@@ -1,4 +1,4 @@
-# Windows Cleaner (minimal) - WinForms
+# Windows Cleaner - WinForms
 
 Outil minimal en C# (WinForms) pour nettoyer les fichiers temporaires utilisateur et optionnellement la corbeille.
 
