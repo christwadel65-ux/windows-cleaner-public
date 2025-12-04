@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace WindowsCleaner
 {
@@ -10,8 +12,7 @@ namespace WindowsCleaner
         public bool DryRun { get; set; }
         public bool EmptyRecycleBin { get; set; }
         public bool IncludeSystemTemp { get; set; }
-        public bool CleanChrome { get; set; }
-        public bool CleanEdge { get; set; }
+        public bool CleanBrowsers { get; set; }
         public bool CleanWindowsUpdate { get; set; }
         public bool CleanThumbnails { get; set; }
         public bool CleanPrefetch { get; set; }
@@ -52,6 +53,7 @@ namespace WindowsCleaner
         public static CleanerResult RunCleanup(CleanerOptions options, Action<string>? log = null)
         {
             var result = new CleanerResult();
+            var lockObj = new object();
 
             void Log(string s)
             {
@@ -59,157 +61,216 @@ namespace WindowsCleaner
                     log?.Invoke(s);
             }
 
-            // User temp
-            try
+            void AddResult(int files, long bytes)
             {
-                string userTemp = Path.GetTempPath();
-                Log($"Nettoyage du dossier temporaire utilisateur: {userTemp}");
-                var r = DeleteDirectoryContents(userTemp, options.DryRun, Log);
-                result.FilesDeleted += r.files;
-                result.BytesFreed += r.bytes;
-            }
-            catch (Exception ex)
-            {
-                Log("Erreur nettoyage user temp: " + ex.Message);
+                lock (lockObj)
+                {
+                    result.FilesDeleted += files;
+                    result.BytesFreed += bytes;
+                }
             }
 
+            var tasks = new System.Collections.Generic.List<Task>();
+
+            // User temp
+            tasks.Add(Task.Run(() =>
+            {
+                try
+                {
+                    string userTemp = Path.GetTempPath();
+                    Log($"Nettoyage du dossier temporaire utilisateur: {userTemp}");
+                    var r = DeleteDirectoryContents(userTemp, options.DryRun, Log);
+                    AddResult(r.files, r.bytes);
+                }
+                catch (Exception ex)
+                {
+                    Log("Erreur nettoyage user temp: " + ex.Message);
+                }
+            }));
+
             // LocalAppData\Temp
-            try
+            tasks.Add(Task.Run(() =>
             {
-                var localTemp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
-                Log($"Nettoyage du dossier LocalAppData Temp: {localTemp}");
-                var r = DeleteDirectoryContents(localTemp, options.DryRun, Log);
-                result.FilesDeleted += r.files;
-                result.BytesFreed += r.bytes;
-            }
-            catch (Exception ex)
-            {
-                Log("Erreur nettoyage LocalAppData Temp: " + ex.Message);
-            }
+                try
+                {
+                    var localTemp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
+                    Log($"Nettoyage du dossier LocalAppData Temp: {localTemp}");
+                    var r = DeleteDirectoryContents(localTemp, options.DryRun, Log);
+                    AddResult(r.files, r.bytes);
+                }
+                catch (Exception ex)
+                {
+                    Log("Erreur nettoyage LocalAppData Temp: " + ex.Message);
+                }
+            }));
 
             // System temp (optional)
             if (options.IncludeSystemTemp)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var systemTemp = Path.Combine(windows, "Temp");
-                    Log($"Nettoyage du dossier Temp système: {systemTemp}");
-                    var r = DeleteDirectoryContents(systemTemp, options.DryRun, Log);
-                    result.FilesDeleted += r.files;
-                    result.BytesFreed += r.bytes;
-                }
-                catch (Exception ex)
-                {
-                    Log("Erreur nettoyage System Temp: " + ex.Message);
-                }
+                    try
+                    {
+                        var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var systemTemp = Path.Combine(windows, "Temp");
+                        Log($"Nettoyage du dossier Temp système: {systemTemp}");
+                        var r = DeleteDirectoryContents(systemTemp, options.DryRun, Log);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage System Temp: " + ex.Message);
+                    }
+                }));
             }
 
-            // Chrome cache
-            if (options.CleanChrome)
+            // Browser caches (Chrome, Edge, Firefox)
+            if (options.CleanBrowsers)
             {
-                try
+                // Chrome cache
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var chromeCache = Path.Combine(local, "Google", "Chrome", "User Data", "Default", "Cache");
-                    Log($"Nettoyage cache Chrome: {chromeCache}");
-                    var r = DeleteDirectoryContents(chromeCache, options.DryRun, log ?? (s => { }));
-                    result.FilesDeleted += r.files;
-                    result.BytesFreed += r.bytes;
-                }
-                catch (Exception ex)
-                {
-                    Log("Erreur nettoyage Chrome: " + ex.Message);
-                }
-            }
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var chromeCache = Path.Combine(local, "Google", "Chrome", "User Data", "Default", "Cache");
+                        Log($"Nettoyage cache Chrome: {chromeCache}");
+                        var r = DeleteDirectoryContents(chromeCache, options.DryRun, log ?? (s => { }));
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage Chrome: " + ex.Message);
+                    }
+                }));
 
-            // Edge cache
-            if (options.CleanEdge)
-            {
-                try
+                // Edge cache
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var edgeCache = Path.Combine(local, "Microsoft", "Edge", "User Data", "Default", "Cache");
-                    Log($"Nettoyage cache Edge: {edgeCache}");
-                    var r = DeleteDirectoryContents(edgeCache, options.DryRun, log ?? (s => { }));
-                    result.FilesDeleted += r.files;
-                    result.BytesFreed += r.bytes;
-                }
-                catch (Exception ex)
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var edgeCache = Path.Combine(local, "Microsoft", "Edge", "User Data", "Default", "Cache");
+                        Log($"Nettoyage cache Edge: {edgeCache}");
+                        var r = DeleteDirectoryContents(edgeCache, options.DryRun, log ?? (s => { }));
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage Edge: " + ex.Message);
+                    }
+                }));
+
+                // Firefox cache
+                tasks.Add(Task.Run(() =>
                 {
-                    Log("Erreur nettoyage Edge: " + ex.Message);
-                }
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var firefoxCache = Path.Combine(local, "Mozilla", "Firefox", "Profiles");
+                        if (Directory.Exists(firefoxCache))
+                        {
+                            Log($"Nettoyage cache Firefox: {firefoxCache}");
+                            var profiles = Directory.GetDirectories(firefoxCache);
+                            foreach (var profile in profiles)
+                            {
+                                var cacheDir = Path.Combine(profile, "cache2");
+                                if (Directory.Exists(cacheDir))
+                                {
+                                    var r = DeleteDirectoryContents(cacheDir, options.DryRun, log ?? (s => { }));
+                                    AddResult(r.files, r.bytes);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage Firefox: " + ex.Message);
+                    }
+                }));
             }
 
             // Windows Update cache (SoftwareDistribution) - requires admin
             if (options.CleanWindowsUpdate)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var sd = Path.Combine(windir, "SoftwareDistribution", "Download");
-                    Log($"Nettoyage SoftwareDistribution\\Download: {sd}");
-                    var r = DeleteDirectoryContents(sd, options.DryRun, log ?? (s => { }));
-                    result.FilesDeleted += r.files;
-                    result.BytesFreed += r.bytes;
-                }
-                catch (Exception ex)
-                {
-                    Log("Erreur nettoyage SoftwareDistribution: " + ex.Message);
-                }
+                    try
+                    {
+                        var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var sd = Path.Combine(windir, "SoftwareDistribution", "Download");
+                        Log($"Nettoyage SoftwareDistribution\\Download: {sd}");
+                        var r = DeleteDirectoryContents(sd, options.DryRun, log ?? (s => { }));
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage SoftwareDistribution: " + ex.Message);
+                    }
+                }));
             }
 
             // Thumbnails
             if (options.CleanThumbnails)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var thumbDir = Path.Combine(local, "Microsoft", "Windows", "Explorer");
-                    Log($"Nettoyage vignettes: {thumbDir}");
-                    // delete thumbcache_*.db files
-                    var files = Directory.Exists(thumbDir) ? Directory.GetFiles(thumbDir, "thumbcache_*.db") : Array.Empty<string>();
-                    foreach (var f in files)
+                    try
                     {
-                        try
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var thumbDir = Path.Combine(local, "Microsoft", "Windows", "Explorer");
+                        Log($"Nettoyage vignettes: {thumbDir}");
+                        var files = Directory.Exists(thumbDir) ? Directory.GetFiles(thumbDir, "thumbcache_*.db") : Array.Empty<string>();
+                        int filesDeleted = 0;
+                        long bytesFreed = 0;
+                        foreach (var f in files)
                         {
-                            var fi = new FileInfo(f);
-                            if (!options.DryRun) File.Delete(f);
-                            result.FilesDeleted++;
-                            result.BytesFreed += fi.Length;
-                            log?.Invoke($"Supprimé vignette: {f}");
+                            try
+                            {
+                                var fi = new FileInfo(f);
+                                if (!options.DryRun) File.Delete(f);
+                                filesDeleted++;
+                                bytesFreed += fi.Length;
+                                log?.Invoke($"Supprimé vignette: {f}");
+                            }
+                            catch (Exception ex)
+                            {
+                                log?.Invoke($"Impossible de supprimer vignette {f}: {ex.Message}");
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            log?.Invoke($"Impossible de supprimer vignette {f}: {ex.Message}");
-                        }
+                        AddResult(filesDeleted, bytesFreed);
                     }
-                }
-                catch (Exception ex)
-                {
-                    Log("Erreur nettoyage vignettes: " + ex.Message);
-                }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage vignettes: " + ex.Message);
+                    }
+                }));
             }
 
             // Prefetch (requires admin)
             if (options.CleanPrefetch)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var prefetch = Path.Combine(windir, "Prefetch");
-                    Log($"Nettoyage Prefetch: {prefetch}");
-                    var r = DeleteDirectoryContents(prefetch, options.DryRun, log ?? (s => { }));
-                    result.FilesDeleted += r.files;
-                    result.BytesFreed += r.bytes;
-                }
-                catch (Exception ex)
-                {
-                    Log("Erreur nettoyage Prefetch: " + ex.Message);
-                }
+                    try
+                    {
+                        var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var prefetch = Path.Combine(windir, "Prefetch");
+                        Log($"Nettoyage Prefetch: {prefetch}");
+                        var r = DeleteDirectoryContents(prefetch, options.DryRun, log ?? (s => { }));
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Erreur nettoyage Prefetch: " + ex.Message);
+                    }
+                }));
             }
 
-            // Flush DNS
+            // Wait for all tasks to complete
+            Task.WaitAll(tasks.ToArray());
+
+            // Flush DNS (sequential, quick operation)
             if (options.FlushDns)
             {
                 try
@@ -232,7 +293,7 @@ namespace WindowsCleaner
                 }
             }
 
-            // Empty Recycle Bin
+            // Empty Recycle Bin (sequential, requires UI thread in some cases)
             if (options.EmptyRecycleBin)
             {
                 try
@@ -260,102 +321,161 @@ namespace WindowsCleaner
         public static CleanerReport GenerateReport(CleanerOptions options, Action<string>? progress = null)
         {
             var report = new CleanerReport();
+            var items = new ConcurrentBag<ReportItem>();
 
             void P(string s) => progress?.Invoke(s);
 
-            try
-            {
-                string userTemp = Path.GetTempPath();
-                P($"Scan du dossier temporaire utilisateur: {userTemp}");
-                ScanDirectory(userTemp, report, P);
-            }
-            catch (Exception ex) { P("Erreur scan user temp: " + ex.Message); }
+            var tasks = new System.Collections.Generic.List<Task>();
 
-            try
+            tasks.Add(Task.Run(() =>
             {
-                var localTemp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
-                P($"Scan LocalAppData Temp: {localTemp}");
-                ScanDirectory(localTemp, report, P);
-            }
-            catch (Exception ex) { P("Erreur scan LocalAppData Temp: " + ex.Message); }
+                try
+                {
+                    string userTemp = Path.GetTempPath();
+                    P($"Scan du dossier temporaire utilisateur: {userTemp}");
+                    ScanDirectoryParallel(userTemp, items, P);
+                }
+                catch (Exception ex) { P("Erreur scan user temp: " + ex.Message); }
+            }));
+
+            tasks.Add(Task.Run(() =>
+            {
+                try
+                {
+                    var localTemp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
+                    P($"Scan LocalAppData Temp: {localTemp}");
+                    ScanDirectoryParallel(localTemp, items, P);
+                }
+                catch (Exception ex) { P("Erreur scan LocalAppData Temp: " + ex.Message); }
+            }));
 
             if (options.IncludeSystemTemp)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var systemTemp = Path.Combine(windows, "Temp");
-                    P($"Scan Temp système: {systemTemp}");
-                    ScanDirectory(systemTemp, report, P);
-                }
-                catch (Exception ex) { P("Erreur scan System Temp: " + ex.Message); }
+                    try
+                    {
+                        var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var systemTemp = Path.Combine(windows, "Temp");
+                        P($"Scan Temp système: {systemTemp}");
+                        ScanDirectoryParallel(systemTemp, items, P);
+                    }
+                    catch (Exception ex) { P("Erreur scan System Temp: " + ex.Message); }
+                }));
             }
 
-            if (options.CleanChrome)
+            if (options.CleanBrowsers)
             {
-                try
+                // Chrome
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var chromeCache = Path.Combine(local, "Google", "Chrome", "User Data", "Default", "Cache");
-                    P($"Scan cache Chrome: {chromeCache}");
-                    ScanDirectory(chromeCache, report, P);
-                }
-                catch (Exception ex) { P("Erreur scan Chrome: " + ex.Message); }
-            }
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var chromeCache = Path.Combine(local, "Google", "Chrome", "User Data", "Default", "Cache");
+                        P($"Scan cache Chrome: {chromeCache}");
+                        ScanDirectoryParallel(chromeCache, items, P);
+                    }
+                    catch (Exception ex) { P("Erreur scan Chrome: " + ex.Message); }
+                }));
 
-            if (options.CleanEdge)
-            {
-                try
+                // Edge
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var edgeCache = Path.Combine(local, "Microsoft", "Edge", "User Data", "Default", "Cache");
-                    P($"Scan cache Edge: {edgeCache}");
-                    ScanDirectory(edgeCache, report, P);
-                }
-                catch (Exception ex) { P("Erreur scan Edge: " + ex.Message); }
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var edgeCache = Path.Combine(local, "Microsoft", "Edge", "User Data", "Default", "Cache");
+                        P($"Scan cache Edge: {edgeCache}");
+                        ScanDirectoryParallel(edgeCache, items, P);
+                    }
+                    catch (Exception ex) { P("Erreur scan Edge: " + ex.Message); }
+                }));
+
+                // Firefox
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var firefoxCache = Path.Combine(local, "Mozilla", "Firefox", "Profiles");
+                        if (Directory.Exists(firefoxCache))
+                        {
+                            P($"Scan cache Firefox: {firefoxCache}");
+                            var profiles = Directory.GetDirectories(firefoxCache);
+                            foreach (var profile in profiles)
+                            {
+                                var cacheDir = Path.Combine(profile, "cache2");
+                                if (Directory.Exists(cacheDir))
+                                {
+                                    ScanDirectoryParallel(cacheDir, items, P);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex) { P("Erreur scan Firefox: " + ex.Message); }
+                }));
             }
 
             if (options.CleanWindowsUpdate)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var sd = Path.Combine(windir, "SoftwareDistribution", "Download");
-                    P($"Scan SoftwareDistribution\\Download: {sd}");
-                    ScanDirectory(sd, report, P);
-                }
-                catch (Exception ex) { P("Erreur scan SoftwareDistribution: " + ex.Message); }
+                    try
+                    {
+                        var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var sd = Path.Combine(windir, "SoftwareDistribution", "Download");
+                        P($"Scan SoftwareDistribution\\Download: {sd}");
+                        ScanDirectoryParallel(sd, items, P);
+                    }
+                    catch (Exception ex) { P("Erreur scan SoftwareDistribution: " + ex.Message); }
+                }));
             }
 
             if (options.CleanThumbnails)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                    var thumbDir = Path.Combine(local, "Microsoft", "Windows", "Explorer");
-                    P($"Scan vignettes: {thumbDir}");
-                    if (Directory.Exists(thumbDir))
+                    try
                     {
-                        foreach (var f in Directory.GetFiles(thumbDir, "thumbcache_*.db"))
+                        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        var thumbDir = Path.Combine(local, "Microsoft", "Windows", "Explorer");
+                        P($"Scan vignettes: {thumbDir}");
+                        if (Directory.Exists(thumbDir))
                         {
-                            try { var fi = new FileInfo(f); report.Items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false }); }
-                            catch { }
+                            foreach (var f in Directory.GetFiles(thumbDir, "thumbcache_*.db"))
+                            {
+                                try { var fi = new FileInfo(f); items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false }); }
+                                catch { }
+                            }
                         }
                     }
-                }
-                catch (Exception ex) { P("Erreur scan vignettes: " + ex.Message); }
+                    catch (Exception ex) { P("Erreur scan vignettes: " + ex.Message); }
+                }));
             }
 
             if (options.CleanPrefetch)
             {
-                try
+                tasks.Add(Task.Run(() =>
                 {
-                    var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                    var prefetch = Path.Combine(windir, "Prefetch");
-                    P($"Scan Prefetch: {prefetch}");
-                    ScanDirectory(prefetch, report, P);
-                }
-                catch (Exception ex) { P("Erreur scan Prefetch: " + ex.Message); }
+                    try
+                    {
+                        var windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        var prefetch = Path.Combine(windir, "Prefetch");
+                        P($"Scan Prefetch: {prefetch}");
+                        ScanDirectoryParallel(prefetch, items, P);
+                    }
+                    catch (Exception ex) { P("Erreur scan Prefetch: " + ex.Message); }
+                }));
+            }
+
+            // Wait for all parallel scans to complete
+            Task.WaitAll(tasks.ToArray());
+
+            // Add all items to the report
+            foreach (var item in items)
+            {
+                report.Items.Add(item);
             }
 
             if (options.EmptyRecycleBin)
@@ -367,22 +487,23 @@ namespace WindowsCleaner
             return report;
         }
 
-        private static void ScanDirectory(string path, CleanerReport report, Action<string>? progress)
+        private static void ScanDirectoryParallel(string path, ConcurrentBag<ReportItem> items, Action<string>? progress)
         {
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path)) return;
             try
             {
-                foreach (var f in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
+                Parallel.ForEach(Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories), f =>
                 {
-                    try { var fi = new FileInfo(f); report.Items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false }); }
+                    try { var fi = new FileInfo(f); items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false }); }
                     catch { }
-                }
+                });
+                
                 // Also add directories as items (size 0) for visibility
-                foreach (var d in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
+                Parallel.ForEach(Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories), d =>
                 {
-                    try { report.Items.Add(new ReportItem { Path = d, Size = 0, IsDirectory = true }); }
+                    try { items.Add(new ReportItem { Path = d, Size = 0, IsDirectory = true }); }
                     catch { }
-                }
+                });
             }
             catch (Exception ex) { progress?.Invoke($"Erreur en scannant {path}: {ex.Message}"); }
         }
@@ -394,34 +515,39 @@ namespace WindowsCleaner
 
             int deleted = 0;
             long bytes = 0;
+            var lockObj = new object();
 
             try
             {
                 var entries = Directory.GetFileSystemEntries(path);
-                foreach (var entry in entries)
+                Parallel.ForEach(entries, new ParallelOptions { MaxDegreeOfParallelism = 4 }, entry =>
                 {
                     try
                     {
                         if (File.Exists(entry))
                         {
                             var fi = new FileInfo(entry);
-                            // Attempt deletion with retries
                             var (ok, freed) = TryDeleteFileWithRetries(entry, dryRun, log);
                             if (ok)
                             {
-                                bytes += freed;
-                                deleted++;
+                                lock (lockObj)
+                                {
+                                    bytes += freed;
+                                    deleted++;
+                                }
                                 log?.Invoke($"Supprimé: {entry}");
                             }
                         }
                         else if (Directory.Exists(entry))
                         {
-                            // Attempt to delete directory recursively with retries
                             var (ok, freed) = TryDeleteDirectoryWithRetries(entry, dryRun, log);
                             if (ok)
                             {
-                                deleted++;
-                                bytes += freed; // best-effort (may be 0)
+                                lock (lockObj)
+                                {
+                                    deleted++;
+                                    bytes += freed;
+                                }
                                 log?.Invoke($"Supprimé dossier: {entry}");
                             }
                         }
@@ -430,7 +556,7 @@ namespace WindowsCleaner
                     {
                         log?.Invoke($"Impossible de supprimer {entry}: {ex.Message}");
                     }
-                }
+                });
             }
             catch (Exception ex)
             {

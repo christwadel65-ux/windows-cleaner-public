@@ -23,8 +23,7 @@ namespace WindowsCleaner
 
         private CheckBox chkRecycle = null!;
         private CheckBox chkSystemTemp = null!;
-        private CheckBox chkChrome = null!;
-        private CheckBox chkEdge = null!;
+        private CheckBox chkBrowsers = null!;
         private CheckBox chkWindowsUpdate = null!;
         private CheckBox chkThumbnails = null!;
         private CheckBox chkPrefetch = null!;
@@ -44,9 +43,25 @@ namespace WindowsCleaner
 #pragma warning disable CS8774
         public MainForm()
         {
-            Text = "Windows Cleaner";
-            Width = 900;
-            Height = 600;
+            Text = "Windows Cleaner - Nettoyage Professionnel";
+            Width = 1000;
+            Height = 700;
+            MinimumSize = new Size(1000, 700);
+            StartPosition = FormStartPosition.CenterScreen;
+
+            // Check if running as admin
+            var isAdmin = new System.Security.Principal.WindowsPrincipal(System.Security.Principal.WindowsIdentity.GetCurrent()).IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+            if (!isAdmin)
+            {
+                MessageBox.Show(
+                    "⚠️ Cette application doit s'exécuter en mode Administrateur pour fonctionner correctement.\n\n" +
+                    "Certaines opérations de nettoyage (fichiers système, Temp système, Windows Update, Prefetch, Flush DNS) nécessitent les droits administrateur.\n\n" +
+                    "Le nettoyage des fichiers utilisateur fonctionnera partiellement sans admin.",
+                    "Avertissement : Droits insuffisants",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
 
             InitializeComponents();
             Logger.Init();
@@ -55,8 +70,8 @@ namespace WindowsCleaner
 
         [MemberNotNull(nameof(menu), nameof(fileMenu), nameof(exportLogsMenuItem), nameof(exitMenuItem),
             nameof(btnDryRun), nameof(btnClean), nameof(btnCancel), nameof(chkRecycle), nameof(chkSystemTemp),
-            nameof(chkChrome), nameof(chkEdge), nameof(chkWindowsUpdate), nameof(chkThumbnails), nameof(chkPrefetch),
-            nameof(chkFlushDns), nameof(chkVerbose), nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
+            nameof(chkBrowsers), nameof(chkWindowsUpdate), nameof(chkThumbnails), nameof(chkPrefetch),
+            nameof(chkFlushDns), nameof(chkVerbose), nameof(chkAdvanced), nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
         private void InitializeComponents()
         {
             menu = new MenuStrip();
@@ -99,26 +114,64 @@ namespace WindowsCleaner
             menu.Items.Add(viewMenu);
             Controls.Add(menu);
 
-            btnDryRun = new Button() { Text = "Dry Run", Left = 10, Top = 30, Width = 100 };
-            btnClean = new Button() { Text = "Nettoyer", Left = 120, Top = 30, Width = 100 };
-            btnCancel = new Button() { Text = "Annuler", Left = 230, Top = 30, Width = 100, Enabled = false };
+            // GroupBox for actions
+            var grpActions = new GroupBox() { Text = "Actions", Left = 15, Top = 50, Width = 350, Height = 80 };
+            btnDryRun = new Button() { Text = "🔍 Simuler (Dry Run)", Left = 10, Top = 25, Width = 160, Height = 40 };
+            btnClean = new Button() { Text = "🧹 Nettoyer", Left = 180, Top = 25, Width = 160, Height = 40 };
+            btnCancel = new Button() { Text = "✖ Annuler", Left = 10, Top = 25, Width = 330, Height = 40, Enabled = false, Visible = false };
+            grpActions.Controls.Add(btnDryRun);
+            grpActions.Controls.Add(btnClean);
+            grpActions.Controls.Add(btnCancel);  // Add last so it's on top
+            btnCancel.BringToFront();
+            Controls.Add(grpActions);
 
-            chkRecycle = new CheckBox() { Text = "Vider la Corbeille", Left = 350, Top = 34, Width = 150 };
-            chkSystemTemp = new CheckBox() { Text = "Inclure Temp système", Left = 510, Top = 34, Width = 170 };
+            // GroupBox for cleanup options
+            var grpOptions = new GroupBox() { Text = "Options de Nettoyage", Left = 380, Top = 50, Width = 595, Height = 80 };
+            chkRecycle = new CheckBox() { Text = "Corbeille", Left = 15, Top = 25, Width = 135, AutoSize = false };
+            chkSystemTemp = new CheckBox() { Text = "Temp système (C:\\Windows\\Temp)", Left = 15, Top = 48, Width = 135, AutoSize = false, Height = 30 };
+            chkBrowsers = new CheckBox() { Text = "Navigateurs (Chrome, Edge...)", Left = 160, Top = 25, Width = 265, AutoSize = false };
+            chkWindowsUpdate = new CheckBox() { Text = "Windows Update", Left = 160, Top = 48, Width = 135, AutoSize = false };
+            chkThumbnails = new CheckBox() { Text = "Vignettes", Left = 305, Top = 48, Width = 115, AutoSize = false };
+            chkPrefetch = new CheckBox() { Text = "Prefetch", Left = 435, Top = 25, Width = 145, AutoSize = false };
+            chkFlushDns = new CheckBox() { Text = "Flush DNS", Left = 435, Top = 48, Width = 145, AutoSize = false };
+            grpOptions.Controls.Add(chkRecycle);
+            grpOptions.Controls.Add(chkSystemTemp);
+            grpOptions.Controls.Add(chkBrowsers);
+            grpOptions.Controls.Add(chkWindowsUpdate);
+            grpOptions.Controls.Add(chkThumbnails);
+            grpOptions.Controls.Add(chkPrefetch);
+            grpOptions.Controls.Add(chkFlushDns);
+            Controls.Add(grpOptions);
 
-            chkChrome = new CheckBox() { Text = "Nettoyer cache Chrome", Left = 10, Top = 65, Width = 200 };
-            chkEdge = new CheckBox() { Text = "Nettoyer cache Edge", Left = 220, Top = 65, Width = 180 };
-            chkWindowsUpdate = new CheckBox() { Text = "Nettoyer Windows Update", Left = 410, Top = 65, Width = 200 };
-            chkThumbnails = new CheckBox() { Text = "Nettoyer vignettes (thumbcache)", Left = 10, Top = 95, Width = 260 };
-            chkPrefetch = new CheckBox() { Text = "Nettoyer Prefetch", Left = 280, Top = 95, Width = 140 };
-            chkFlushDns = new CheckBox() { Text = "Flush DNS", Left = 430, Top = 95, Width = 100 };
-            chkVerbose = new CheckBox() { Text = "Verbose", Left = 540, Top = 95, Width = 100 };
-            chkAdvanced = new CheckBox() { Text = "Nettoyage avancé (rapport avant exécution)", Left = 10, Top = 110, Width = 350 };
+            // Info label
+            var lblInfo = new Label() 
+            { 
+                Text = "Note : Les dossiers Temp utilisateur (%TEMP% et LocalAppData\\Temp) sont toujours nettoyés", 
+                Left = 380, 
+                Top = 135, 
+                Width = 595, 
+                Height = 20,
+                ForeColor = System.Drawing.Color.Gray,
+                Font = new System.Drawing.Font(this.Font.FontFamily, 7.5f, System.Drawing.FontStyle.Italic)
+            };
+            Controls.Add(lblInfo);
 
-            lvLogs = new ListView() { Left = 10, Top = 130, Width = 860, Height = 380, View = View.Details, FullRowSelect = true };
+            // Advanced options
+            var grpAdvanced = new GroupBox() { Text = "Options Avancées", Left = 15, Top = 145, Width = 960, Height = 55 };
+            chkVerbose = new CheckBox() { Text = "Mode verbeux (logs détaillés)", Left = 15, Top = 23, AutoSize = true };
+            chkAdvanced = new CheckBox() { Text = "Rapport de nettoyage avancé (prévisualisation avant exécution)", Left = 350, Top = 23, AutoSize = true };
+            grpAdvanced.Controls.Add(chkVerbose);
+            grpAdvanced.Controls.Add(chkAdvanced);
+            Controls.Add(grpAdvanced);
+
+            // Logs GroupBox
+            var grpLogs = new GroupBox() { Text = "Journal des Opérations", Left = 15, Top = 215, Width = 960, Height = 375 };
+            lvLogs = new ListView() { Left = 10, Top = 25, Width = 940, Height = 340, View = View.Details, FullRowSelect = true };
             lvLogs.Columns.Add("Heure", 160);
             lvLogs.Columns.Add("Niveau", 100);
-            lvLogs.Columns.Add("Message", 580);
+            lvLogs.Columns.Add("Message", 660);
+            grpLogs.Controls.Add(lvLogs);
+            Controls.Add(grpLogs);
 
             // Improved ListView appearance: owner-draw, alternating rows, double-buffered
             lvLogs.OwnerDraw = true;
@@ -138,29 +191,15 @@ namespace WindowsCleaner
             }
             catch { }
 
-            progressBar = new ColoredProgressBar() { Left = 10, Top = 520, Width = 700, Height = 20, BackColor = menu != null ? menu.BackColor : SystemColors.Control, ForeColor = this.ForeColor };
+            progressBar = new ColoredProgressBar() { Left = 15, Top = 605, Width = 960, Height = 28, BackColor = menu != null ? menu.BackColor : SystemColors.Control, ForeColor = this.ForeColor };
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             progressBar.Value = 0;
             progressBar.BarColor = _accentColor;
             statusStrip = new StatusStrip();
-            statusLabel = new ToolStripStatusLabel("Prêt");
+            statusLabel = new ToolStripStatusLabel("Prêt - Sélectionnez les options et cliquez sur une action");
             statusStrip.Items.Add(statusLabel);
 
-            Controls.Add(btnDryRun);
-            Controls.Add(btnClean);
-            Controls.Add(btnCancel);
-            Controls.Add(chkRecycle);
-            Controls.Add(chkSystemTemp);
-            Controls.Add(chkChrome);
-            Controls.Add(chkEdge);
-            Controls.Add(chkWindowsUpdate);
-            Controls.Add(chkThumbnails);
-            Controls.Add(chkPrefetch);
-            Controls.Add(chkFlushDns);
-            Controls.Add(chkVerbose);
-            Controls.Add(chkAdvanced);
-            Controls.Add(lvLogs);
             Controls.Add(progressBar);
             Controls.Add(statusStrip);
 
@@ -173,9 +212,20 @@ namespace WindowsCleaner
             {
                 if (b == null) continue;
                 b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 0;
-                b.Padding = new Padding(6);
-                b.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+                b.FlatAppearance.BorderSize = 1;
+                b.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                b.Cursor = Cursors.Hand;
+            }
+
+            // GroupBox styling
+            var grpFont = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            foreach (Control c in Controls)
+            {
+                if (c is GroupBox gb)
+                {
+                    gb.Font = grpFont;
+                    gb.ForeColor = _accentColor;
+                }
             }
 
             MainMenuStrip = menu;
@@ -421,7 +471,12 @@ SOFTWARE.";
         {
             btnClean.Enabled = false;
             btnDryRun.Enabled = false;
+            btnClean.Visible = false;
+            btnDryRun.Visible = false;
+            btnCancel.Visible = true;
             btnCancel.Enabled = true;
+            btnCancel.Top = 25;
+            btnCancel.Height = 40;
             lvLogs.Items.Clear();
             progressBar.Value = 0;
             statusLabel.Text = dryRun ? "Dry run en cours..." : "Nettoyage en cours...";
@@ -431,8 +486,7 @@ SOFTWARE.";
                 DryRun = dryRun,
                 EmptyRecycleBin = chkRecycle.Checked,
                 IncludeSystemTemp = chkSystemTemp.Checked,
-                CleanChrome = chkChrome.Checked,
-                CleanEdge = chkEdge.Checked,
+                CleanBrowsers = chkBrowsers.Checked,
                 CleanWindowsUpdate = chkWindowsUpdate.Checked,
                 CleanThumbnails = chkThumbnails.Checked,
                 CleanPrefetch = chkPrefetch.Checked,
@@ -457,9 +511,9 @@ SOFTWARE.";
                 if (report.Count > 200) details.AppendLine($"... ({report.Count - 200} autres éléments non affichés)");
 
                 var dlg = new Form() { Text = "Rapport avancé - aperçu", Width = 1000, Height = 700 };
-                var panelTop = new Panel() { Dock = DockStyle.Top, Height = 34 };
-                var lblFilter = new Label() { Text = "Filtre:", Left = 6, Top = 8, AutoSize = true };
-                var txtFilter = new TextBox() { Left = 56, Top = 4, Width = 480 };
+                var panelTop = new Panel() { Dock = DockStyle.Top, Height = 44 };
+                var lblFilter = new Label() { Text = "Filtre:", Left = 6, Top = 12, AutoSize = true };
+                var txtFilter = new TextBox() { Left = 56, Top = 8, Width = 480, Height = 26 };
                 panelTop.Controls.Add(lblFilter);
                 panelTop.Controls.Add(txtFilter);
 
@@ -504,10 +558,10 @@ SOFTWARE.";
                     dv.RowFilter = string.IsNullOrWhiteSpace(f) ? string.Empty : $"Path LIKE '%" + f.Replace("'", "''") + "%'";
                 };
 
-                var btnPanel = new Panel() { Dock = DockStyle.Bottom, Height = 44 };
-                var btnProceed = new Button() { Text = "Continuer et exécuter", Left = 10, Width = 180, Top = 6, DialogResult = DialogResult.OK }; btnProceed.FlatStyle = FlatStyle.Flat;
-                var btnCancelReport = new Button() { Text = "Annuler", Left = 200, Width = 100, Top = 6, DialogResult = DialogResult.Cancel }; btnCancelReport.FlatStyle = FlatStyle.Flat;
-                var btnSave = new Button() { Text = "Enregistrer le rapport complet", Left = 310, Width = 220, Top = 6 }; btnSave.FlatStyle = FlatStyle.Flat;
+                var btnPanel = new Panel() { Dock = DockStyle.Bottom, Height = 50 };
+                var btnProceed = new Button() { Text = "Continuer et exécuter", Left = 10, Width = 180, Top = 8, Height = 35, DialogResult = DialogResult.OK }; btnProceed.FlatStyle = FlatStyle.Flat;
+                var btnCancelReport = new Button() { Text = "Annuler", Left = 200, Width = 100, Top = 8, Height = 35, DialogResult = DialogResult.Cancel }; btnCancelReport.FlatStyle = FlatStyle.Flat;
+                var btnSave = new Button() { Text = "Enregistrer le rapport complet", Left = 310, Width = 220, Top = 8, Height = 35 }; btnSave.FlatStyle = FlatStyle.Flat;
                 btnSave.Click += (s, e) =>
                 {
                     using var sfd = new SaveFileDialog();
@@ -545,7 +599,7 @@ SOFTWARE.";
                     try
                     {
                         if (ee.RowIndex < 0) return;
-                        var row = ((System.Data.DataRowView)((BindingSource)dgv.DataSource).Current)?.Row;
+                        var row = ((System.Data.DataRowView?)((BindingSource)dgv.DataSource).Current)?.Row;
                         // safer approach: get value directly from dgv
                         var val = dgv.Rows[ee.RowIndex].Cells["Path"].Value as string;
                         if (string.IsNullOrWhiteSpace(val)) return;
@@ -656,7 +710,10 @@ SOFTWARE.";
                     statusLabel.Text = "Annulé (rapport)";
                     btnClean.Enabled = true;
                     btnDryRun.Enabled = true;
+                    btnClean.Visible = true;
+                    btnDryRun.Visible = true;
                     btnCancel.Enabled = false;
+                    btnCancel.Visible = false;
                     return;
                 }
                 // otherwise continue
@@ -688,6 +745,7 @@ SOFTWARE.";
                             btnClean.Enabled = true;
                             btnDryRun.Enabled = true;
                             btnCancel.Enabled = false;
+                            btnCancel.Visible = false;
                             return;
                         }
                     }
@@ -724,7 +782,10 @@ SOFTWARE.";
             {
                 btnClean.Enabled = true;
                 btnDryRun.Enabled = true;
+                btnClean.Visible = true;
+                btnDryRun.Visible = true;
                 btnCancel.Enabled = false;
+                btnCancel.Visible = false;
                 _cts = null;
             }
         }
