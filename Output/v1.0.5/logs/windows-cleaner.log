@@ -1,0 +1,463 @@
+﻿[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:23] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:24:27] [Info] Début du nettoyage (dry-run)...
+[2025-12-06 18:24:27] [Info] Nettoyage du dossier temporaire utilisateur: C:\Users\c.lecomte\AppData\Local\Temp\
+[2025-12-06 18:24:27] [Info] Nettoyage du dossier Temp système: C:\WINDOWS\Temp
+[2025-12-06 18:24:27] [Info] Nettoyage Prefetch: C:\WINDOWS\Prefetch
+[2025-12-06 18:24:27] [Info] Nettoyage du dossier LocalAppData Temp: C:\Users\c.lecomte\AppData\Local\Temp
+[2025-12-06 18:24:27] [Info] Nettoyage fichiers orphelins: C:\Users\c.lecomte\AppData\Local\Temp\
+[2025-12-06 18:24:27] [Info] Nettoyage cache Edge: C:\Users\c.lecomte\AppData\Local\Microsoft\Edge\User Data\Default\Cache
+[2025-12-06 18:24:27] [Info] Nettoyage vignettes: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer
+[2025-12-06 18:24:27] [Info] Nettoyage cache Chrome: C:\Users\c.lecomte\AppData\Local\Google\Chrome\User Data\Default\Cache
+[2025-12-06 18:24:27] [Info] Nettoyage cache Firefox: C:\Users\c.lecomte\AppData\Local\Mozilla\Firefox\Profiles
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_1280.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_16.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_1920.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_256.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_2560.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_32.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_48.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_768.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_96.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_custom_stream.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_exif.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_idx.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_sr.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_wide.db
+[2025-12-06 18:24:27] [Info] Supprimé vignette: C:\Users\c.lecomte\AppData\Local\Microsoft\Windows\Explorer\thumbcache_wide_alternate.db
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DLLHOST.EXE-7D5CE0CA.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\AIMGR.EXE-D5060E24.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\AIMGR.EXE-D5060E24.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Microsoft\Edge\User Data\Default\Cache\Cache_Data
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Microsoft\Edge\User Data\Default\Cache\Cache_Data
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9A.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9A.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Temp\FRLT312573-20251206-1801.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Temp\FRLT312573-20251206-1801.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\.ses
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\.ses
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Temp\FRLT312573-20251206-1350.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Temp\FRLT312573-20251206-1350.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DLLHOST.EXE-7D5CE0CA.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\.ses
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Diagnostics
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Diagnostics
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\AUDIODG.EXE-AB22E9A6.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\AUDIODG.EXE-AB22E9A6.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_14744_20251206_181731_347.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_14744_20251206_181731_347.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9B.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9B.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Temp\osm_1.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Temp\osm_1.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\0igegwye.tgs
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\0igegwye.tgs
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\qvc10jpp.igu
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\qvc10jpp.igu
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\.ses
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Diagnostics
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Diagnostics
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Temp\FRLT312573-20251206-1747.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Temp\FRLT312573-20251206-1747.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SPLWOW64.EXE-57576C25.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SPLWOW64.EXE-57576C25.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_14744_20251206_181731_347.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_14744_20251206_181731_347.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\WINDOWS\Temp\DiagOutputDir
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\WINDOWS\Temp\DiagOutputDir
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Microsoft\Edge\User Data\Default\Cache\No_Vary_Search
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Microsoft\Edge\User Data\Default\Cache\No_Vary_Search
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DLLHOST.EXE-895D23F2.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DLLHOST.EXE-895D23F2.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\fw451221.15e
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\fw451221.15e
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\BACKGROUNDTASKHOST.EXE-CAD1DF16.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\BACKGROUNDTASKHOST.EXE-CAD1DF16.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_18416_20251206_181830_117.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_18416_20251206_181830_117.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\qvc10jpp.igu
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\qvc10jpp.igu
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\0igegwye.tgs
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\0igegwye.tgs
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\fw451221.15e
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\fw451221.15e
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Roslyn
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Roslyn
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SPPSVC.EXE-96070FE0.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SPPSVC.EXE-96070FE0.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_18416_20251206_181830_117.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_18416_20251206_181830_117.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\1fnshrl5.ubc
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\1fnshrl5.ubc
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\1fnshrl5.ubc
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\1fnshrl5.ubc
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\fzupdate_9cad4cb5ea15f98c.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\fzupdate_9cad4cb5ea15f98c.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Roslyn
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Roslyn
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-19B557B1.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-19B557B1.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_6068_20251206_182135_917.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_6068_20251206_182135_917.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\5wkbrhvt.212
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\5wkbrhvt.212
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\5wkbrhvt.212
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\5wkbrhvt.212
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\servicehub
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\servicehub
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_6068_20251206_182135_917.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_6068_20251206_182135_917.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-59780EBF.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-59780EBF.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_9384_20251206_182006_892.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_9384_20251206_182006_892.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\71800053-0c89-43ce-a1aa-94c129ade8d0.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\71800053-0c89-43ce-a1aa-94c129ade8d0.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CALCULATRICEMARGE.EXE-3C304AA8.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CALCULATRICEMARGE.EXE-3C304AA8.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\is-QWZ0YHOOX5-uninstall.tmp
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\is-QWZ0YHOOX5-uninstall.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9E.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25F9E.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DOTNET.EXE-7BF5AC29.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DOTNET.EXE-7BF5AC29.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\fzupdate_9cad4cb5ea15f98c.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\fzupdate_9cad4cb5ea15f98c.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\servicehub
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\servicehub
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\71800053-0c89-43ce-a1aa-94c129ade8d0.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\71800053-0c89-43ce-a1aa-94c129ade8d0.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\SmartScreen
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\SmartScreen
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_9384_20251206_182006_892.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_9384_20251206_182006_892.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-768E59F7.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-768E59F7.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\mkxugh21.rtk
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\mkxugh21.rtk
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\81c9bf69-4f0c-4502-bae4-056b05dd025f.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\81c9bf69-4f0c-4502-bae4-056b05dd025f.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CHCP.COM-2CF9B15C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CHCP.COM-2CF9B15C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\jd2vnuko.2eg
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\jd2vnuko.2eg
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\mkxugh21.rtk
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\mkxugh21.rtk
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DOTNET.EXE-A471E4E7.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DOTNET.EXE-A471E4E7.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\is-QWZ0YHOOX5-uninstall.tmp
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\is-QWZ0YHOOX5-uninstall.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\SmartScreen
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\SmartScreen
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\81c9bf69-4f0c-4502-bae4-056b05dd025f.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\81c9bf69-4f0c-4502-bae4-056b05dd025f.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA4.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA4.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\luxc5ozd.41w
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\luxc5ozd.41w
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-852EC587.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-852EC587.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\MSBuildTemp
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\MSBuildTemp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\AdobeARM.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\AdobeARM.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\SymbolCache
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\SymbolCache
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\SymbolCache
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\SymbolCache
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\MSBuildTemp
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\MSBuildTemp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\ELEVATION_SERVICE.EXE-E921B82C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\ELEVATION_SERVICE.EXE-E921B82C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\jd2vnuko.2eg
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\jd2vnuko.2eg
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CMD.EXE-0BD30981.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CMD.EXE-0BD30981.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\AdobeARM.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\AdobeARM.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA5.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA5.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-19160.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-19160.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-8A4EB855.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-8A4EB855.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\n0eretbr.pam
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\n0eretbr.pam
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\CitrixAutoUpdate.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\CitrixAutoUpdate.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\system-commandline-sentinel-files
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\system-commandline-sentinel-files
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\system-commandline-sentinel-files
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\system-commandline-sentinel-files
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\n0eretbr.pam
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\n0eretbr.pam
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\ESCAPE-NODE-JOB.EXE-5785E8B3.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\ESCAPE-NODE-JOB.EXE-5785E8B3.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\luxc5ozd.41w
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\luxc5ozd.41w
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE-TUNNEL.EXE-DA3E42EE.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE-TUNNEL.EXE-DA3E42EE.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\codespaces_logs
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\codespaces_logs
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA7.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA7.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-20444.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\n3do1abv.rqy
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\n3do1abv.rqy
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\EXCEL.EXE-FE860005.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\EXCEL.EXE-FE860005.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-19160.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-19160.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F6.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F6.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\collab_low
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\collab_low
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA8.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FA8.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-9A28EB78.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-9A28EB78.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\n3do1abv.rqy
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\n3do1abv.rqy
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\CitrixAutoUpdate.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\CitrixAutoUpdate.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\t0kizhhx.ypw
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\t0kizhhx.ypw
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\t0kizhhx.ypw
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\t0kizhhx.ypw
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\csdevkit
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\csdevkit
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\NuGetScratch
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\NuGetScratch
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\FILECOAUTH.EXE-8B67D318.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\FILECOAUTH.EXE-8B67D318.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-20444.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-20444.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\codespaces_logs
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\codespaces_logs
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\mat-debug-20444.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\tcj1qwr1.nfn
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\tcj1qwr1.nfn
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\cv_debug.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\cv_debug.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Outlook Logging
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Outlook Logging
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\FILEZILLA.EXE-C5C0E348.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\FILEZILLA.EXE-C5C0E348.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\mb3pw0k5.20m
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\mb3pw0k5.20m
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\collab_low
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\collab_low
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FAA.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MSEDGE.EXE-37D25FAA.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-9D041ABC.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-9D041ABC.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\NuGetScratch
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\NuGetScratch
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F7.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F7.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\tcj1qwr1.nfn
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\tcj1qwr1.nfn
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\mb3pw0k5.20m
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\mb3pw0k5.20m
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\csdevkit
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\MetadataAsSource
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\MetadataAsSource
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Deployment
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Deployment
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\PSES-7920
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\PSES-7920
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\GIT.EXE-49C87D8C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\GIT.EXE-49C87D8C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\MetadataAsSource
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\MetadataAsSource
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\VPN7C20.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\VPN7C20.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\NETWORKANALYZER.EXE-B089D265.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\NETWORKANALYZER.EXE-B089D265.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-C625B657.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-C625B657.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\pyright-14804-rFt6Xb9481j9
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\pyright-14804-rFt6Xb9481j9
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\GIT.EXE-52A8D03B.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\GIT.EXE-52A8D03B.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10292_20251206_182040_515.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10292_20251206_182040_515.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\vscode-typescript
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\vscode-typescript
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\NOTEPAD.EXE-87302445.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\NOTEPAD.EXE-87302445.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SVCHOST.EXE-D8C907E1.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SVCHOST.EXE-D8C907E1.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\python-languageserver-cancellation
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\python-languageserver-cancellation
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\GIT.EXE-DA7EFDD1.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\GIT.EXE-DA7EFDD1.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10972_20251206_181721_616.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10972_20251206_181721_616.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\w0fijbdq.ck5
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\w0fijbdq.ck5
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\OPENWITH.EXE-8B50D58B.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\OPENWITH.EXE-8B50D58B.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\TASKHOSTW.EXE-2E5D4B75.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\TASKHOSTW.EXE-2E5D4B75.pf
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\csdevkit
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\GOOGLEEARTH.EXE-530F69BE.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\GOOGLEEARTH.EXE-530F69BE.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_11444_20251206_181740_143.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_11444_20251206_181740_143.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\y3zzolsk.4ht
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\y3zzolsk.4ht
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\PET.EXE-CF3D2EAF.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\PET.EXE-CF3D2EAF.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\TASKMGR.EXE-4C8500BA.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\TASKMGR.EXE-4C8500BA.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10292_20251206_182040_515.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10292_20251206_182040_515.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Outlook Logging
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Outlook Logging
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\z4s1txhq.0fc
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\z4s1txhq.0fc
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\POWERSHELL.EXE-CA1AE517.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\POWERSHELL.EXE-CA1AE517.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\UNINS000.EXE-2F4FCE6D.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\UNINS000.EXE-2F4FCE6D.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10972_20251206_181721_616.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_10972_20251206_181721_616.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\PSES-7920
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\PSES-7920
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\cv_debug.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\cv_debug.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\IDENTITY_HELPER.EXE-A6193B3F.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\IDENTITY_HELPER.EXE-A6193B3F.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F8.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28F8.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\VPN7C20.tmp
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\VPN7C20.tmp
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\REG.EXE-A93A1343.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\REG.EXE-A93A1343.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\UPDATER.EXE-DF42943C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\UPDATER.EXE-DF42943C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_11444_20251206_181740_143.log
+[2025-12-06 18:24:27] [Info] Supprimé: C:\Users\c.lecomte\AppData\Local\Temp\Microsoft.NET.Workload_11444_20251206_181740_143.log
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\pyright-14804-rFt6Xb9481j9
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\pyright-14804-rFt6Xb9481j9
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\Deployment
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\Deployment
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\IFS.FND.EXPLORER.EXE-3A69439A.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\IFS.FND.EXPLORER.EXE-3A69439A.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28FA.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE28FA.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\python-languageserver-cancellation
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\python-languageserver-cancellation
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\VBCSCOMPILER.EXE-7E310CBB.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\VBCSCOMPILER.EXE-7E310CBB.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\vscode-typescript
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\vscode-typescript
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\RG.EXE-4C4001C4.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\RG.EXE-4C4001C4.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\WHERE.EXE-8DCB25CC.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\WHERE.EXE-8DCB25CC.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\w0fijbdq.ck5
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\w0fijbdq.ck5
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\RUNDLL32.EXE-7A8D45B2.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\RUNDLL32.EXE-7A8D45B2.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\WINDOWS-CLEANER.EXE-52C607B6.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\WINDOWS-CLEANER.EXE-52C607B6.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\y3zzolsk.4ht
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\y3zzolsk.4ht
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\RUNDLL32.EXE-D673D18F.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\RUNDLL32.EXE-D673D18F.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\WMIAPSRV.EXE-FC8436DD.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\WMIAPSRV.EXE-FC8436DD.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée du dossier: C:\Users\c.lecomte\AppData\Local\Temp\z4s1txhq.0fc
+[2025-12-06 18:24:27] [Info] Supprimé dossier: C:\Users\c.lecomte\AppData\Local\Temp\z4s1txhq.0fc
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\RUNTIMEBROKER.EXE-2C5A250C.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\RUNTIMEBROKER.EXE-2C5A250C.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\WMIPRVSE.EXE-E8B8DD29.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\WMIPRVSE.EXE-E8B8DD29.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2900.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2900.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\IPCONFIG.EXE-BFEC2AD0.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\IPCONFIG.EXE-BFEC2AD0.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SCHTASKS.EXE-8B6144A9.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SCHTASKS.EXE-8B6144A9.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\WSL.EXE-1B26B53B.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\WSL.EXE-1B26B53B.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2901.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2901.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\Layout.ini
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\Layout.ini
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SEARCHPROTOCOLHOST.EXE-69C456C3.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SEARCHPROTOCOLHOST.EXE-69C456C3.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\_UNINS.TMP-8F3FE7F0.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\_UNINS.TMP-8F3FE7F0.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2904.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CODE.EXE-DDEE2904.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MICROSOFT.VISUALSTUDIO.CODE.S-17CD692E.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MICROSOFT.VISUALSTUDIO.CODE.S-17CD692E.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\SMARTSCREEN.EXE-EACC1250.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\SMARTSCREEN.EXE-EACC1250.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CONSENT.EXE-40419367.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CONSENT.EXE-40419367.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\COMPATTELRUNNER.EXE-B7A68ECC.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\COMPATTELRUNNER.EXE-B7A68ECC.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CSC.EXE-A14D0E83.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CSC.EXE-A14D0E83.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MICROSOFT.VISUALSTUDIO.CODE.S-A9350CBD.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MICROSOFT.VISUALSTUDIO.CODE.S-A9350CBD.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CTFMON.EXE-795F8130.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CTFMON.EXE-795F8130.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MICROSOFTEDGEUPDATE.EXE-7A595326.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MICROSOFTEDGEUPDATE.EXE-7A595326.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\CVTRES.EXE-929E64D1.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\CVTRES.EXE-929E64D1.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MOUSOCOREWORKER.EXE-44A01CE7.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MOUSOCOREWORKER.EXE-44A01CE7.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DEFRAG.EXE-3D9E8D72.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DEFRAG.EXE-3D9E8D72.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\MPCMDRUN.EXE-30893678.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\MPCMDRUN.EXE-30893678.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DFSVC.EXE-7526A0DE.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DFSVC.EXE-7526A0DE.pf
+[2025-12-06 18:24:27] [Info] (dry-run) Suppression planifiée: C:\WINDOWS\Prefetch\DLLHOST.EXE-51C0C0B8.pf
+[2025-12-06 18:24:27] [Info] Supprimé: C:\WINDOWS\Prefetch\DLLHOST.EXE-51C0C0B8.pf
+[2025-12-06 18:24:27] [Info] Nettoyage du cache mémoire système...
+[2025-12-06 18:24:27] [Info] (dry-run) Cache mémoire non nettoyé
+[2025-12-06 18:24:27] [Info] Exécution flush DNS...
+[2025-12-06 18:24:27] [Info] (dry-run) ipconfig /flushdns non exécuté
+[2025-12-06 18:24:27] [Info] Vidage de la Corbeille...
+[2025-12-06 18:24:27] [Info] (dry-run) Corbeille non vidée
+[2025-12-06 18:24:33] [Info] Terminé. Fichiers supprimés: 214, Octets libérés: 314791235
+[2025-12-06 18:25:17] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:39] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:40] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:40] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:40] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:40] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:25:45] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:46] [Debug] Paramètres sauvegardés avec succès
+[2025-12-06 18:28:49] [Debug] Paramètres sauvegardés avec succès

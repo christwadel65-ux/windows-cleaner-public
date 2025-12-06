@@ -30,6 +30,10 @@ namespace WindowsCleaner
         private CheckBox chkFlushDns = null!;
         private CheckBox chkVerbose = null!;
         private CheckBox chkAdvanced = null!;
+        
+        // Advanced cleaning options
+        private CheckBox chkOrphanedFiles = null!;
+        private CheckBox chkClearMemoryCache = null!;
 
         private ListView lvLogs = null!;
         private ColoredProgressBar progressBar = null!;
@@ -44,10 +48,12 @@ namespace WindowsCleaner
         public MainForm()
         {
             Text = "Windows Cleaner - Nettoyage Professionnel";
-            Width = 1000;
-            Height = 700;
-            MinimumSize = new Size(1000, 700);
+            Width = 1220;
+            Height = 820;
+            MinimumSize = new Size(1220, 700);
             StartPosition = FormStartPosition.CenterScreen;
+            MaximizeBox = true;
+            AutoScaleMode = AutoScaleMode.Dpi;
 
             // Check if running as admin
             var isAdmin = new System.Security.Principal.WindowsPrincipal(System.Security.Principal.WindowsIdentity.GetCurrent()).IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
@@ -66,40 +72,92 @@ namespace WindowsCleaner
             InitializeComponents();
             Logger.Init();
             Logger.OnLog += Logger_OnLog;
+            
+            // Charger les paramètres sauvegardés
+            LoadSavedOptions();
+        }
+        
+        private void LoadSavedOptions()
+        {
+            try
+            {
+                var settings = SettingsManager.Load();
+                
+                // Restaurer les états des CheckBox
+                if (settings.CleanRecycleBin.HasValue) chkRecycle.Checked = settings.CleanRecycleBin.Value;
+                if (settings.CleanSystemTemp.HasValue) chkSystemTemp.Checked = settings.CleanSystemTemp.Value;
+                if (settings.CleanBrowsers.HasValue) chkBrowsers.Checked = settings.CleanBrowsers.Value;
+                if (settings.CleanWindowsUpdate.HasValue) chkWindowsUpdate.Checked = settings.CleanWindowsUpdate.Value;
+                if (settings.CleanThumbnails.HasValue) chkThumbnails.Checked = settings.CleanThumbnails.Value;
+                if (settings.CleanPrefetch.HasValue) chkPrefetch.Checked = settings.CleanPrefetch.Value;
+                if (settings.FlushDns.HasValue) chkFlushDns.Checked = settings.FlushDns.Value;
+                if (settings.Verbose.HasValue) chkVerbose.Checked = settings.Verbose.Value;
+                if (settings.Advanced.HasValue) chkAdvanced.Checked = settings.Advanced.Value;
+                if (settings.CleanOrphanedFiles.HasValue) chkOrphanedFiles.Checked = settings.CleanOrphanedFiles.Value;
+                if (settings.ClearMemoryCache.HasValue) chkClearMemoryCache.Checked = settings.ClearMemoryCache.Value;
+            }
+            catch { /* Ignorer les erreurs de chargement */ }
+        }
+        
+        private void SaveOptions()
+        {
+            try
+            {
+                var settings = new AppSettings
+                {
+                    CleanRecycleBin = chkRecycle.Checked,
+                    CleanSystemTemp = chkSystemTemp.Checked,
+                    CleanBrowsers = chkBrowsers.Checked,
+                    CleanWindowsUpdate = chkWindowsUpdate.Checked,
+                    CleanThumbnails = chkThumbnails.Checked,
+                    CleanPrefetch = chkPrefetch.Checked,
+                    FlushDns = chkFlushDns.Checked,
+                    Verbose = chkVerbose.Checked,
+                    Advanced = chkAdvanced.Checked,
+                    CleanOrphanedFiles = chkOrphanedFiles.Checked,
+                    ClearMemoryCache = chkClearMemoryCache.Checked,
+                };
+                SettingsManager.Save(settings);
+            }
+            catch { /* Ignorer les erreurs de sauvegarde */ }
         }
 
         [MemberNotNull(nameof(menu), nameof(fileMenu), nameof(exportLogsMenuItem), nameof(exitMenuItem),
             nameof(btnDryRun), nameof(btnClean), nameof(btnCancel), nameof(chkRecycle), nameof(chkSystemTemp),
             nameof(chkBrowsers), nameof(chkWindowsUpdate), nameof(chkThumbnails), nameof(chkPrefetch),
-            nameof(chkFlushDns), nameof(chkVerbose), nameof(chkAdvanced), nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
+            nameof(chkFlushDns), nameof(chkVerbose), nameof(chkAdvanced), nameof(chkOrphanedFiles), nameof(chkClearMemoryCache), 
+            nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
         private void InitializeComponents()
         {
             menu = new MenuStrip();
             fileMenu = new ToolStripMenuItem("Fichier");
             var clearLogsMenuItem = new ToolStripMenuItem("Effacer les logs");
+            var readLogsMenuItem = new ToolStripMenuItem("📖 Lire les logs");
             exportLogsMenuItem = new ToolStripMenuItem("Exporter les logs");
             exitMenuItem = new ToolStripMenuItem("Quitter");
-            var helpMenu = new ToolStripMenuItem("Aide");
-            var aboutMenuItem = new ToolStripMenuItem("À propos");
-            aboutMenuItem.Click += AboutMenuItem_Click;
-            clearLogsMenuItem.Click += ClearLogsMenuItem_Click;
-            exportLogsMenuItem.Click += ExportLogsMenuItem_Click;
-            exitMenuItem.Click += (s, e) => Close();
-            fileMenu.DropDownItems.Add(clearLogsMenuItem);
-            fileMenu.DropDownItems.Add(exportLogsMenuItem);
-            fileMenu.DropDownItems.Add(new ToolStripSeparator());
-            fileMenu.DropDownItems.Add(exitMenuItem);
-            menu.Items.Add(fileMenu);
-            helpMenu.DropDownItems.Add(aboutMenuItem);
-            menu.Items.Add(helpMenu);
-
-            // Affichage / thèmes
             var viewMenu = new ToolStripMenuItem("Affichage");
             var themeLight = new ToolStripMenuItem("Thème Clair");
             var themeDark = new ToolStripMenuItem("Thème Sombre");
             var accentBlue = new ToolStripMenuItem("Accent Bleu");
             var accentGreen = new ToolStripMenuItem("Accent Vert");
             var accentOrange = new ToolStripMenuItem("Accent Orange");
+            var helpMenu = new ToolStripMenuItem("Aide");
+            var aboutMenuItem = new ToolStripMenuItem("À propos");
+            
+            aboutMenuItem.Click += AboutMenuItem_Click;
+            clearLogsMenuItem.Click += ClearLogsMenuItem_Click;
+            readLogsMenuItem.Click += ReadLogsMenuItem_Click;
+            exportLogsMenuItem.Click += ExportLogsMenuItem_Click;
+            exitMenuItem.Click += (s, e) => Close();
+            
+            fileMenu.DropDownItems.Add(clearLogsMenuItem);
+            fileMenu.DropDownItems.Add(readLogsMenuItem);
+            fileMenu.DropDownItems.Add(exportLogsMenuItem);
+            fileMenu.DropDownItems.Add(new ToolStripSeparator());
+            fileMenu.DropDownItems.Add(exitMenuItem);
+            menu.Items.Add(fileMenu);
+
+            // Affichage / thèmes
             themeLight.Click += (s, e) => ApplyTheme(isDark: false, accent: Color.FromArgb(0, 120, 215));
             themeDark.Click += (s, e) => ApplyTheme(isDark: true, accent: Color.FromArgb(0, 120, 215));
             accentBlue.Click += (s, e) => ApplyAccent(Color.FromArgb(0, 120, 215));
@@ -112,28 +170,31 @@ namespace WindowsCleaner
             viewMenu.DropDownItems.Add(accentGreen);
             viewMenu.DropDownItems.Add(accentOrange);
             menu.Items.Add(viewMenu);
+            
+            helpMenu.DropDownItems.Add(aboutMenuItem);
+            menu.Items.Add(helpMenu);
             Controls.Add(menu);
 
-            // GroupBox for actions
-            var grpActions = new GroupBox() { Text = "Actions", Left = 15, Top = 50, Width = 350, Height = 80 };
-            btnDryRun = new Button() { Text = "🔍 Simuler (Dry Run)", Left = 10, Top = 25, Width = 160, Height = 40 };
-            btnClean = new Button() { Text = "🧹 Nettoyer", Left = 180, Top = 25, Width = 160, Height = 40 };
-            btnCancel = new Button() { Text = "✖ Annuler", Left = 10, Top = 25, Width = 330, Height = 40, Enabled = false, Visible = false };
+            // GroupBox for actions - DESIGN AMÉLIORÉ
+            var grpActions = new GroupBox() { Text = "Actions", Left = 12, Top = 50, Width = 380, Height = 95, Padding = new Padding(0, 8, 0, 0) };
+            btnDryRun = new Button() { Text = "🔍 Simuler", Left = 15, Top = 28, Width = 170, Height = 55, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            btnClean = new Button() { Text = "🧹 Nettoyer", Left = 195, Top = 28, Width = 170, Height = 55, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            btnCancel = new Button() { Text = "✖ Annuler", Left = 12, Top = 28, Width = 356, Height = 55, Enabled = false, Visible = false, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
             grpActions.Controls.Add(btnDryRun);
             grpActions.Controls.Add(btnClean);
-            grpActions.Controls.Add(btnCancel);  // Add last so it's on top
+            grpActions.Controls.Add(btnCancel);
             btnCancel.BringToFront();
             Controls.Add(grpActions);
 
-            // GroupBox for cleanup options
-            var grpOptions = new GroupBox() { Text = "Options de Nettoyage", Left = 380, Top = 50, Width = 595, Height = 80 };
-            chkRecycle = new CheckBox() { Text = "Corbeille", Left = 15, Top = 25, Width = 135, AutoSize = false };
-            chkSystemTemp = new CheckBox() { Text = "Temp système (C:\\Windows\\Temp)", Left = 15, Top = 48, Width = 135, AutoSize = false, Height = 30 };
-            chkBrowsers = new CheckBox() { Text = "Navigateurs (Chrome, Edge...)", Left = 160, Top = 25, Width = 265, AutoSize = false };
-            chkWindowsUpdate = new CheckBox() { Text = "Windows Update", Left = 160, Top = 48, Width = 135, AutoSize = false };
-            chkThumbnails = new CheckBox() { Text = "Vignettes", Left = 305, Top = 48, Width = 115, AutoSize = false };
-            chkPrefetch = new CheckBox() { Text = "Prefetch", Left = 435, Top = 25, Width = 145, AutoSize = false };
-            chkFlushDns = new CheckBox() { Text = "Flush DNS", Left = 435, Top = 48, Width = 145, AutoSize = false };
+            // GroupBox for cleanup options - LARGEMENT AGRANDI
+            var grpOptions = new GroupBox() { Text = "Nettoyage Standard", Left = 400, Top = 50, Width = 780, Height = 95, Padding = new Padding(0, 8, 0, 0) };
+            chkRecycle = new CheckBox() { Text = "🗑️ Corbeille", Left = 15, Top = 30, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkSystemTemp = new CheckBox() { Text = "📁 Temp Système", Left = 205, Top = 30, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkBrowsers = new CheckBox() { Text = "🌐 Navigateurs", Left = 395, Top = 30, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkWindowsUpdate = new CheckBox() { Text = "🔄 Windows Update", Left = 585, Top = 30, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkThumbnails = new CheckBox() { Text = "🖼️ Vignettes", Left = 15, Top = 60, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkPrefetch = new CheckBox() { Text = "⚡ Prefetch", Left = 205, Top = 60, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkFlushDns = new CheckBox() { Text = "🔗 Flush DNS", Left = 395, Top = 60, Width = 180, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
             grpOptions.Controls.Add(chkRecycle);
             grpOptions.Controls.Add(chkSystemTemp);
             grpOptions.Controls.Add(chkBrowsers);
@@ -143,33 +204,24 @@ namespace WindowsCleaner
             grpOptions.Controls.Add(chkFlushDns);
             Controls.Add(grpOptions);
 
-            // Info label
-            var lblInfo = new Label() 
-            { 
-                Text = "Note : Les dossiers Temp utilisateur (%TEMP% et LocalAppData\\Temp) sont toujours nettoyés", 
-                Left = 380, 
-                Top = 135, 
-                Width = 595, 
-                Height = 20,
-                ForeColor = System.Drawing.Color.Gray,
-                Font = new System.Drawing.Font(this.Font.FontFamily, 7.5f, System.Drawing.FontStyle.Italic)
-            };
-            Controls.Add(lblInfo);
-
-            // Advanced options
-            var grpAdvanced = new GroupBox() { Text = "Options Avancées", Left = 15, Top = 145, Width = 960, Height = 55 };
-            chkVerbose = new CheckBox() { Text = "Mode verbeux (logs détaillés)", Left = 15, Top = 23, AutoSize = true };
-            chkAdvanced = new CheckBox() { Text = "Rapport de nettoyage avancé (prévisualisation avant exécution)", Left = 350, Top = 23, AutoSize = true };
+            // Advanced options - MEILLEURE PRÉSENTATION
+            var grpAdvanced = new GroupBox() { Text = "Options Avancées", Left = 12, Top = 155, Width = 1168, Height = 75, Padding = new Padding(0, 8, 0, 0) };
+            chkVerbose = new CheckBox() { Text = "📝 Mode verbeux", Left = 15, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkAdvanced = new CheckBox() { Text = "📊 Rapport détaillé", Left = 280, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkOrphanedFiles = new CheckBox() { Text = "🧩 Fichiers orphelins", Left = 545, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkClearMemoryCache = new CheckBox() { Text = "💾 Cache mémoire", Left = 810, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
             grpAdvanced.Controls.Add(chkVerbose);
             grpAdvanced.Controls.Add(chkAdvanced);
+            grpAdvanced.Controls.Add(chkOrphanedFiles);
+            grpAdvanced.Controls.Add(chkClearMemoryCache);
             Controls.Add(grpAdvanced);
 
-            // Logs GroupBox
-            var grpLogs = new GroupBox() { Text = "Journal des Opérations", Left = 15, Top = 215, Width = 960, Height = 375 };
-            lvLogs = new ListView() { Left = 10, Top = 25, Width = 940, Height = 340, View = View.Details, FullRowSelect = true };
+            // Logs GroupBox - AUGMENTÉ
+            var grpLogs = new GroupBox() { Text = "📋 Journal des Opérations", Left = 12, Top = 240, Width = 1168, Height = 485, Padding = new Padding(0, 8, 0, 0) };
+            lvLogs = new ListView() { Left = 8, Top = 30, Width = 1152, Height = 447, View = View.Details, FullRowSelect = true, Font = new Font("Segoe UI", 9), BorderStyle = BorderStyle.None };
             lvLogs.Columns.Add("Heure", 160);
             lvLogs.Columns.Add("Niveau", 100);
-            lvLogs.Columns.Add("Message", 660);
+            lvLogs.Columns.Add("Message", 892);
             grpLogs.Controls.Add(lvLogs);
             Controls.Add(grpLogs);
 
@@ -191,13 +243,17 @@ namespace WindowsCleaner
             }
             catch { }
 
-            progressBar = new ColoredProgressBar() { Left = 15, Top = 605, Width = 960, Height = 28, BackColor = menu != null ? menu.BackColor : SystemColors.Control, ForeColor = this.ForeColor };
+            progressBar = new ColoredProgressBar() { Left = 12, Top = 735, Width = 1168, Height = 32, BackColor = menu != null ? menu.BackColor : SystemColors.Control, ForeColor = this.ForeColor };
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             progressBar.Value = 0;
             progressBar.BarColor = _accentColor;
             statusStrip = new StatusStrip();
-            statusLabel = new ToolStripStatusLabel("Prêt - Sélectionnez les options et cliquez sur une action");
+            statusLabel = new ToolStripStatusLabel("✓ Prêt - Sélectionnez les options et cliquez sur une action");
+            statusLabel.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            statusLabel.AutoSize = false;
+            statusLabel.Width = 1350;
+            statusLabel.ForeColor = Color.DarkGreen;
             statusStrip.Items.Add(statusLabel);
 
             Controls.Add(progressBar);
@@ -206,25 +262,49 @@ namespace WindowsCleaner
             btnDryRun.Click += async (s, e) => await StartCleanerAsync(dryRun: true);
             btnClean.Click += async (s, e) => await StartCleanerAsync(dryRun: false);
             btnCancel.Click += (s, e) => Cancel();
+            
+            // Double-clic sur les logs pour ouvrir les chemins
+            lvLogs.DoubleClick += LvLogs_DoubleClick;
+            
+            // Event handlers pour sauvegarder les options à chaque changement
+            foreach (Control c in Controls)
+            {
+                if (c is GroupBox gb)
+                {
+                    foreach (Control subC in gb.Controls)
+                    {
+                        if (subC is CheckBox chk)
+                            chk.CheckedChanged += (s, e) => SaveOptions();
+                    }
+                }
+            }
+            
+            // Sauvegarder les options à la fermeture
+            FormClosing += (s, e) => SaveOptions();
 
-            // button visual polish
+            // button visual polish - STYLE MODERNE
             foreach (var b in new[] { btnDryRun, btnClean, btnCancel })
             {
                 if (b == null) continue;
                 b.FlatStyle = FlatStyle.Flat;
-                b.FlatAppearance.BorderSize = 1;
-                b.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                b.FlatAppearance.BorderSize = 0;
+                b.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 100, 180);
+                b.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 140, 230);
+                b.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
+                b.BackColor = _accentColor;
+                b.ForeColor = Color.White;
             }
 
-            // GroupBox styling
-            var grpFont = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            // GroupBox styling - DESIGN ÉPURÉ
+            var grpFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             foreach (Control c in Controls)
             {
                 if (c is GroupBox gb)
                 {
                     gb.Font = grpFont;
                     gb.ForeColor = _accentColor;
+                    gb.Padding = new Padding(10);
                 }
             }
 
@@ -356,6 +436,50 @@ namespace WindowsCleaner
             catch { }
         }
 
+        private void LvLogs_DoubleClick(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (lvLogs.SelectedItems.Count == 0) return;
+                
+                var selectedItem = lvLogs.SelectedItems[0];
+                if (selectedItem.SubItems.Count < 3) return;
+                
+                var message = selectedItem.SubItems[2].Text;
+                
+                // Extraire les chemins du message (entre guillemets ou après ":")
+                var paths = System.Text.RegularExpressions.Regex.Matches(message, @"[A-Z]:\\[^\s""<>|?*]+");
+                
+                if (paths.Count > 0)
+                {
+                    var path = paths[0].Value;
+                    
+                    if (System.IO.Directory.Exists(path))
+                    {
+                        Process.Start(new ProcessStartInfo("explorer.exe", '"' + path + '"') { UseShellExecute = true });
+                        Logger.Log(LogLevel.Info, $"Ouverture dossier: {path}");
+                    }
+                    else if (System.IO.File.Exists(path))
+                    {
+                        Process.Start(new ProcessStartInfo("explorer.exe", "/select,\"" + path + "\"") { UseShellExecute = true });
+                        Logger.Log(LogLevel.Info, $"Ouverture fichier: {path}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Chemin introuvable dans le message: {path}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Aucun chemin de fichier ou dossier détecté dans ce message.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, "Erreur lors de l'ouverture: " + ex.Message);
+            }
+        }
+
         private void Logger_OnLog(DateTime ts, LogLevel level, string message)
         {
             if (InvokeRequired)
@@ -412,6 +536,33 @@ namespace WindowsCleaner
             }
         }
 
+        private void ReadLogsMenuItem_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                var logFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "windows-cleaner.log");
+                
+                if (!System.IO.File.Exists(logFile))
+                {
+                    MessageBox.Show("Aucun fichier de log trouvé.", "Lire les logs", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Ouvrir le fichier avec l'éditeur par défaut
+                var psi = new ProcessStartInfo(logFile)
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                };
+                Process.Start(psi);
+                statusLabel.Text = "Fichier de log ouvert";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Impossible d'ouvrir le fichier de log: {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ExportLogsMenuItem_Click(object? sender, EventArgs e)
         {
             using var sfd = new SaveFileDialog();
@@ -454,7 +605,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.";
 
-            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 0.1";
+            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 1.0.5";
             MessageBox.Show(msg, "À propos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -492,7 +643,12 @@ SOFTWARE.";
                 CleanPrefetch = chkPrefetch.Checked,
                 FlushDns = chkFlushDns.Checked,
                 Verbose = chkVerbose.Checked,
-                // advanced option
+                // Advanced options
+                CleanSystemLogs = false,
+                CleanInstallerCache = false,
+                CleanOrphanedFiles = chkOrphanedFiles.Checked,
+                CleanApplicationLogs = false,
+                ClearMemoryCache = chkClearMemoryCache.Checked,
             };
 
             // advanced mode: generate and show report before executing (unless dry-run)

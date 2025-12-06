@@ -871,7 +871,7 @@ namespace WindowsCleaner
                     File.Delete(filePath);
                     return (true, size);
                 }
-                catch (IOException)
+                catch (IOException ioEx)
                 {
                     attempt++;
                     log($"Fichier verrouillé, tentative {attempt}/{maxAttempts}: {filePath}");
@@ -938,7 +938,7 @@ namespace WindowsCleaner
                     Directory.Delete(dirPath, true);
                     return (true, totalFreed);
                 }
-                catch (IOException)
+                catch (IOException ioEx)
                 {
                     attempt++;
                     log($"Dossier verrouillé, tentative {attempt}/{maxAttempts}: {dirPath}");

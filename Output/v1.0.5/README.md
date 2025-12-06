@@ -1,20 +1,20 @@
-Windows Cleaner - WinForms
+# Windows Cleaner (minimal) - WinForms
 
-Minimal tool in C# (WinForms) to clean temporary user files and optionally the Recycle Bin.
+Outil minimal en C# (WinForms) pour nettoyer les fichiers temporaires utilisateur et optionnellement la corbeille.
 
-Quick Use
-- Open a PowerShell Terminal
-- Place yourself in the project folder
+Usage rapide
+- Ouvrir un terminal PowerShell
+- Se placer dans le dossier du projet
 
-"'
-Dotnet Build
-Dotnet Run
-"'
+```
+dotnet build
+dotnet run
+```
 
-Important Notes
-Run the application as an administrator if you want to delete files from the System Temp folder.
-- The "Dry Run" mode allows you to see actions without deleting.
-The Recycle Bin dump uses the Windows API (P/Invoke). No confirmation is required if the option is enabled.
+Notes importantes
+- Exécuter l'application en tant qu'administrateur si vous voulez supprimer les fichiers du dossier Temp système.
+- Le mode "Dry Run" permet de voir les actions sans supprimer.
+- Le vidage de la Corbeille utilise l'API Windows (P/Invoke). Aucune confirmation n'est demandée si l'option est activée.
 
 Options de nettoyage standard
 - Nettoyage du cache Chrome, Edge et Firefox (fermez les navigateurs avant d'exécuter pour éviter les fichiers verrouillés).
@@ -42,55 +42,56 @@ Robustesse et retries
 
 Licence (MIT)
 ----------------
-This project is distributed under the MIT license. The full text of the license is included below and in the 'LICENSE' file at the root of the project.
+Ce projet est distribué sous la licence MIT. Le texte complet de la licence est inclus ci-dessous et dans le fichier `LICENSE` à la racine du projet.
 
 MIT License
 
-Copyright (c) 2025 c.lecomte.
+Copyright (c) 2025 c.lecomte
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-the Software without restriction, including the right to the right to create a free service.
+in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to the right persons to whom the Software is, the Software is, and to which the Software is, the software is, which is created.
+copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. In No Event Shall the
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-Software.
+SOFTWARE.
 
-Author
+Auteur
 ------
-'c.lecomte'
+`c.lecomte`
 
-Limits
-This tool is minimal and does not handle all cases (file lock, multiple profiles, deep cleaning). Use with caution.
+Limites
+- Cet outil est minimal et ne gère pas tous les cas (verrou de fichiers, profils multiples, nettoyage approfondi). À utiliser avec précaution.
 
-License
-No special license provided here; use at your own risk.
-Developer Helper
+Licence
+- Aucun licence particulière fournie ici; utilisez à vos risques.
+
+Developer helper
 ----------------
 
-A handy PowerShell script is included to apply the format, check the build, and prepare a group commit:
+Un script PowerShell pratique est inclus pour appliquer le format, vérifier la build et préparer un commit groupé :
 
-- 'scripts/prepare_commit.ps1'
+- `scripts/prepare_commit.ps1`
 
-Use:
+Usage :
 
-" Powershell "
+```powershell
 .\scripts\prepare_commit.ps1
-"'
+```
 
-The script:
-- Runs 'dotnet format' (if installed); otherwise offers installation.
-- Runs 'dotnet build' to check that everything is compiling.
-- Proposes to run 'git add -A' + 'git commit -m...' to group changes into a single commit.
+Le script :
+- Exécute `dotnet format` (si installé) ; sinon propose l'installation.
+- Exécute `dotnet build` pour vérifier que tout compile.
+- Propose d'exécuter `git add -A` + `git commit -m "..."` pour regrouper les modifications en un seul commit.
 
-Tip: Use this script before you push your changes to keep a clean history.
+Conseil : utilisez ce script avant de pousser vos changements pour garder un historique propre.

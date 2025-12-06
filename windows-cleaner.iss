@@ -1,14 +1,14 @@
 [Setup]
 AppName=Windows Cleaner
-AppVersion=1.0.0
+AppVersion=1.0.5
 AppPublisher=Windows Cleaner
-AppPublisherURL=https://github.com/yourusername/windows-cleaner
-AppSupportURL=https://github.com/yourusername/windows-cleaner
-AppUpdatesURL=https://github.com/yourusername/windows-cleaner
+AppPublisherURL=https://github.com/christwadel65-ux/windows-cleaner
+AppSupportURL=https://github.com/christwadel65-ux/windows-cleaner
+AppUpdatesURL=https://github.com/christwadel65-ux/windows-cleaner
 DefaultDirName={pf}\WindowsCleaner
 DefaultGroupName=Windows Cleaner
 OutputDir=Output
-OutputBaseFilename=WindowsCleaner-Setup-1.0.0
+OutputBaseFilename=WindowsCleaner-Setup-1.0.5
 SetupIconFile=app.ico
 Compression=lzma
 SolidCompression=yes
@@ -27,11 +27,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "bin\Debug\net10.0-windows\windows-cleaner.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Debug\net10.0-windows\windows-cleaner.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Debug\net10.0-windows\*.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Debug\net10.0-windows\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Debug\net10.0-windows\*.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "bin\Release\net10.0-windows\windows-cleaner.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net10.0-windows\windows-cleaner.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net10.0-windows\*.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net10.0-windows\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net10.0-windows\*.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 Source: "app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "README.md"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 Source: "LICENSE"; DestDir: "{app}"; Flags: ignoreversion

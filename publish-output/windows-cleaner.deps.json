@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "windows-cleaner/1.0.5": {
+        "runtime": {
+          "windows-cleaner.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "windows-cleaner/1.0.5": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
