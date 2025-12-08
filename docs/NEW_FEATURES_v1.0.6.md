@@ -378,7 +378,7 @@ options.CleanClipboard = true;
 ### Compiler
 
 ```powershell
-cd "C:\Users\Your Name\Documents\dev_pyt\Windows Cleaner"
+cd "$env:USERPROFILE\Documents\dev_pyt\Windows Cleaner"
 dotnet restore
 dotnet build --configuration Release
 ```

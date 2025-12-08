@@ -1,9 +1,10 @@
 using System;
-using System.Drawing;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,6 +36,10 @@ namespace WindowsCleaner
         private CheckBox chkOrphanedFiles = null!;
         private CheckBox chkClearMemoryCache = null!;
 
+        // Profile selection
+        private ComboBox cmbProfiles = null!;
+        private Label lblProfile = null!;
+
         private ListView lvLogs = null!;
         private ColoredProgressBar progressBar = null!;
         private StatusStrip statusStrip = null!;
@@ -43,6 +48,10 @@ namespace WindowsCleaner
         private CancellationTokenSource? _cts;
         private Color _accentColor = Color.FromArgb(0, 120, 215);
         private bool _isDark = false;
+        private List<CleaningProfile> _profiles = new List<CleaningProfile>();
+        private bool _isApplyingProfile = false;
+        private bool _suppressProfileEvent = false;
+        private const string CustomProfileLabel = "Personnalisé (manuel)";
 
 #pragma warning disable CS8774
         public MainForm()
@@ -70,6 +79,7 @@ namespace WindowsCleaner
             }
 
             InitializeComponents();
+            LoadProfilesIntoCombo();
             Logger.Init();
             Logger.OnLog += Logger_OnLog;
             
@@ -82,19 +92,23 @@ namespace WindowsCleaner
             try
             {
                 var settings = SettingsManager.Load();
-                
-                // Restaurer les états des CheckBox
-                if (settings.CleanRecycleBin.HasValue) chkRecycle.Checked = settings.CleanRecycleBin.Value;
-                if (settings.CleanSystemTemp.HasValue) chkSystemTemp.Checked = settings.CleanSystemTemp.Value;
-                if (settings.CleanBrowsers.HasValue) chkBrowsers.Checked = settings.CleanBrowsers.Value;
-                if (settings.CleanWindowsUpdate.HasValue) chkWindowsUpdate.Checked = settings.CleanWindowsUpdate.Value;
-                if (settings.CleanThumbnails.HasValue) chkThumbnails.Checked = settings.CleanThumbnails.Value;
-                if (settings.CleanPrefetch.HasValue) chkPrefetch.Checked = settings.CleanPrefetch.Value;
-                if (settings.FlushDns.HasValue) chkFlushDns.Checked = settings.FlushDns.Value;
-                if (settings.Verbose.HasValue) chkVerbose.Checked = settings.Verbose.Value;
-                if (settings.Advanced.HasValue) chkAdvanced.Checked = settings.Advanced.Value;
-                if (settings.CleanOrphanedFiles.HasValue) chkOrphanedFiles.Checked = settings.CleanOrphanedFiles.Value;
-                if (settings.ClearMemoryCache.HasValue) chkClearMemoryCache.Checked = settings.ClearMemoryCache.Value;
+                var preferredProfile = settings.SelectedProfileName;
+
+                // Si un profil enregistré existe encore, l'appliquer
+                var matchingProfile = _profiles.FirstOrDefault(p =>
+                    !string.IsNullOrWhiteSpace(preferredProfile) &&
+                    p.Name.Equals(preferredProfile, StringComparison.OrdinalIgnoreCase));
+
+                if (matchingProfile != null)
+                {
+                    SetProfileSelection(matchingProfile.Name);
+                    ApplyProfileToUi(matchingProfile);
+                }
+                else
+                {
+                    RestoreCheckboxesFromSettings(settings);
+                    SetProfileSelection(string.IsNullOrWhiteSpace(preferredProfile) ? CustomProfileLabel : preferredProfile!);
+                }
             }
             catch { /* Ignorer les erreurs de chargement */ }
         }
@@ -116,17 +130,133 @@ namespace WindowsCleaner
                     Advanced = chkAdvanced.Checked,
                     CleanOrphanedFiles = chkOrphanedFiles.Checked,
                     ClearMemoryCache = chkClearMemoryCache.Checked,
+                    SelectedProfileName = cmbProfiles?.SelectedItem?.ToString() ?? CustomProfileLabel,
                 };
                 SettingsManager.Save(settings);
             }
             catch { /* Ignorer les erreurs de sauvegarde */ }
         }
 
+        private void RestoreCheckboxesFromSettings(AppSettings settings)
+        {
+            if (settings.CleanRecycleBin.HasValue) chkRecycle.Checked = settings.CleanRecycleBin.Value;
+            if (settings.CleanSystemTemp.HasValue) chkSystemTemp.Checked = settings.CleanSystemTemp.Value;
+            if (settings.CleanBrowsers.HasValue) chkBrowsers.Checked = settings.CleanBrowsers.Value;
+            if (settings.CleanWindowsUpdate.HasValue) chkWindowsUpdate.Checked = settings.CleanWindowsUpdate.Value;
+            if (settings.CleanThumbnails.HasValue) chkThumbnails.Checked = settings.CleanThumbnails.Value;
+            if (settings.CleanPrefetch.HasValue) chkPrefetch.Checked = settings.CleanPrefetch.Value;
+            if (settings.FlushDns.HasValue) chkFlushDns.Checked = settings.FlushDns.Value;
+            if (settings.Verbose.HasValue) chkVerbose.Checked = settings.Verbose.Value;
+            if (settings.Advanced.HasValue) chkAdvanced.Checked = settings.Advanced.Value;
+            if (settings.CleanOrphanedFiles.HasValue) chkOrphanedFiles.Checked = settings.CleanOrphanedFiles.Value;
+            if (settings.ClearMemoryCache.HasValue) chkClearMemoryCache.Checked = settings.ClearMemoryCache.Value;
+        }
+
+        private void LoadProfilesIntoCombo()
+        {
+            _profiles = ProfileManager.GetAllProfiles();
+
+            if (cmbProfiles == null)
+                return;
+
+            _suppressProfileEvent = true;
+            try
+            {
+                cmbProfiles.Items.Clear();
+                cmbProfiles.Items.Add(CustomProfileLabel);
+                foreach (var profile in _profiles)
+                    cmbProfiles.Items.Add(profile.Name);
+
+                if (cmbProfiles.Items.Count > 0)
+                    cmbProfiles.SelectedIndex = 0;
+            }
+            finally
+            {
+                _suppressProfileEvent = false;
+            }
+        }
+
+        private void SetProfileSelection(string profileName)
+        {
+            if (cmbProfiles == null) return;
+
+            _suppressProfileEvent = true;
+            try
+            {
+                if (cmbProfiles.Items.Contains(profileName))
+                    cmbProfiles.SelectedItem = profileName;
+                else if (cmbProfiles.Items.Count > 0)
+                    cmbProfiles.SelectedIndex = 0;
+            }
+            finally
+            {
+                _suppressProfileEvent = false;
+            }
+        }
+
+        private CleaningProfile? GetSelectedProfile()
+        {
+            if (cmbProfiles == null || cmbProfiles.SelectedItem == null) return null;
+            var selectedName = cmbProfiles.SelectedItem.ToString();
+            if (string.IsNullOrWhiteSpace(selectedName) || selectedName == CustomProfileLabel) return null;
+
+            return _profiles.FirstOrDefault(p => p.Name.Equals(selectedName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private void ApplyProfileToUi(CleaningProfile profile)
+        {
+            _isApplyingProfile = true;
+            try
+            {
+                chkRecycle.Checked = profile.EmptyRecycleBin;
+                chkSystemTemp.Checked = profile.IncludeSystemTemp;
+                chkBrowsers.Checked = profile.CleanBrowsers;
+                chkWindowsUpdate.Checked = profile.CleanWindowsUpdate;
+                chkThumbnails.Checked = profile.CleanThumbnails;
+                chkPrefetch.Checked = profile.CleanPrefetch;
+                chkFlushDns.Checked = profile.FlushDns;
+                chkVerbose.Checked = profile.Verbose;
+                chkOrphanedFiles.Checked = profile.CleanOrphanedFiles;
+                chkClearMemoryCache.Checked = profile.ClearMemoryCache;
+            }
+            finally
+            {
+                _isApplyingProfile = false;
+            }
+
+            SaveOptions();
+        }
+
+        private void CmbProfiles_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (_suppressProfileEvent) return;
+
+            SaveOptions();
+
+            var selectedProfile = GetSelectedProfile();
+            if (selectedProfile == null)
+                return;
+
+            ApplyProfileToUi(selectedProfile);
+            statusLabel.Text = $"Profil appliqué: {selectedProfile.Name}";
+        }
+
+        private void OnOptionChanged(object? sender, EventArgs e)
+        {
+            SaveOptions();
+
+            if (_isApplyingProfile)
+                return;
+
+            if (cmbProfiles != null && cmbProfiles.SelectedItem != null && cmbProfiles.SelectedItem.ToString() != CustomProfileLabel)
+                SetProfileSelection(CustomProfileLabel);
+        }
+
         [MemberNotNull(nameof(menu), nameof(fileMenu), nameof(exportLogsMenuItem), nameof(exitMenuItem),
             nameof(btnDryRun), nameof(btnClean), nameof(btnCancel), nameof(chkRecycle), nameof(chkSystemTemp),
             nameof(chkBrowsers), nameof(chkWindowsUpdate), nameof(chkThumbnails), nameof(chkPrefetch),
             nameof(chkFlushDns), nameof(chkVerbose), nameof(chkAdvanced), nameof(chkOrphanedFiles), nameof(chkClearMemoryCache), 
-            nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
+            nameof(cmbProfiles), nameof(lblProfile), nameof(lvLogs), nameof(progressBar), nameof(statusStrip), nameof(statusLabel))]
         private void InitializeComponents()
         {
             menu = new MenuStrip();
@@ -202,11 +332,15 @@ namespace WindowsCleaner
             menu.Items.Add(helpMenu);
             Controls.Add(menu);
 
-            // GroupBox for actions - DESIGN AMÉLIORÉ
-            var grpActions = new GroupBox() { Text = "Actions", Left = 12, Top = 50, Width = 380, Height = 95, Padding = new Padding(0, 8, 0, 0) };
-            btnDryRun = new Button() { Text = "🔍 Simuler", Left = 15, Top = 28, Width = 170, Height = 55, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
-            btnClean = new Button() { Text = "🧹 Nettoyer", Left = 195, Top = 28, Width = 170, Height = 55, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
-            btnCancel = new Button() { Text = "✖ Annuler", Left = 12, Top = 28, Width = 356, Height = 55, Enabled = false, Visible = false, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            // GroupBox for actions and profiles - DESIGN AMÉLIORÉ
+            var grpActions = new GroupBox() { Text = "Actions", Left = 12, Top = 50, Width = 380, Height = 135, Padding = new Padding(0, 8, 0, 0) };
+            lblProfile = new Label() { Text = "Profil de nettoyage", Left = 15, Top = 22, AutoSize = true, Font = new Font("Segoe UI", 9.5f, FontStyle.Bold) };
+            cmbProfiles = new ComboBox() { Left = 15, Top = 42, Width = 340, Height = 32, DropDownStyle = ComboBoxStyle.DropDownList, Font = new Font("Segoe UI", 10) };
+            btnDryRun = new Button() { Text = "🔍 Simuler", Left = 15, Top = 80, Width = 170, Height = 40, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            btnClean = new Button() { Text = "🧹 Nettoyer", Left = 195, Top = 80, Width = 170, Height = 40, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            btnCancel = new Button() { Text = "✖ Annuler", Left = 12, Top = 80, Width = 356, Height = 40, Enabled = false, Visible = false, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
+            grpActions.Controls.Add(lblProfile);
+            grpActions.Controls.Add(cmbProfiles);
             grpActions.Controls.Add(btnDryRun);
             grpActions.Controls.Add(btnClean);
             grpActions.Controls.Add(btnCancel);
@@ -232,7 +366,7 @@ namespace WindowsCleaner
             Controls.Add(grpOptions);
 
             // Advanced options - MEILLEURE PRÉSENTATION
-            var grpAdvanced = new GroupBox() { Text = "Options Avancées", Left = 12, Top = 155, Width = 1168, Height = 75, Padding = new Padding(0, 8, 0, 0) };
+            var grpAdvanced = new GroupBox() { Text = "Options Avancées", Left = 12, Top = 200, Width = 1168, Height = 75, Padding = new Padding(0, 8, 0, 0) };
             chkVerbose = new CheckBox() { Text = "📝 Mode verbeux", Left = 15, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
             chkAdvanced = new CheckBox() { Text = "📊 Rapport détaillé", Left = 280, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
             chkOrphanedFiles = new CheckBox() { Text = "🧩 Fichiers orphelins", Left = 545, Top = 30, Width = 250, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
@@ -244,8 +378,8 @@ namespace WindowsCleaner
             Controls.Add(grpAdvanced);
 
             // Logs GroupBox - AUGMENTÉ
-            var grpLogs = new GroupBox() { Text = "📋 Journal des Opérations", Left = 12, Top = 240, Width = 1168, Height = 485, Padding = new Padding(0, 8, 0, 0) };
-            lvLogs = new ListView() { Left = 8, Top = 30, Width = 1152, Height = 447, View = View.Details, FullRowSelect = true, Font = new Font("Segoe UI", 9), BorderStyle = BorderStyle.None };
+            var grpLogs = new GroupBox() { Text = "📋 Journal des Opérations", Left = 12, Top = 290, Width = 1168, Height = 440, Padding = new Padding(0, 8, 0, 0) };
+            lvLogs = new ListView() { Left = 8, Top = 30, Width = 1152, Height = 402, View = View.Details, FullRowSelect = true, Font = new Font("Segoe UI", 9), BorderStyle = BorderStyle.None };
             lvLogs.Columns.Add("Heure", 160);
             lvLogs.Columns.Add("Niveau", 100);
             lvLogs.Columns.Add("Message", 892);
@@ -286,6 +420,7 @@ namespace WindowsCleaner
             Controls.Add(progressBar);
             Controls.Add(statusStrip);
 
+            cmbProfiles.SelectedIndexChanged += CmbProfiles_SelectedIndexChanged;
             btnDryRun.Click += async (s, e) => await StartCleanerAsync(dryRun: true);
             btnClean.Click += async (s, e) => await StartCleanerAsync(dryRun: false);
             btnCancel.Click += (s, e) => Cancel();
@@ -301,7 +436,7 @@ namespace WindowsCleaner
                     foreach (Control subC in gb.Controls)
                     {
                         if (subC is CheckBox chk)
-                            chk.CheckedChanged += (s, e) => SaveOptions();
+                            chk.CheckedChanged += OnOptionChanged;
                     }
                 }
             }
@@ -659,24 +794,29 @@ SOFTWARE.";
             progressBar.Value = 0;
             statusLabel.Text = dryRun ? "Dry run en cours..." : "Nettoyage en cours...";
 
-            var options = new CleanerOptions
-            {
-                DryRun = dryRun,
-                EmptyRecycleBin = chkRecycle.Checked,
-                IncludeSystemTemp = chkSystemTemp.Checked,
-                CleanBrowsers = chkBrowsers.Checked,
-                CleanWindowsUpdate = chkWindowsUpdate.Checked,
-                CleanThumbnails = chkThumbnails.Checked,
-                CleanPrefetch = chkPrefetch.Checked,
-                FlushDns = chkFlushDns.Checked,
-                Verbose = chkVerbose.Checked,
-                // Advanced options
-                CleanSystemLogs = false,
-                CleanInstallerCache = false,
-                CleanOrphanedFiles = chkOrphanedFiles.Checked,
-                CleanApplicationLogs = false,
-                ClearMemoryCache = chkClearMemoryCache.Checked,
-            };
+            var selectedProfile = GetSelectedProfile();
+            var profileUsed = selectedProfile?.Name ?? CustomProfileLabel;
+
+            CleanerOptions options = selectedProfile != null
+                ? selectedProfile.ToCleanerOptions(dryRun)
+                : new CleanerOptions
+                {
+                    DryRun = dryRun,
+                    EmptyRecycleBin = chkRecycle.Checked,
+                    IncludeSystemTemp = chkSystemTemp.Checked,
+                    CleanBrowsers = chkBrowsers.Checked,
+                    CleanWindowsUpdate = chkWindowsUpdate.Checked,
+                    CleanThumbnails = chkThumbnails.Checked,
+                    CleanPrefetch = chkPrefetch.Checked,
+                    FlushDns = chkFlushDns.Checked,
+                    Verbose = chkVerbose.Checked,
+                    // Advanced options
+                    CleanSystemLogs = false,
+                    CleanInstallerCache = false,
+                    CleanOrphanedFiles = chkOrphanedFiles.Checked,
+                    CleanApplicationLogs = false,
+                    ClearMemoryCache = chkClearMemoryCache.Checked,
+                };
 
             // advanced mode: generate and show report before executing (unless dry-run)
             if (chkAdvanced.Checked && !dryRun)
@@ -961,7 +1101,7 @@ SOFTWARE.";
                     StatisticsManager.RecordCleaningSession(new CleaningStatistics
                     {
                         Timestamp = DateTime.Now,
-                        ProfileUsed = "Interface graphique",
+                        ProfileUsed = profileUsed,
                         FilesDeleted = result.FilesDeleted,
                         BytesFreed = result.BytesFreed,
                         Duration = sw.Elapsed,

@@ -10,3 +10,4 @@ Output/
 publish-output/
 bin/
 obj/
+*.iss

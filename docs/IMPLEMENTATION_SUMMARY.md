@@ -259,7 +259,7 @@ Process.Start(new ProcessStartInfo(reportPath) { UseShellExecute = true });
 ## 🔧 Compilation
 
 ```powershell
-cd "C:\Users\user\Documents\dev_pyt\Windows Cleaner"
+cd "C:\Users\c.lecomte\Documents\dev_pyt\Windows Cleaner"
 dotnet restore windows-cleaner.csproj
 dotnet build windows-cleaner.csproj --configuration Release
 ```

@@ -37,6 +37,9 @@ namespace WindowsCleaner
         public bool? CleanOrphanedFiles { get; set; }
         /// <summary>Effacer le cache mémoire</summary>
         public bool? ClearMemoryCache { get; set; }
+
+        /// <summary>Nom du profil sélectionné dans l'interface</summary>
+        public string? SelectedProfileName { get; set; }
     }
 
     /// <summary>

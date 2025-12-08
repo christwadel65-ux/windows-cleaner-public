@@ -307,7 +307,7 @@ Ce projet est distribué sous licence MIT. Le texte complet de la licence est in
 ```
 MIT License
 
-Copyright (c) 2025 c.lecomte
+Copyright (c) 2025 C.L
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -330,7 +330,7 @@ SOFTWARE.
 
 ## 👤 Auteur
 
-**c.lecomte**
+**C.L**
 
 ## ⚠️ Limitations
 
