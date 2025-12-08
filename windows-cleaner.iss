@@ -1,6 +1,6 @@
 [Setup]
 AppName=Windows Cleaner
-AppVersion=1.0.5
+AppVersion=1.0.6
 AppPublisher=Windows Cleaner
 AppPublisherURL=https://github.com/christwadel65-ux/windows-cleaner
 AppSupportURL=https://github.com/christwadel65-ux/windows-cleaner
@@ -8,7 +8,7 @@ AppUpdatesURL=https://github.com/christwadel65-ux/windows-cleaner
 DefaultDirName={pf}\WindowsCleaner
 DefaultGroupName=Windows Cleaner
 OutputDir=Output
-OutputBaseFilename=WindowsCleaner-Setup-1.0.5
+OutputBaseFilename=WindowsCleaner-Setup-1.0.6
 SetupIconFile=app.ico
 Compression=lzma
 SolidCompression=yes

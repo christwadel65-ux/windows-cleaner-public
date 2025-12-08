@@ -8,9 +8,9 @@
     <RootNamespace>WindowsCleaner</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>app.ico</ApplicationIcon>
-    <Version>1.0.5</Version>
-    <FileVersion>1.0.5.0</FileVersion>
-    <InformationalVersion>1.0.5</InformationalVersion>
+    <Version>1.0.6</Version>
+    <FileVersion>1.0.6.0</FileVersion>
+    <InformationalVersion>1.0.6</InformationalVersion>
     <Product>Windows Cleaner</Product>
     <Company>Windows Cleaner</Company>
     <AssemblyName>windows-cleaner</AssemblyName>

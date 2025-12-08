@@ -43,6 +43,30 @@ namespace WindowsCleaner
         public bool CleanApplicationLogs { get; set; }
         /// <summary>Vide le cache mémoire via GC</summary>
         public bool ClearMemoryCache { get; set; }
+        
+        // Software-specific cleaning
+        /// <summary>Nettoie les images et conteneurs Docker inutilisés</summary>
+        public bool CleanDocker { get; set; }
+        /// <summary>Nettoie les dossiers node_modules anciens</summary>
+        public bool CleanNodeModules { get; set; }
+        /// <summary>Nettoie les caches Visual Studio et build files</summary>
+        public bool CleanVisualStudio { get; set; }
+        /// <summary>Nettoie les fichiers __pycache__ et .pyc Python</summary>
+        public bool CleanPythonCache { get; set; }
+        /// <summary>Nettoie les objets Git non référencés</summary>
+        public bool CleanGitCache { get; set; }
+        
+        // Privacy cleaning
+        /// <summary>Nettoie l'historique Exécuter (Win+R)</summary>
+        public bool CleanRunHistory { get; set; }
+        /// <summary>Nettoie les documents récents</summary>
+        public bool CleanRecentDocuments { get; set; }
+        /// <summary>Nettoie la Timeline Windows 10/11</summary>
+        public bool CleanWindowsTimeline { get; set; }
+        /// <summary>Nettoie l'historique de recherche Windows</summary>
+        public bool CleanSearchHistory { get; set; }
+        /// <summary>Vide le presse-papiers Windows</summary>
+        public bool CleanClipboard { get; set; }
     }
 
     /// <summary>
@@ -429,6 +453,168 @@ namespace WindowsCleaner
                 {
                     Logger.Log(LogLevel.Error, $"Erreur nettoyage cache mémoire: {ex.Message}");
                 }
+            }
+            
+            // Software-specific cleaning
+            if (options.CleanDocker)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanDocker(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Docker: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanNodeModules)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanNodeModules(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Node.js: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanVisualStudio)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanVisualStudio(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Visual Studio: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanPythonCache)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanPythonCache(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Python: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanGitCache)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanGitCache(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Git: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            // Privacy cleaning
+            if (options.CleanRunHistory)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanRunHistory(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage historique Exécuter: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanRecentDocuments)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanRecentDocuments(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage documents récents: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanWindowsTimeline)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanWindowsTimeline(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage Timeline: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanSearchHistory)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanSearchHistory(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur nettoyage historique recherche: {ex.Message}");
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanClipboard)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var r = CleanClipboard(options.DryRun, threadSafeLog, cancellationToken);
+                        AddResult(r.files, r.bytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur vidage presse-papiers: {ex.Message}");
+                    }
+                }, cancellationToken));
             }
 
             // Flush DNS (sequential, quick operation)
@@ -963,6 +1149,633 @@ namespace WindowsCleaner
             log($"Échec suppression dossier après {maxAttempts} tentatives: {dirPath}");
             Logger.Log(LogLevel.Warning, $"Échec dossier après {maxAttempts} tentatives: {dirPath}");
             return (false, 0);
+        }
+        
+        #region Software-Specific Cleaning Methods
+        
+        /// <summary>
+        /// Nettoie les images et conteneurs Docker inutilisés
+        /// </summary>
+        private static (int files, long bytes) CleanDocker(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage Docker (images, conteneurs, volumes inutilisés)...");
+            
+            try
+            {
+                if (dryRun)
+                {
+                    log("(dry-run) Exécution simulée: docker system prune -af");
+                    return (0, 0);
+                }
+                
+                var psi = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "docker",
+                    Arguments = "system prune -af --volumes",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                
+                using var process = System.Diagnostics.Process.Start(psi);
+                if (process == null)
+                {
+                    log("Docker n'est pas installé ou accessible");
+                    return (0, 0);
+                }
+                
+                var output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+                
+                log($"Docker nettoyé: {output}");
+                Logger.Log(LogLevel.Info, "Nettoyage Docker terminé");
+                
+                return (1, 0); // Impossible de déterminer l'espace exact libéré
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur nettoyage Docker: {ex.Message}");
+                Logger.Log(LogLevel.Error, $"Erreur Docker: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Nettoie les dossiers node_modules anciens (> 30 jours)
+        /// </summary>
+        private static (int files, long bytes) CleanNodeModules(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Recherche de dossiers node_modules anciens...");
+            
+            var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var searchPaths = new[] 
+            { 
+                Path.Combine(userProfile, "Documents"),
+                Path.Combine(userProfile, "Desktop"),
+                Path.Combine(userProfile, "Downloads")
+            };
+            
+            int totalDeleted = 0;
+            long totalFreed = 0;
+            
+            foreach (var searchPath in searchPaths)
+            {
+                if (!Directory.Exists(searchPath)) continue;
+                
+                try
+                {
+                    FindAndCleanNodeModules(searchPath, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, $"Erreur scan node_modules dans {searchPath}: {ex.Message}");
+                }
+            }
+            
+            log($"Nettoyage node_modules terminé: {totalDeleted} dossiers, {FormatBytes(totalFreed)} libérés");
+            return (totalDeleted, totalFreed);
+        }
+        
+        private static void FindAndCleanNodeModules(
+            string path, 
+            bool dryRun, 
+            Action<string> log, 
+            ref int totalDeleted, 
+            ref long totalFreed,
+            CancellationToken cancellationToken)
+        {
+            if (cancellationToken.IsCancellationRequested) return;
+            
+            try
+            {
+                foreach (var dir in Directory.GetDirectories(path))
+                {
+                    if (cancellationToken.IsCancellationRequested) return;
+                    
+                    var dirName = Path.GetFileName(dir);
+                    
+                    // Si c'est un dossier node_modules
+                    if (dirName.Equals("node_modules", StringComparison.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            var dirInfo = new DirectoryInfo(dir);
+                            var age = DateTime.Now - dirInfo.LastWriteTime;
+                            
+                            // Supprimer si > 30 jours
+                            if (age.TotalDays > 30)
+                            {
+                                var size = GetDirectorySize(dir);
+                                
+                                if (!dryRun)
+                                {
+                                    Directory.Delete(dir, true);
+                                }
+                                
+                                totalDeleted++;
+                                totalFreed += size;
+                                log($"node_modules supprimé ({FormatBytes(size)}): {dir}");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            log($"Erreur suppression node_modules {dir}: {ex.Message}");
+                        }
+                        
+                        continue; // Ne pas entrer dans node_modules
+                    }
+                    
+                    // Continuer la recherche récursive
+                    FindAndCleanNodeModules(dir, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                }
+            }
+            catch { /* Ignorer erreurs d'accès */ }
+        }
+        
+        /// <summary>
+        /// Nettoie les caches Visual Studio (obj, bin, .vs)
+        /// </summary>
+        private static (int files, long bytes) CleanVisualStudio(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage des caches Visual Studio...");
+            
+            var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            
+            int totalDeleted = 0;
+            long totalFreed = 0;
+            
+            // Nettoyer le cache VS dans AppData
+            var vsCachePaths = new[]
+            {
+                Path.Combine(localAppData, "Microsoft", "VisualStudio"),
+                Path.Combine(localAppData, "Microsoft", "VSApplicationInsights"),
+                Path.Combine(localAppData, "Microsoft", "VisualStudio Services"),
+                Path.Combine(userProfile, ".nuget", "packages")
+            };
+            
+            foreach (var cachePath in vsCachePaths)
+            {
+                if (Directory.Exists(cachePath))
+                {
+                    try
+                    {
+                        var cacheDir = Path.Combine(cachePath, "Cache");
+                        if (Directory.Exists(cacheDir))
+                        {
+                            var result = DeleteDirectoryContents(cacheDir, dryRun, log, cancellationToken);
+                            totalDeleted += result.files;
+                            totalFreed += result.bytes;
+                        }
+                    }
+                    catch { }
+                }
+            }
+            
+            // Chercher et nettoyer obj/bin dans les projets
+            var searchPaths = new[] 
+            { 
+                Path.Combine(userProfile, "source"),
+                Path.Combine(userProfile, "Documents"),
+                Path.Combine(userProfile, "Desktop")
+            };
+            
+            foreach (var searchPath in searchPaths)
+            {
+                if (Directory.Exists(searchPath))
+                {
+                    try
+                    {
+                        FindAndCleanBuildFolders(searchPath, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                    }
+                    catch { }
+                }
+            }
+            
+            log($"Nettoyage Visual Studio terminé: {FormatBytes(totalFreed)} libérés");
+            return (totalDeleted, totalFreed);
+        }
+        
+        private static void FindAndCleanBuildFolders(
+            string path,
+            bool dryRun,
+            Action<string> log,
+            ref int totalDeleted,
+            ref long totalFreed,
+            CancellationToken cancellationToken)
+        {
+            if (cancellationToken.IsCancellationRequested) return;
+            
+            try
+            {
+                foreach (var dir in Directory.GetDirectories(path))
+                {
+                    if (cancellationToken.IsCancellationRequested) return;
+                    
+                    var dirName = Path.GetFileName(dir).ToLower();
+                    
+                    // Supprimer les dossiers obj, bin, .vs
+                    if (dirName == "obj" || dirName == "bin" || dirName == ".vs")
+                    {
+                        try
+                        {
+                            var size = GetDirectorySize(dir);
+                            
+                            if (!dryRun)
+                            {
+                                Directory.Delete(dir, true);
+                            }
+                            
+                            totalDeleted++;
+                            totalFreed += size;
+                            log($"Dossier build supprimé ({FormatBytes(size)}): {dir}");
+                        }
+                        catch { }
+                        
+                        continue;
+                    }
+                    
+                    FindAndCleanBuildFolders(dir, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                }
+            }
+            catch { }
+        }
+        
+        /// <summary>
+        /// Nettoie les caches Python (__pycache__, .pyc)
+        /// </summary>
+        private static (int files, long bytes) CleanPythonCache(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage des caches Python...");
+            
+            var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var searchPaths = new[] 
+            { 
+                Path.Combine(userProfile, "Documents"),
+                Path.Combine(userProfile, "Desktop"),
+                Path.Combine(userProfile, "Downloads")
+            };
+            
+            int totalDeleted = 0;
+            long totalFreed = 0;
+            
+            foreach (var searchPath in searchPaths)
+            {
+                if (Directory.Exists(searchPath))
+                {
+                    try
+                    {
+                        FindAndCleanPythonCache(searchPath, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                    }
+                    catch { }
+                }
+            }
+            
+            log($"Nettoyage Python terminé: {totalDeleted} éléments, {FormatBytes(totalFreed)} libérés");
+            return (totalDeleted, totalFreed);
+        }
+        
+        private static void FindAndCleanPythonCache(
+            string path,
+            bool dryRun,
+            Action<string> log,
+            ref int totalDeleted,
+            ref long totalFreed,
+            CancellationToken cancellationToken)
+        {
+            if (cancellationToken.IsCancellationRequested) return;
+            
+            try
+            {
+                // Supprimer les fichiers .pyc
+                foreach (var file in Directory.GetFiles(path, "*.pyc"))
+                {
+                    try
+                    {
+                        var size = new FileInfo(file).Length;
+                        if (!dryRun) File.Delete(file);
+                        totalDeleted++;
+                        totalFreed += size;
+                        log($"Fichier .pyc supprimé: {file}");
+                    }
+                    catch { }
+                }
+                
+                foreach (var dir in Directory.GetDirectories(path))
+                {
+                    if (cancellationToken.IsCancellationRequested) return;
+                    
+                    var dirName = Path.GetFileName(dir);
+                    
+                    // Supprimer les dossiers __pycache__
+                    if (dirName.Equals("__pycache__", StringComparison.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            var size = GetDirectorySize(dir);
+                            if (!dryRun) Directory.Delete(dir, true);
+                            totalDeleted++;
+                            totalFreed += size;
+                            log($"__pycache__ supprimé ({FormatBytes(size)}): {dir}");
+                        }
+                        catch { }
+                        
+                        continue;
+                    }
+                    
+                    FindAndCleanPythonCache(dir, dryRun, log, ref totalDeleted, ref totalFreed, cancellationToken);
+                }
+            }
+            catch { }
+        }
+        
+        /// <summary>
+        /// Nettoie les objets Git non référencés
+        /// </summary>
+        private static (int files, long bytes) CleanGitCache(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage des caches Git...");
+            
+            if (dryRun)
+            {
+                log("(dry-run) Exécution simulée de git gc dans tous les repositories");
+                return (0, 0);
+            }
+            
+            var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var searchPaths = new[] 
+            { 
+                Path.Combine(userProfile, "source"),
+                Path.Combine(userProfile, "Documents"),
+                Path.Combine(userProfile, "Desktop")
+            };
+            
+            int reposCleaned = 0;
+            
+            foreach (var searchPath in searchPaths)
+            {
+                if (Directory.Exists(searchPath))
+                {
+                    try
+                    {
+                        FindAndCleanGitRepos(searchPath, log, ref reposCleaned, cancellationToken);
+                    }
+                    catch { }
+                }
+            }
+            
+            log($"Nettoyage Git terminé: {reposCleaned} repositories optimisés");
+            return (reposCleaned, 0);
+        }
+        
+        private static void FindAndCleanGitRepos(
+            string path,
+            Action<string> log,
+            ref int reposCleaned,
+            CancellationToken cancellationToken)
+        {
+            if (cancellationToken.IsCancellationRequested) return;
+            
+            try
+            {
+                foreach (var dir in Directory.GetDirectories(path))
+                {
+                    if (cancellationToken.IsCancellationRequested) return;
+                    
+                    var dirName = Path.GetFileName(dir);
+                    
+                    // Si c'est un dossier .git
+                    if (dirName.Equals(".git", StringComparison.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            // Exécuter git gc dans le repository parent
+                            var repoPath = Path.GetDirectoryName(dir);
+                            if (repoPath != null)
+                            {
+                                var psi = new System.Diagnostics.ProcessStartInfo
+                                {
+                                    FileName = "git",
+                                    Arguments = "gc --aggressive --prune=now",
+                                    WorkingDirectory = repoPath,
+                                    CreateNoWindow = true,
+                                    UseShellExecute = false,
+                                    RedirectStandardOutput = true,
+                                    RedirectStandardError = true
+                                };
+                                
+                                using var process = System.Diagnostics.Process.Start(psi);
+                                if (process != null)
+                                {
+                                    process.WaitForExit(30000); // Timeout 30s
+                                    reposCleaned++;
+                                    log($"Git repository optimisé: {repoPath}");
+                                }
+                            }
+                        }
+                        catch { }
+                        
+                        continue; // Ne pas entrer dans .git
+                    }
+                    
+                    FindAndCleanGitRepos(dir, log, ref reposCleaned, cancellationToken);
+                }
+            }
+            catch { }
+        }
+        
+        #endregion
+        
+        #region Privacy Cleaning Methods
+        
+        /// <summary>
+        /// Nettoie l'historique Exécuter (Win+R)
+        /// </summary>
+        private static (int files, long bytes) CleanRunHistory(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage de l'historique Exécuter...");
+            
+            try
+            {
+                var runHistoryKey = @"Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU";
+                
+                if (dryRun)
+                {
+                    log($"(dry-run) Suppression planifiée: {runHistoryKey}");
+                    return (1, 0);
+                }
+                
+                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(runHistoryKey, true);
+                if (key != null)
+                {
+                    foreach (var valueName in key.GetValueNames())
+                    {
+                        if (valueName != "MRUList")
+                        {
+                            key.DeleteValue(valueName, false);
+                        }
+                    }
+                    key.SetValue("MRUList", "");
+                }
+                
+                log("Historique Exécuter nettoyé");
+                return (1, 0);
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur nettoyage historique Exécuter: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Nettoie les documents récents
+        /// </summary>
+        private static (int files, long bytes) CleanRecentDocuments(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage des documents récents...");
+            
+            var recentPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                @"Microsoft\Windows\Recent"
+            );
+            
+            try
+            {
+                if (!Directory.Exists(recentPath))
+                    return (0, 0);
+                
+                var result = DeleteDirectoryContents(recentPath, dryRun, log, cancellationToken);
+                log($"Documents récents nettoyés: {result.files} éléments");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur nettoyage documents récents: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Nettoie la Timeline Windows
+        /// </summary>
+        private static (int files, long bytes) CleanWindowsTimeline(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage de la Timeline Windows...");
+            
+            var timelinePath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                @"ConnectedDevicesPlatform"
+            );
+            
+            try
+            {
+                if (!Directory.Exists(timelinePath))
+                    return (0, 0);
+                
+                var result = DeleteDirectoryContents(timelinePath, dryRun, log, cancellationToken);
+                log($"Timeline Windows nettoyée: {result.files} éléments");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur nettoyage Timeline: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Nettoie l'historique de recherche Windows
+        /// </summary>
+        private static (int files, long bytes) CleanSearchHistory(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Nettoyage de l'historique de recherche...");
+            
+            try
+            {
+                var searchHistoryKey = @"Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery";
+                
+                if (dryRun)
+                {
+                    log($"(dry-run) Suppression planifiée: {searchHistoryKey}");
+                    return (1, 0);
+                }
+                
+                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(searchHistoryKey, true);
+                if (key != null)
+                {
+                    foreach (var valueName in key.GetValueNames())
+                    {
+                        if (valueName != "MRUListEx")
+                        {
+                            key.DeleteValue(valueName, false);
+                        }
+                    }
+                }
+                
+                log("Historique de recherche nettoyé");
+                return (1, 0);
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur nettoyage historique recherche: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        /// <summary>
+        /// Vide le presse-papiers Windows
+        /// </summary>
+        private static (int files, long bytes) CleanClipboard(bool dryRun, Action<string> log, CancellationToken cancellationToken)
+        {
+            log("Vidage du presse-papiers...");
+            
+            try
+            {
+                if (dryRun)
+                {
+                    log("(dry-run) Vidage simulé du presse-papiers");
+                    return (1, 0);
+                }
+                
+                System.Windows.Forms.Clipboard.Clear();
+                log("Presse-papiers vidé");
+                return (1, 0);
+            }
+            catch (Exception ex)
+            {
+                log($"Erreur vidage presse-papiers: {ex.Message}");
+                return (0, 0);
+            }
+        }
+        
+        #endregion
+        
+        private static long GetDirectorySize(string path)
+        {
+            try
+            {
+                var dirInfo = new DirectoryInfo(path);
+                return dirInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(f => f.Length);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        
+        private static string FormatBytes(long bytes)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+            double len = bytes;
+            int order = 0;
+            while (len >= 1024 && order < sizes.Length - 1)
+            {
+                order++;
+                len = len / 1024;
+            }
+            return $"{len:0.##} {sizes[order]}";
         }
     }
 }
