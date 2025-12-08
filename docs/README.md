@@ -48,7 +48,7 @@ windows-cleaner.exe --stats
 ## ✨ Fonctionnalités
 
 ### 🧹 Nettoyage Standard
-- **Cache Navigateurs** : Chrome, Edge, Firefox (fermez les navigateurs avant d'exécuter)
+- **Cache Navigateurs** : Chrome, Edge, Firefox, Brave, Opera, Vivaldi (fermeture automatique avant nettoyage)
 - **Fichiers Temporaires** : Dossiers Temp utilisateur et système
 - **Windows Update** : Cache de téléchargement (`C:\Windows\SoftwareDistribution\Download`)
 - **Vignettes** : Fichiers `thumbcache_*.db` pour récupérer de l'espace
@@ -69,6 +69,11 @@ windows-cleaner.exe --stats
 - **Visual Studio** : Nettoyage des dossiers `obj`, `bin`, `.vs`
 - **Python** : Suppression des caches `__pycache__` et fichiers `.pyc`
 - **Git** : Optimisation avec `git gc --aggressive --prune=now`
+- **VS Code** : Nettoyage du cache (depuis AppData)
+- **NuGet** : Suppression des packages anciens (> 30 jours)
+- **Maven** : Nettoyage du repository cache (`~/.m2`)
+- **npm** : Vidage du cache npm global
+- **Jeux** : Steam et Epic Games caches
 
 ### 🔒 Protection Vie Privée (v1.0.6)
 - **Historique Exécuter** : Efface l'historique Win+R
@@ -87,6 +92,7 @@ windows-cleaner.exe --stats
 - **⌨️ Support CLI Complet** : Arguments --profile, --dry-run, --silent, --stats, --help
 - **🔔 Alertes Intelligentes** : Monitoring proactif (disque < 10%, cache > 2GB, maintenance)
 - **⚡ Optimisations Système** : TRIM SSD, compaction registre, nettoyage mémoire cache
+- **🎯 Fermeture Auto Navigateurs** : Ferme automatiquement Chrome/Edge/Firefox avant nettoyage cache
 
 ### 🎨 Interface Moderne
 - **Thème Sombre/Clair** : Mode sombre avec accents personnalisables
@@ -99,12 +105,14 @@ windows-cleaner.exe --stats
 ### 🛡️ Robustesse et Sécurité
 - ✅ **Gestion d'Erreurs Complète** : Toutes les erreurs sont loggées et tracées
 - ✅ **Thread-Safe** : Logger sécurisé pour opérations parallèles
-- ✅ **Retry Logic** : Tentatives avec backoff pour fichiers verrouillés
+- ✅ **Retry Logic Avancée** : 8 tentatives avec backoff exponentiel plafonné (fichiers verrouillés)
+- ✅ **Attributs ReadOnly** : Retrait automatique avant suppression
 - ✅ **Support Annulation** : CancellationToken pour arrêt gracieux
 - ✅ **Architecture Modulaire** : 18 fichiers C#, ~5500 lignes de code
 - ✅ **Mode Dry-Run** : Test sans suppression pour sécurité maximale
 - ✅ **Backup Automatique** : Restauration possible < 24h après nettoyage
 - ✅ **Points de Restauration** : Création automatique avant opérations critiques
+- ✅ **Logs Intelligents** : Verbosité réduite pour fichiers verrouillés (niveau Debug)
 
 
 ## 📊 Spécifications Techniques

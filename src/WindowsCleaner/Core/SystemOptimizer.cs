@@ -345,5 +345,57 @@ namespace WindowsCleaner
                 return false;
             }
         }
+        
+        /// <summary>
+        /// Vérifie la santé du disque via SMART et retourne un rapport
+        /// </summary>
+        public static string CheckDiskHealth(Action<string>? log = null)
+        {
+            try
+            {
+                log?.Invoke("Vérification SMART des disques...");
+                
+                var script = @"
+                    $report = @()
+                    
+                    # Obtenir les disques
+                    $disks = Get-CimInstance Win32_DiskDrive
+                    
+                    foreach ($disk in $disks) {
+                        $report += ""Disque: $($disk.Model)""
+                        $report += ""Santé: $($disk.Status)""
+                        $report += ""Taille: $([Math]::Round($disk.Size / 1GB)) GB""
+                        $report += """"
+                    }
+                    
+                    $report -join ""`r`n""
+                ";
+                
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"{script}\"",
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+                
+                using var process = Process.Start(psi);
+                if (process == null)
+                    return "Impossible d'accéder aux données SMART";
+                
+                var output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+                
+                log?.Invoke("Rapport SMART récupéré");
+                return string.IsNullOrEmpty(output) ? "Aucun disque détecté" : output;
+            }
+            catch (Exception ex)
+            {
+                log?.Invoke($"Erreur vérification SMART: {ex.Message}");
+                return $"Erreur: {ex.Message}";
+            }
+        }
     }
 }

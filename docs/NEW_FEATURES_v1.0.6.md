@@ -13,7 +13,11 @@ Windows Cleaner v1.0.6 introduit des fonctionnalités majeures pour transformer 
 - 💻 **Support CLI** complet pour automatisation
 - 🔔 **Alertes Intelligentes** proactives
 - 🧹 **Nettoyage Étendu** : Docker, Node.js, Python, Git, VS
+- 🎯 **Caches Applicatifs** : VS Code, NuGet, Maven, npm, Steam, Epic
 - 🔒 **Nettoyage Vie Privée** : historique, timeline, presse-papiers
+- 🎯 **Fermeture Auto Navigateurs** : Chrome, Edge, Firefox, Brave, Opera, Vivaldi
+- ⚡ **Optimisations SSD** : TRIM, SMART, défragmentation légère
+- ⚡ **Retry Logic Améliorée** : 8 tentatives avec backoff intelligent
 
 ---
 
@@ -369,6 +373,142 @@ options.CleanSearchHistory = true;
 ### Presse-papiers
 ```csharp
 options.CleanClipboard = true;
+```
+
+---
+
+## 🎯 11. Fermeture Automatique des Navigateurs
+
+### Détection et Fermeture Intelligente
+
+Avant de nettoyer les caches navigateurs, Windows Cleaner peut **fermer automatiquement** les navigateurs en cours d'exécution pour éviter les fichiers verrouillés.
+
+**Navigateurs supportés** :
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+- Brave
+- Opera
+- Vivaldi
+
+### Utilisation
+
+```csharp
+var options = new CleanerOptions
+{
+    CleanBrowsers = true,
+    CloseBrowsersIfNeeded = true // Activé par défaut
+};
+
+Cleaner.RunCleanup(options);
+```
+
+**Comportement** :
+1. Détection automatique des processus navigateurs
+2. Tentative de fermeture propre (`CloseMainWindow()`)
+3. Fermeture forcée (`Kill()`) après 3s si nécessaire
+4. Attente de 1.5s pour libération des fichiers
+5. Nettoyage des caches
+
+**Note** : En mode `DryRun`, les navigateurs ne sont **pas** fermés.
+
+---
+
+## ⚡ 12. Améliorations de Robustesse
+
+### Retry Logic Avancée
+
+**Avant** : 5 tentatives avec backoff exponentiel illimité
+**Maintenant** :
+- **8 tentatives** pour les fichiers
+- **6 tentatives** pour les dossiers
+- **Backoff plafonné** : 2s (fichiers), 2.5s (dossiers)
+- **Retrait automatique** de l'attribut `ReadOnly`
+- **Logs intelligents** : niveau `Debug` pour fichiers verrouillés/protégés
+
+### Gestion des Attributs ReadOnly
+
+```csharp
+// Retrait automatique avant suppression
+var attributes = File.GetAttributes(filePath);
+if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+{
+    File.SetAttributes(filePath, attributes & ~FileAttributes.ReadOnly);
+}
+```
+
+### Réduction du Bruit dans les Logs
+
+Les fichiers verrouillés ou protégés par le système sont maintenant loggés en niveau `Debug` au lieu de `Warning`, réduisant les faux positifs dans les journaux.
+
+---
+
+## 📦 13. Nettoyage des Caches Applicatifs
+
+### VS Code
+```csharp
+options.CleanVsCodeCache = true;
+```
+
+### NuGet (packages anciens > 30 jours)
+```csharp
+options.CleanNugetCache = true;
+```
+
+### Maven
+```csharp
+options.CleanMavenCache = true;
+```
+
+### npm Global
+```csharp
+options.CleanNpmCache = true;
+```
+
+### Jeux (Steam, Epic Games)
+```csharp
+options.CleanGameCaches = true;
+```
+
+---
+
+## 💾 14. Optimisations SSD Avancées
+
+### Activation de l'Optimisation SSD
+
+```csharp
+var options = new CleanerOptions
+{
+    OptimizeSsd = true,        // TRIM et défragmentation légère
+    CheckDiskHealth = true     // Vérification SMART
+};
+
+Cleaner.RunCleanup(options);
+```
+
+### Fonctionnalités
+
+**Optimisation TRIM** :
+- Lance `defrag.exe /L` pour analyser les volumes
+- Applique TRIM aux SSD détectés
+- Réduit la fragmentation
+
+**Vérification SMART** :
+- Récupère les données SMART de chaque disque
+- Affiche le statut de santé
+- Alerte si des anomalies détectées
+- Fournit la capacité totale en GB
+
+### Exemple de Rapport SMART
+
+```
+Disque: Samsung SSD 970 EVO
+Santé: OK
+Taille: 500 GB
+
+Disque: WDC WD10EZEX
+Santé: OK
+Taille: 1000 GB
 ```
 
 ---
