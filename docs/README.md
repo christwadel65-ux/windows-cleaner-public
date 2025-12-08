@@ -1,7 +1,7 @@
 # Windows Cleaner v1.0.6
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
 [![Version](https://img.shields.io/badge/version-1.0.6-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
@@ -11,8 +11,9 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 ### Compilation et Exécution
 ```powershell
-dotnet build windows-cleaner.csproj --configuration Release
-dotnet run --project windows-cleaner.csproj
+# À la racine du repo
+dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
+dotnet run --project src/WindowsCleaner/WindowsCleaner.csproj
 ```
 
 ### Exécution depuis le dossier compilé
@@ -120,23 +121,16 @@ windows-cleaner.exe --stats
 
 ```
 Windows Cleaner/
-├── Program.cs              # Point d'entrée + CLI
-├── MainForm.cs             # Interface utilisateur principale
-├── Cleaner.cs              # Logique de nettoyage étendue
-├── BrowserPaths.cs         # Chemins centralisés
-├── Logger.cs               # Système de logging
-├── Settings.cs             # Gestion des paramètres
-├── ColoredProgressBar.cs   # Composant UI personnalisé
-├── CleaningProfile.cs      # Système de profils (v1.0.6)
-├── DiskAnalyzer.cs         # Analyse d'espace disque (v1.0.6)
-├── TaskSchedulerManager.cs # Planification tâches (v1.0.6)
-├── DuplicateFinder.cs      # Détection doublons (v1.0.6)
-├── BackupManager.cs        # Backup et restauration (v1.0.6)
-├── StatisticsManager.cs    # Statistiques et rapports (v1.0.6)
-├── SmartAlerts.cs          # Alertes intelligentes (v1.0.6)
-├── SystemOptimizer.cs      # Optimisations système (v1.0.6)
-├── Output/v1.0.6/          # Build de release
-└── scripts/                # Scripts utilitaires
+├── src/WindowsCleaner/
+│   ├── WindowsCleaner.csproj
+│   ├── Core/                # Cleaner, SystemOptimizer, BackupManager, Logger
+│   ├── Features/            # DiskAnalyzer, DuplicateFinder, Profiles, etc.
+│   └── UI/                  # Program, MainForm, ColoredProgressBar, manifest, ico
+├── docs/                    # README, guides et notes de version
+├── scripts/                 # Scripts PowerShell
+├── assets/                  # Ressources (icônes/images auxiliaires)
+├── build/                   # Scripts d'installation (ex: Inno Setup)
+└── bin/ obj/                # Générés (ignorés du dépôt)
 ```
 
 ## 📝 Logs et Paramètres
@@ -173,16 +167,13 @@ Un script PowerShell pratique est inclus pour faciliter le développement :
 Le dépôt Git contient **uniquement le code source** pour maintenir une taille minimale :
 
 ```
-├── *.cs                      # Fichiers C# (18 fichiers)
-├── windows-cleaner.csproj    # Configuration projet
-├── app.manifest              # Manifest application
-├── app.ico                   # Icône
-├── README.md                 # Documentation
-├── LICENSE                   # Licence MIT
-├── .gitignore                # Exclusions Git
-├── windows-cleaner.iss       # Script Inno Setup (local)
-├── scripts/                  # Scripts PowerShell
+├── src/WindowsCleaner/       # Code source et projet
 ├── docs/                     # Documentation (guides)
+├── scripts/                  # Scripts PowerShell
+├── build/                    # Scripts d'installation (.iss)
+├── assets/                   # Icônes/ressources
+├── LICENSE                   # Licence MIT
+├── .gitignore                # Exclusions Git (bin/ obj/ *.iss)
 └── create_icon.ps1           # Utilitaires
 ```
 
@@ -196,7 +187,7 @@ Le dépôt Git contient **uniquement le code source** pour maintenir une taille 
 
 ### Compiler une build Release
 ```powershell
-dotnet build windows-cleaner.csproj --configuration Release
+dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
 ```
 
 Build générée dans : `bin\Release\net10.0-windows\`
