@@ -201,8 +201,6 @@ dotnet build windows-cleaner.csproj --configuration Release
 
 Build générée dans : `bin\Release\net10.0-windows\`
 
-### Créer un installateur
-Utilisez Inno Setup avec `windows-cleaner.iss` :
 
 ```powershell
 # Avec Inno Setup compilé
