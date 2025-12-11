@@ -60,7 +60,7 @@ namespace WindowsCleaner
                 if (!silent)
                 {
                     Console.WriteLine("╔════════════════════════════════════════════════════════════╗");
-                    Console.WriteLine("║          Windows Cleaner v1.0.6 - Mode CLI               ║");
+                    Console.WriteLine("║          Windows Cleaner v1.0.8 - Mode CLI               ║");
                     Console.WriteLine("╚════════════════════════════════════════════════════════════╝");
                     Console.WriteLine();
                 }
@@ -180,7 +180,7 @@ namespace WindowsCleaner
         private static void ShowHelp()
         {
             Console.WriteLine("╔════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║          Windows Cleaner v1.0.6 - Aide CLI               ║");
+            Console.WriteLine("║          Windows Cleaner v1.0.8 - Aide CLI               ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════╝");
             Console.WriteLine();
             Console.WriteLine("UTILISATION:");

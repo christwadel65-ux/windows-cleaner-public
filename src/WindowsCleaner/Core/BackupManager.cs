@@ -231,7 +231,21 @@ namespace WindowsCleaner
                 Logger.Log(LogLevel.Error, $"Erreur lecture historique sauvegardes: {ex.Message}");
             }
             
-            return backups.OrderByDescending(b => b.Item1).ToList();
+            // Tri optimisé sans LINQ pour minimiser les allocations
+            for (int i = 0; i < backups.Count - 1; i++)
+            {
+                for (int j = i + 1; j < backups.Count; j++)
+                {
+                    if (string.Compare(backups[j].Item1, backups[i].Item1) > 0)
+                    {
+                        var temp = backups[i];
+                        backups[i] = backups[j];
+                        backups[j] = temp;
+                    }
+                }
+            }
+            
+            return backups;
         }
         
         /// <summary>

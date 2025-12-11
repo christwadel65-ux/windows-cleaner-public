@@ -442,16 +442,19 @@ namespace WindowsCleaner
                     {
                         var userTemp = BrowserPaths.UserTemp;
                         threadSafeLog($"Nettoyage fichiers orphelins: {userTemp}");
-                        var orphanFiles = Directory.GetFiles(userTemp, "*.*", SearchOption.TopDirectoryOnly)
-                            .Where(f => new FileInfo(f).CreationTime < DateTime.Now.AddDays(-7)).ToList();
                         
                         int deleted = 0;
                         long freed = 0;
-                        foreach (var file in orphanFiles)
+                        var cutoffDate = DateTime.Now.AddDays(-7);
+                        
+                        // Énumération optimisée sans allocations inutiles
+                        foreach (var file in Directory.EnumerateFiles(userTemp, "*.*", SearchOption.TopDirectoryOnly))
                         {
                             try
                             {
                                 var fi = new FileInfo(file);
+                                if (fi.CreationTime >= cutoffDate) continue;
+                                
                                 if (!options.DryRun) File.Delete(file);
                                 deleted++;
                                 freed += fi.Length;
@@ -1132,35 +1135,50 @@ namespace WindowsCleaner
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path)) return;
             try
             {
-                Parallel.ForEach(Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories), 
-                    new ParallelOptions { CancellationToken = cancellationToken },
-                    f =>
-                    {
-                        try 
-                        { 
-                            var fi = new FileInfo(f);
-                            items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false }); 
-                        }
-                        catch (Exception ex)
+                // Utilise EnumerateFiles pour éviter les allocations massives
+                int fileCount = 0;
+                foreach (var f in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    
+                    try 
+                    { 
+                        var fi = new FileInfo(f);
+                        items.Add(new ReportItem { Path = f, Size = fi.Length, IsDirectory = false });
+                        
+                        // Optimise la mémoire tous les 5000 fichiers
+                        if ((++fileCount % 5000) == 0)
                         {
-                            Logger.Log(LogLevel.Error, $"Erreur lors du scan du fichier {f}: {ex.Message}");
+                            GC.Collect(0);
                         }
-                    });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur lors du scan du fichier {f}: {ex.Message}");
+                    }
+                }
                 
-                // Also add directories as items (size 0) for visibility
-                Parallel.ForEach(Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories),
-                    new ParallelOptions { CancellationToken = cancellationToken },
-                    d =>
-                    {
-                        try 
-                        { 
-                            items.Add(new ReportItem { Path = d, Size = 0, IsDirectory = true }); 
-                        }
-                        catch (Exception ex)
+                // Traite les répertoires
+                int dirCount = 0;
+                foreach (var d in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    
+                    try 
+                    { 
+                        items.Add(new ReportItem { Path = d, Size = 0, IsDirectory = true });
+                        
+                        // Optimise la mémoire tous les 1000 répertoires
+                        if ((++dirCount % 1000) == 0)
                         {
-                            Logger.Log(LogLevel.Error, $"Erreur lors du scan du répertoire {d}: {ex.Message}");
+                            GC.Collect(0);
                         }
-                    });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, $"Erreur lors du scan du répertoire {d}: {ex.Message}");
+                    }
+                }
             }
             catch (Exception ex) 
             { 
@@ -1183,8 +1201,10 @@ namespace WindowsCleaner
 
             try
             {
-                var entries = Directory.GetFileSystemEntries(path);
-                Parallel.ForEach(entries, new ParallelOptions { MaxDegreeOfParallelism = 4, CancellationToken = cancellationToken }, entry =>
+                // Utilise EnumerateFileSystemEntries pour une énumération progressive
+                Parallel.ForEach(Directory.EnumerateFileSystemEntries(path), 
+                    new ParallelOptions { MaxDegreeOfParallelism = 4, CancellationToken = cancellationToken }, 
+                    entry =>
                 {
                     try
                     {

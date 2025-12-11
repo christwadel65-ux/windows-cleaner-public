@@ -11,3 +11,6 @@ publish-output/
 bin/
 obj/
 *.iss
+# Distribution artifacts
+release/
+*.exe

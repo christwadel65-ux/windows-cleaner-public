@@ -775,7 +775,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.";
 
-            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 1.0.6";
+            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 1.0.8";
             MessageBox.Show(msg, "À propos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

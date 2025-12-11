@@ -8,13 +8,21 @@
     <RootNamespace>WindowsCleaner</RootNamespace>
     <ApplicationManifest>UI/app.manifest</ApplicationManifest>
     <ApplicationIcon>UI/app.ico</ApplicationIcon>
-    <Version>1.0.6</Version>
-    <FileVersion>1.0.6.0</FileVersion>
-    <InformationalVersion>1.0.6</InformationalVersion>
+    <Version>1.0.8</Version>
+    <FileVersion>1.0.8.0</FileVersion>
+    <InformationalVersion>1.0.8</InformationalVersion>
     <Product>Windows Cleaner</Product>
     <Company>Windows Cleaner</Company>
     <AssemblyName>windows-cleaner</AssemblyName>
     <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>..\..\obj\$(Configuration)\</IntermediateOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <SuppressAllProjectPropertyMessages>true</SuppressAllProjectPropertyMessages>
+    <WarningLevel>0</WarningLevel>
+    <TrimMode>partial</TrimMode>
+    <PublishAot>false</PublishAot>
+    <PublishTrimmed>false</PublishTrimmed>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 </Project>

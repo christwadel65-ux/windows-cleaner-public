@@ -426,7 +426,7 @@ namespace WindowsCleaner
         </table>
         
         <div class=""footer"">
-            <p>Windows Cleaner v1.0.6 - © 2025</p>
+            <p>Windows Cleaner v1.0.8 - © 2025</p>
         </div>
     </div>
 </body>
