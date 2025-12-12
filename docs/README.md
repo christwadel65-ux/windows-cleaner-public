@@ -62,6 +62,7 @@ windows-cleaner.exe --stats
 - **Journaux d'Applications** : Logs des apps Microsoft Store (`LocalAppData\Packages`)
 - **Fichiers Orphelins** : Détecte et supprime les fichiers temporaires > 7 jours
 - **Cache Mémoire** : Vide les caches RAM et disque système (nécessite admin)
+- **Raccourcis Cassés** : Détecte et supprime les raccourcis (.lnk) dont la cible n'existe plus (Bureau, Menu Démarrer, Récents)
 
 ### 💻 Nettoyage Développeur (v1.0.6)
 - **Docker** : `docker system prune` pour libérer l'espace
@@ -101,6 +102,7 @@ windows-cleaner.exe --stats
 - **Rapport Détaillé** : Aperçu des éléments à supprimer avant exécution
 - **Annulation** : Arrêtez les opérations en cours à tout moment
 - **Logs en Temps Réel** : Affichage des opérations dans l'interface
+- **Sélection Rapide** : Boutons "☑ Tout" et "☐ Rien" pour cocher/décocher toutes les options en un clic
 
 ### 🛡️ Robustesse et Sécurité
 - ✅ **Gestion d'Erreurs Complète** : Toutes les erreurs sont loggées et tracées
@@ -118,11 +120,11 @@ windows-cleaner.exe --stats
 ## 📊 Spécifications Techniques
 
 - **Framework** : .NET 10.0 Windows
-- **Version** : 1.0.6.0
+- **Version** : 1.0.8.0
 - **UI** : Windows Forms (WinForms) + CLI
 - **Configuration** : Release (optimisée)
-- **Taille** : ~400 KB (sans runtime)
-- **Modules** : 18 fichiers C# (~5500 lignes)
+- **Taille** : ~371 KB DLL + ~199 KB EXE
+- **Modules** : 20+ fichiers C# (~6000+ lignes)
 - **Prérequis** : Windows 10/11 (x64), .NET 10.0 Runtime
 
 ## 📁 Structure du Projet
@@ -228,7 +230,51 @@ Fichiers à distribuer depuis `bin\Release\net10.0-windows\` :
 - **[ADVANCED_FEATURES.md](ADVANCED_FEATURES.md)** - Guide des fonctionnalités avancées
 - **[USAGE_GUIDE.md](USAGE_GUIDE.md)** - Guide d'utilisation
 
-## 🆕 Nouveautés v1.0.6 (8 décembre 2025)
+## 🆕 Nouveautés v1.0.8 (12 décembre 2025)
+
+### ✨ Nouvelles Fonctionnalités
+
+#### 🔗 Suppression des Raccourcis Cassés
+- **Détection automatique** des raccourcis (.lnk) dont la cible n'existe plus
+- **Scan intelligent** : Bureau, Menu Démarrer, Documents Récents, Dossier Liens
+- **Vérification via COM** (WScript.Shell) pour validation précise
+- **Suppression sécurisée** avec support du mode Dry-Run
+- **Aucun privilège admin requis**
+- Améliore la propreté du bureau et des menus
+
+#### ☑ Boutons de Sélection Rapide
+- **Bouton "✅ Tout"** : Coche toutes les options de nettoyage en un clic
+- **Bouton "❌ Rien"** : Décoche toutes les options rapidement
+- **Emplacement** : Groupe Actions, à côté des boutons Simuler/Nettoyer
+- **Couleurs intelligentes** :
+  - 🟢 VERT VIF si tout est coché
+  - 🔴 ROUGE VIF si rien n'est coché
+  - 🟠 ORANGE VIF si sélection partielle
+- **Infobulles explicites** : Description au survol de la souris
+- **Bascule automatique** vers le profil "Personnalisé (manuel)"
+- **Sélectif** : Affecte uniquement les options de nettoyage (préserve Mode verbeux et Rapport détaillé)
+
+### 🎨 Améliorations de l'Interface
+- **Infobulles contextuelles** sur tous les boutons d'action
+  - 🔍 Simuler : "Simuler le nettoyage sans supprimer (Mode test sûr)"
+  - 🧹 Nettoyer : "Exécuter le nettoyage avec suppression réelle (Vérifiez d'abord)"
+  - ✅ Tout : "Cocher toutes les options en un clic"
+  - ❌ Rien : "Décocher toutes les options en un clic"
+- **Design Material moderne** avec palette de couleurs vives
+- **Feedback visuel immédiat** sur l'état de sélection
+
+### 🔧 Améliorations Techniques
+- Migration complète vers **.NET 10.0-windows**
+- Restructuration des méthodes d'énumération (correction erreurs CS1626)
+- Optimisation mémoire et gestion des ressources
+- Corrections de typage (AuditManager, BackupManager)
+- **Système de tooltips** avec ToolTip .NET standard
+- **Système de feedback visuel** avec détection d'état en temps réel
+- Documentation enrichie et mise à jour
+
+---
+
+## 🆕 Historique v1.0.6 (8 décembre 2025)
 
 ### 🎯 12 Fonctionnalités Majeures Ajoutées
 
@@ -357,4 +403,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 
 ---
 
-**Windows Cleaner v1.0.6** | Build: Release | Date: 8 décembre 2025 | [Télécharger](https://github.com/christwadel65-ux/Windows-Cleaner/releases/tag/v1.0.6)
+**Windows Cleaner v1.0.8** | Build: Release | Date: 12 décembre 2025 | .NET 10.0-windows
