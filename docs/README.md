@@ -113,6 +113,48 @@ Taille: 465.75 GB (Libre: 123.45 GB)
 - **Système de feedback visuel** avec détection d'état en temps réel
 - Documentation enrichie et mise à jour
 
+## 🆕 Nouveautés v1.0.8 (12 décembre 2025)
+
+### ✨ Nouvelles Fonctionnalités
+
+#### 🔗 Suppression des Raccourcis Cassés
+- **Détection automatique** des raccourcis (.lnk) dont la cible n'existe plus
+- **Scan intelligent** : Bureau, Menu Démarrer, Documents Récents, Dossier Liens
+- **Vérification via COM** (WScript.Shell) pour validation précise
+- **Suppression sécurisée** avec support du mode Dry-Run
+- **Aucun privilège admin requis**
+- Améliore la propreté du bureau et des menus
+
+#### ☑ Boutons de Sélection Rapide
+- **Bouton "✅ Tout"** : Coche toutes les options de nettoyage en un clic
+- **Bouton "❌ Rien"** : Décoche toutes les options rapidement
+- **Emplacement** : Groupe Actions, à côté des boutons Simuler/Nettoyer
+- **Couleurs intelligentes** :
+  - 🟢 VERT VIF si tout est coché
+  - 🔴 ROUGE VIF si rien n'est coché
+  - 🟠 ORANGE VIF si sélection partielle
+- **Infobulles explicites** : Description au survol de la souris
+- **Bascule automatique** vers le profil "Personnalisé (manuel)"
+- **Sélectif** : Affecte uniquement les options de nettoyage (préserve Mode verbeux et Rapport détaillé)
+
+### 🎨 Améliorations de l'Interface
+- **Infobulles contextuelles** sur tous les boutons d'action
+  - 🔍 Simuler : "Simuler le nettoyage sans supprimer (Mode test sûr)"
+  - 🧹 Nettoyer : "Exécuter le nettoyage avec suppression réelle (Vérifiez d'abord)"
+  - ✅ Tout : "Cocher toutes les options en un clic"
+  - ❌ Rien : "Décocher toutes les options en un clic"
+- **Design Material moderne** avec palette de couleurs vives
+- **Feedback visuel immédiat** sur l'état de sélection
+
+### 🔧 Améliorations Techniques
+- Migration complète vers **.NET 10.0-windows**
+- Restructuration des méthodes d'énumération (correction erreurs CS1626)
+- Optimisation mémoire et gestion des ressources
+- Corrections de typage (AuditManager, BackupManager)
+- **Système de tooltips** avec ToolTip .NET standard
+- **Système de feedback visuel** avec détection d'état en temps réel
+- Documentation enrichie et mise à jour
+
 ## 🚀 Démarrage Rapide
 
 ### Compilation et Exécution
