@@ -581,4 +581,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 
 ---
 
-**Windows Cleaner v1.0.8** | Build: Release | Date: 12 décembre 2025 | .NET 10.0-windows
+**Windows Cleaner v2.0.2** | Build: Release | Date: 18 décembre 2025 | .NET 10.0-windows
