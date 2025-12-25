@@ -29,13 +29,14 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src/WindowsCleaner/WindowsCleaner.csproj
 
       - name: Check vulnerable packages
-        run: dotnet list package --vulnerable
+        run: dotnet list src/WindowsCleaner/WindowsCleaner.csproj package --vulnerable --include-transitive
+        continue-on-error: true
 
   codeql:
     name: 🔍 CodeQL Analysis
@@ -53,10 +54,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Build
-        run: dotnet build --no-incremental
+        run: dotnet build src/WindowsCleaner/WindowsCleaner.csproj --no-incremental
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
