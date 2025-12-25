@@ -11,6 +11,25 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 ## 🆕 Nouveautés v2.0.2 (18 décembre 2025)
 
+### 🌍 Interface Multilingue (Français / Anglais)
+- **Support complet de 2 langues** : Français 🇫🇷 et Anglais 🇺🇸
+- **Changement de langue en direct** : Menu Aide → 🌍 Langue → Sélection (redémarrage automatique)
+- **Traduction complète de l'interface** :
+  - Tous les menus (Fichier, Affichage, Outils, Aide)
+  - Tous les boutons et labels
+  - Toutes les checkboxes et groupes
+  - Tooltips et messages d'aide
+  - Messages d'avertissement et de statut
+- **Traduction des profils de nettoyage** :
+  - "Nettoyage Rapide" → "Quick Cleaning"
+  - "Nettoyage Complet" → "Complete Cleaning"
+  - "Nettoyage Développeur" → "Developer Cleaning"
+  - "Protection Vie Privée" → "Privacy Protection"
+- **Traduction des logs** : Messages du journal des opérations traduits
+- **Persistance de la langue** : Préférence sauvegardée et restaurée au prochain lancement
+- **Installeur multilingue** : Choix de la langue lors de l'installation (Inno Setup)
+- **Langue par défaut** : Anglais (modifiable facilement)
+
 ### 🔒 Amélioration Vie Privée : Historique Navigateurs et Onglets Récents
 - **Case à cocher dédiée "🕘 Historique navigateurs"** dans le bloc Nettoyage Standard (cochée par défaut)
 - **Nettoyage complet de l'historique** : Chrome/Edge/Firefox (fichiers History, places.sqlite)
