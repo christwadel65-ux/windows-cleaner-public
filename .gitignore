@@ -4,6 +4,7 @@ obj/
 Output/
 publish-output/
 release/
+src/
 
 # IDE files
 *.user
