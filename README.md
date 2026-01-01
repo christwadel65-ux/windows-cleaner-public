@@ -1,9 +1,9 @@
-# Windows Cleaner v2.0.2
+# Windows Cleaner v2.0.3
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Version](https://img.shields.io/badge/version-2.0.2-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
+[![Version](https://img.shields.io/badge/version-2.0.3-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
 Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser votre système Windows. Interface moderne avec support multilingue (FR/EN), mode sombre, système de profils, CLI complet, statistiques, et mise à jour automatique.
 
@@ -11,6 +11,21 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 
 ## ✨ Fonctionnalités Principales
+
+### 👻 Nettoyage Applications Fantômes (v2.0.3)
+- **Détection des applications fantômes** : entrées registre invalides (HKLM/HKCU)
+- **Sécurité maximale** : liste blanche de 80+ dossiers système pour zéro faux positif
+- **Mode Dry-Run** : prévisualise avant suppression
+- **Case "👻 Applications fantômes"** dans groupe Advanced
+- **Rapport détaillé** : statistiques sur applications détectées/supprimées
+
+### 📁 Nettoyage des Dossiers Vides (v2.0.3)
+- **Détection récursive** : trouve tous les dossiers vides
+- **Suppression intelligente** : traite d'abord les dossiers imbriqués
+- **Vérification double** : vérifie que vide avant suppression
+- **Case "📁 Dossiers vides"** dans groupe Advanced
+- **Mode Dry-Run** : aperçu avant suppression
+- **100% sûr** : ne touche que les dossiers vides
 
 ### 🌍 Interface Multilingue (v2.0.2)
 - **Support complet** : Français 🇫🇷 et Anglais 🇺🇸
@@ -93,6 +108,8 @@ windows-cleaner.exe --stats
 - Journaux d'applications (Microsoft Store)
 - Fichiers orphelins (> 7 jours)
 - Cache mémoire, Raccourcis cassés
+- **👻 Applications fantômes** : détecte et supprime entrées registre invalides
+- **📁 Dossiers vides** : détecte et supprime récursivement dossiers vides
 
 ### 💻 Nettoyage Développeur
 Docker, Node.js (node_modules), Visual Studio (obj/bin/.vs), Python (__pycache__), Git, VS Code, NuGet, Maven, npm, Jeux (Steam/Epic)
@@ -130,7 +147,7 @@ Historique Exécuter (Win+R), Documents récents, Timeline Windows, Historique r
 ## 📊 Spécifications Techniques
 
 - **Framework** : .NET 10.0 Windows
-- **Version** : 2.0.2
+- **Version** : 2.0.3
 - **UI** : Windows Forms + CLI
 - **Modules** : 21+ fichiers C# (~6500+ lignes)
 - **Prérequis** : Windows 10/11 (x64), .NET 10.0 Runtime

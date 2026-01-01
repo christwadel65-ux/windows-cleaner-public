@@ -9,6 +9,25 @@ et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
+## 🆕 Nouveautés v2.0.3 (01 janvier 2026)
+
+### 👻 Détection et Nettoyage des Applications Fantômes
+- **Classe GhostAppsCleaner** : détecte les applications non complètement désinstallées
+- **3 types d'applications fantômes** :
+  - Dossiers orphelins (> 1 MB sans entrée registre)
+  - Entrées registre invalides (pointant vers des répertoires inexistants)
+  - Dossiers sans entrée registre correspondante
+- **Mode Dry-Run supporté** : prévisualiser les suppression sans action
+- **Traductions FR/EN** : messages de log complètement localisés
+- **Intégration totale** : case à cocher dans groupe "Advanced options", profils, sauvegarde paramètres
+- **Performance optimisée** : détection parallèle, filtrage intelligent (> 1 MB minimum)
+- **Sécurité renforcée** : gestion complète des erreurs, respect des permissions
+
+### 🎨 Interface Utilisateur
+- **Restructuration groupe Advanced** : 2 lignes pour meilleure lisibilité (3 éléments par ligne)
+- **Case "👻 Applications fantômes"** avec largeur appropriée (380px)
+- **Alignement parfait** sans coupure de texte
+
 ## 🆕 Nouveautés v2.0.2 (18 décembre 2025)
 
 ### 🔒 Amélioration Vie Privée : Historique Navigateurs et Onglets Récents

@@ -61,6 +61,9 @@ namespace WindowsCleaner
         // Broken shortcuts
         public bool CleanBrokenShortcuts { get; set; }
         
+        // Ghost apps
+        public bool CleanGhostApps { get; set; }
+        
         // Options d'exécution
         public bool Verbose { get; set; }
         public bool CreateBackup { get; set; }
@@ -102,6 +105,7 @@ namespace WindowsCleaner
                 CleanApplicationLogs = true,
                 ClearMemoryCache = true,
                 CleanBrokenShortcuts = true,
+                CleanGhostApps = true,
                 OptimizeSsd = true,
                 CheckDiskHealth = true,
                 Verbose = true,
@@ -198,7 +202,9 @@ namespace WindowsCleaner
                 OptimizeSsd = this.OptimizeSsd,
                 CheckDiskHealth = this.CheckDiskHealth,
                 // Broken shortcuts
-                CleanBrokenShortcuts = this.CleanBrokenShortcuts
+                CleanBrokenShortcuts = this.CleanBrokenShortcuts,
+                // Ghost apps
+                CleanGhostApps = this.CleanGhostApps
             };
         }
     }
