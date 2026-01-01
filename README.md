@@ -207,11 +207,11 @@ iscc build/windows-cleaner.iss
 
 ## 📜 Licence
 
-MIT License - Copyright (c) 2025 C.L
+MIT License - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr)
 
 ## 👤 Auteur
 
-**C.L (Skill_teams)**
+**[easycoding.fr](https://easycoding.fr) (Skill_teams)**
 
 ## 🔗 Liens
 
@@ -226,8 +226,4 @@ MIT License - Copyright (c) 2025 C.L
 3. Commit (`git commit -m 'Add NewFeature'`)
 4. Push (`git push origin feature/NewFeature`)
 5. Ouvrir une Pull Request
-
----
-
-**Windows Cleaner v2.0.2** | .NET 10.0 | 18 décembre 2025
 
