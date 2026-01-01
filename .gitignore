@@ -5,10 +5,6 @@ Output/
 publish-output/
 release/
 
-# Source code (keep .csproj and .sln)
-src/**/*.cs
-src/**/Tests/
-
 # IDE files
 *.user
 *.suo
