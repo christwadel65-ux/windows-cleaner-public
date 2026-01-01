@@ -207,11 +207,11 @@ iscc build/windows-cleaner.iss
 
 ## 📜 Licence
 
-MIT License - Copyright (c) 2025 C.L
+MIT License - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr)
 
 ## 👤 Auteur
 
-**C.L (Skill_teams)**
+**[easycoding.fr](https://easycoding.fr) (Skill_teams)**
 
 ## 🔗 Liens
 

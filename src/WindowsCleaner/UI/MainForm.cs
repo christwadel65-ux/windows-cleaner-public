@@ -437,6 +437,16 @@ namespace WindowsCleaner
             helpMenu.DropDownItems.Add(new ToolStripSeparator());
             helpMenu.DropDownItems.Add(aboutMenuItem);
             menu.Items.Add(helpMenu);
+            
+            // Add copyright label on the right side of the menu
+            var copyrightLabel = new ToolStripLabel("© 2025 easycoding.fr")
+            {
+                Alignment = ToolStripItemAlignment.Right,
+                ForeColor = Color.Gray,
+                Font = new Font("Segoe UI", 8f)
+            };
+            menu.Items.Add(copyrightLabel);
+            
             Controls.Add(menu);
 
             // GroupBox for actions and profiles - DESIGN AMÉLIORÉ
@@ -967,33 +977,147 @@ namespace WindowsCleaner
 
         private void AboutMenuItem_Click(object? sender, EventArgs e)
         {
-            // Author and MIT license (full text)
-            var author = "Auteur : C.L";
-            var licenseTitle = "Licence : MIT";
-            var licenseText = @"MIT License
+            // Create custom About dialog with clickable links
+            var aboutForm = new Form
+            {
+                Text = LanguageManager.Get("msgbox_about"),
+                Size = new Size(500, 550),
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterParent,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
 
-Copyright (c) 2025 C.L
+            var panel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(20),
+                AutoScroll = true
+            };
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the ""Software""), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+            int yPos = 10;
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+            // Title
+            var lblTitle = new Label
+            {
+                Text = "Windows Cleaner",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                Location = new Point(10, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblTitle);
+            yPos += 40;
 
-THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.";
+            // Version
+            var lblVersion = new Label
+            {
+                Text = "Version: 2.0.3",
+                Location = new Point(10, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblVersion);
+            yPos += 30;
 
-            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 2.0.3";
-            MessageBox.Show(msg, LanguageManager.Get("msgbox_about"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Author label
+            var lblAuthor = new Label
+            {
+                Text = "Auteur : ",
+                Location = new Point(10, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblAuthor);
+
+            // Author link
+            var linkAuthor = new LinkLabel
+            {
+                Text = "easycoding.fr",
+                Location = new Point(lblAuthor.Right, yPos),
+                AutoSize = true
+            };
+            linkAuthor.LinkClicked += (s, ev) =>
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "https://easycoding.fr",
+                        UseShellExecute = true
+                    });
+                }
+                catch { }
+            };
+            panel.Controls.Add(linkAuthor);
+            yPos += 40;
+
+            // License title
+            var lblLicenseTitle = new Label
+            {
+                Text = "Licence : MIT",
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(10, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblLicenseTitle);
+            yPos += 30;
+
+            // License text with clickable link
+            var txtLicense = new RichTextBox
+            {
+                Location = new Point(10, yPos),
+                Size = new Size(440, 260),
+                ReadOnly = true,
+                BorderStyle = BorderStyle.None,
+                BackColor = panel.BackColor,
+                ScrollBars = RichTextBoxScrollBars.Vertical,
+                Text = @"MIT License
+
+Copyright (c) 2025 easycoding.fr
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+            };
+            
+            // Make the link in RichTextBox clickable
+            int linkStart = txtLicense.Text.IndexOf("easycoding.fr");
+            if (linkStart >= 0)
+            {
+                txtLicense.Select(linkStart, "easycoding.fr".Length);
+                txtLicense.SelectionColor = Color.Blue;
+                txtLicense.Select(0, 0);
+            }
+            
+            txtLicense.LinkClicked += (s, ev) =>
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "https://easycoding.fr",
+                        UseShellExecute = true
+                    });
+                }
+                catch { }
+            };
+            
+            panel.Controls.Add(txtLicense);
+            yPos += 270;
+
+            // OK button
+            var btnOk = new Button
+            {
+                Text = "OK",
+                Location = new Point(190, yPos),
+                Size = new Size(80, 30),
+                DialogResult = DialogResult.OK
+            };
+            panel.Controls.Add(btnOk);
+
+            aboutForm.Controls.Add(panel);
+            aboutForm.AcceptButton = btnOk;
+            aboutForm.ShowDialog(this);
         }
 
         private void Cancel()
@@ -1032,6 +1156,8 @@ SOFTWARE.";
             chkOrphanedFiles.Checked = select;
             chkClearMemoryCache.Checked = select;
             chkBrokenShortcuts.Checked = select;
+            chkGhostApps.Checked = select;
+            chkEmptyFolders.Checked = select;
             
             // Options développeur
             chkVsCodeCache.Checked = select;
@@ -1064,7 +1190,7 @@ SOFTWARE.";
             bool allChecked = chkRecycle.Checked && chkSystemTemp.Checked && chkBrowsers.Checked &&
                              chkBrowserHistory.Checked && chkWindowsUpdate.Checked && chkThumbnails.Checked && chkPrefetch.Checked &&
                              chkFlushDns.Checked && chkOrphanedFiles.Checked && chkClearMemoryCache.Checked &&
-                             chkBrokenShortcuts.Checked &&
+                             chkBrokenShortcuts.Checked && chkGhostApps.Checked && chkEmptyFolders.Checked &&
                              chkVsCodeCache.Checked && chkNugetCache.Checked && chkMavenCache.Checked &&
                              chkNpmCache.Checked && chkDockerCache.Checked && chkNodeModules.Checked &&
                              chkVisualStudio.Checked && chkPythonCache.Checked && chkGitCache.Checked &&
@@ -1074,7 +1200,7 @@ SOFTWARE.";
             bool noneChecked = !chkRecycle.Checked && !chkSystemTemp.Checked && !chkBrowsers.Checked &&
                               !chkBrowserHistory.Checked && !chkWindowsUpdate.Checked && !chkThumbnails.Checked && !chkPrefetch.Checked &&
                               !chkFlushDns.Checked && !chkOrphanedFiles.Checked && !chkClearMemoryCache.Checked &&
-                              !chkBrokenShortcuts.Checked &&
+                              !chkBrokenShortcuts.Checked && !chkGhostApps.Checked && !chkEmptyFolders.Checked &&
                               !chkVsCodeCache.Checked && !chkNugetCache.Checked && !chkMavenCache.Checked &&
                               !chkNpmCache.Checked && !chkDockerCache.Checked && !chkNodeModules.Checked &&
                               !chkVisualStudio.Checked && !chkPythonCache.Checked && !chkGitCache.Checked &&
