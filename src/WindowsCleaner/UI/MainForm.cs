@@ -39,6 +39,8 @@ namespace WindowsCleaner
         private CheckBox chkOrphanedFiles = null!;
         private CheckBox chkClearMemoryCache = null!;
         private CheckBox chkBrokenShortcuts = null!;
+        private CheckBox chkGhostApps = null!;
+        private CheckBox chkEmptyFolders = null!;
         
         // Developer cleaning options
         private CheckBox chkVsCodeCache = null!;
@@ -200,6 +202,7 @@ namespace WindowsCleaner
                 settings.CleanOrphanedFiles = chkOrphanedFiles.Checked;
                 settings.ClearMemoryCache = chkClearMemoryCache.Checked;
                 settings.CleanBrokenShortcuts = chkBrokenShortcuts.Checked;
+                settings.CleanGhostApps = chkGhostApps.Checked;
                 settings.SelectedProfileName = cmbProfiles?.SelectedItem?.ToString() ?? CustomProfileLabel;
                 SettingsManager.Save(settings);
             }
@@ -220,6 +223,8 @@ namespace WindowsCleaner
             if (settings.Advanced.HasValue) chkAdvanced.Checked = settings.Advanced.Value;
             if (settings.CleanOrphanedFiles.HasValue) chkOrphanedFiles.Checked = settings.CleanOrphanedFiles.Value;
             if (settings.ClearMemoryCache.HasValue) chkClearMemoryCache.Checked = settings.ClearMemoryCache.Value;
+            if (settings.CleanBrokenShortcuts.HasValue) chkBrokenShortcuts.Checked = settings.CleanBrokenShortcuts.Value;
+            if (settings.CleanGhostApps.HasValue) chkGhostApps.Checked = settings.CleanGhostApps.Value;
         }
 
         private void LoadProfilesIntoCombo()
@@ -290,6 +295,7 @@ namespace WindowsCleaner
                 chkOrphanedFiles.Checked = profile.CleanOrphanedFiles;
                 chkClearMemoryCache.Checked = profile.ClearMemoryCache;
                 chkBrokenShortcuts.Checked = profile.CleanBrokenShortcuts;
+                chkGhostApps.Checked = profile.CleanGhostApps;
                 
                 // Developer options
                 chkVsCodeCache.Checked = profile.CleanVsCodeCache;
@@ -489,21 +495,25 @@ namespace WindowsCleaner
             Controls.Add(grpOptions);
 
             // Advanced options - MEILLEURE PRÉSENTATION
-            var grpAdvanced = new GroupBox() { Text = LanguageManager.Get("group_advanced"), Left = 12, Top = 155, Width = 1168, Height = 75, Padding = new Padding(0, 8, 0, 0) };
-            chkVerbose = new CheckBox() { Text = LanguageManager.Get("chk_verbose"), Left = 15, Top = 30, Width = 220, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
-            chkAdvanced = new CheckBox() { Text = LanguageManager.Get("chk_report"), Left = 240, Top = 30, Width = 220, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
-            chkOrphanedFiles = new CheckBox() { Text = LanguageManager.Get("chk_orphaned"), Left = 465, Top = 30, Width = 220, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
-            chkClearMemoryCache = new CheckBox() { Text = LanguageManager.Get("chk_memory_cache"), Left = 690, Top = 30, Width = 220, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
-            chkBrokenShortcuts = new CheckBox() { Text = LanguageManager.Get("chk_broken_shortcuts"), Left = 915, Top = 30, Width = 220, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            var grpAdvanced = new GroupBox() { Text = LanguageManager.Get("group_advanced"), Left = 12, Top = 155, Width = 1168, Height = 135, Padding = new Padding(0, 8, 0, 0) };
+            chkVerbose = new CheckBox() { Text = LanguageManager.Get("chk_verbose"), Left = 15, Top = 30, Width = 360, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkAdvanced = new CheckBox() { Text = LanguageManager.Get("chk_report"), Left = 390, Top = 30, Width = 360, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkOrphanedFiles = new CheckBox() { Text = LanguageManager.Get("chk_orphaned"), Left = 765, Top = 30, Width = 380, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkClearMemoryCache = new CheckBox() { Text = LanguageManager.Get("chk_memory_cache"), Left = 15, Top = 63, Width = 360, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkBrokenShortcuts = new CheckBox() { Text = LanguageManager.Get("chk_broken_shortcuts"), Left = 390, Top = 63, Width = 360, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkGhostApps = new CheckBox() { Text = LanguageManager.Get("chk_ghost_apps"), Left = 765, Top = 63, Width = 380, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
+            chkEmptyFolders = new CheckBox() { Text = LanguageManager.Get("chk_empty_folders"), Left = 15, Top = 96, Width = 360, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9.5f) };
             grpAdvanced.Controls.Add(chkVerbose);
             grpAdvanced.Controls.Add(chkAdvanced);
             grpAdvanced.Controls.Add(chkOrphanedFiles);
             grpAdvanced.Controls.Add(chkClearMemoryCache);
             grpAdvanced.Controls.Add(chkBrokenShortcuts);
+            grpAdvanced.Controls.Add(chkGhostApps);
+            grpAdvanced.Controls.Add(chkEmptyFolders);
             Controls.Add(grpAdvanced);
             
             // Developer options - NOUVEAU GROUPE
-            var grpDeveloper = new GroupBox() { Text = LanguageManager.Get("group_developer"), Left = 12, Top = 240, Width = 1168, Height = 100, Padding = new Padding(0, 8, 0, 0) };
+            var grpDeveloper = new GroupBox() { Text = LanguageManager.Get("group_developer"), Left = 12, Top = 300, Width = 1168, Height = 100, Padding = new Padding(0, 8, 0, 0) };
             chkVsCodeCache = new CheckBox() { Text = LanguageManager.Get("chk_vscode"), Left = 15, Top = 25, Width = 145, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9f) };
             chkNugetCache = new CheckBox() { Text = LanguageManager.Get("chk_nuget"), Left = 165, Top = 25, Width = 130, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9f) };
             chkMavenCache = new CheckBox() { Text = LanguageManager.Get("chk_maven"), Left = 300, Top = 25, Width = 130, AutoSize = false, Height = 28, Font = new Font("Segoe UI", 9f) };
@@ -528,7 +538,7 @@ namespace WindowsCleaner
             Controls.Add(grpDeveloper);
 
             // Logs GroupBox - AUGMENTÉ - Position ajustée
-            var grpLogs = new GroupBox() { Text = LanguageManager.Get("group_logs"), Left = 12, Top = 350, Width = 1168, Height = 380, Padding = new Padding(0, 8, 0, 0) };
+            var grpLogs = new GroupBox() { Text = LanguageManager.Get("group_logs"), Left = 12, Top = 410, Width = 1168, Height = 380, Padding = new Padding(0, 8, 0, 0) };
             lvLogs = new ListView() { Left = 8, Top = 30, Width = 1152, Height = 342, View = View.Details, FullRowSelect = true, Font = new Font("Segoe UI", 9), BorderStyle = BorderStyle.None };
             lvLogs.Columns.Add(LanguageManager.Get("log_time"), 160);
             lvLogs.Columns.Add(LanguageManager.Get("log_level"), 100);
@@ -982,7 +992,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.";
 
-            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 2.0.2";
+            var msg = $"Windows Cleaner\n\n{author}\n\n{licenseTitle}\n\n{licenseText}\n\nVersion: 2.0.3";
             MessageBox.Show(msg, LanguageManager.Get("msgbox_about"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -1150,6 +1160,7 @@ SOFTWARE.";
                     CleanApplicationLogs = false,
                     ClearMemoryCache = chkClearMemoryCache.Checked,
                     CleanBrokenShortcuts = chkBrokenShortcuts.Checked,
+                    CleanGhostApps = chkGhostApps.Checked,
                     // Developer options
                     CleanVsCodeCache = chkVsCodeCache.Checked,
                     CleanNugetCache = chkNugetCache.Checked,

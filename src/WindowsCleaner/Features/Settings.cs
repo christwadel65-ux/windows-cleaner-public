@@ -41,6 +41,8 @@ namespace WindowsCleaner
         public bool? ClearMemoryCache { get; set; }
         /// <summary>Supprimer les raccourcis cassés</summary>
         public bool? CleanBrokenShortcuts { get; set; }
+        /// <summary>Nettoyer les applications fantômes</summary>
+        public bool? CleanGhostApps { get; set; }
 
         /// <summary>Nom du profil sélectionné dans l'interface</summary>
         public string? SelectedProfileName { get; set; }

@@ -86,6 +86,8 @@ namespace WindowsCleaner
             { "chk_orphaned", new Dictionary<Language, string> { { Language.French, "🧩 Fichiers orphelins" }, { Language.English, "🧩 Orphaned files" } } },
             { "chk_memory_cache", new Dictionary<Language, string> { { Language.French, "💾 Cache mémoire" }, { Language.English, "💾 Memory cache" } } },
             { "chk_broken_shortcuts", new Dictionary<Language, string> { { Language.French, "🔗 Raccourcis cassés" }, { Language.English, "🔗 Broken shortcuts" } } },
+            { "chk_ghost_apps", new Dictionary<Language, string> { { Language.French, "👻 Applications fantômes" }, { Language.English, "👻 Ghost apps" } } },
+            { "chk_empty_folders", new Dictionary<Language, string> { { Language.French, "📁 Dossiers vides" }, { Language.English, "📁 Empty folders" } } },
             
             // Developer Group
             { "group_developer", new Dictionary<Language, string> { { Language.French, "💻 Nettoyage Développeur" }, { Language.English, "💻 Developer Cleaning" } } },
@@ -351,6 +353,24 @@ namespace WindowsCleaner
             { "log_closing_browsers", new Dictionary<Language, string> { { Language.French, "Fermeture de {0} instance(s) de {1}..." }, { Language.English, "Closing {0} instance(s) of {1}..." } } },
             { "log_browsers_closed", new Dictionary<Language, string> { { Language.French, "✓ {0} navigateur(s) fermé(s) avec succès" }, { Language.English, "✓ {0} browser(s) closed successfully" } } },
             { "log_no_browsers_running", new Dictionary<Language, string> { { Language.French, "Aucun navigateur en cours d'exécution" }, { Language.English, "No browsers running" } } },
+            
+            // Ghost apps messages
+            { "log_detecting_ghost_apps", new Dictionary<Language, string> { { Language.French, "Détection des applications fantômes en cours..." }, { Language.English, "Detecting ghost apps..." } } },
+            { "log_ghost_apps_found", new Dictionary<Language, string> { { Language.French, "Applications fantômes trouvées: {0}" }, { Language.English, "Ghost apps found: {0}" } } },
+            { "log_orphaned_folder_found", new Dictionary<Language, string> { { Language.French, "Dossier orphelin trouvé: {0}" }, { Language.English, "Orphaned folder found: {0}" } } },
+            { "log_invalid_registry_found", new Dictionary<Language, string> { { Language.French, "Entrée registre invalide trouvée: {0}" }, { Language.English, "Invalid registry entry found: {0}" } } },
+            { "log_removing_ghost_app", new Dictionary<Language, string> { { Language.French, "Suppression de l'application fantôme: {0}" }, { Language.English, "Removing ghost app: {0}" } } },
+            { "log_removing_invalid_registry", new Dictionary<Language, string> { { Language.French, "Suppression de l'entrée registre invalide: {0}" }, { Language.English, "Removing invalid registry entry: {0}" } } },
+            { "error_detecting_ghost_apps", new Dictionary<Language, string> { { Language.French, "Erreur lors de la détection des applications fantômes: {0}" }, { Language.English, "Error detecting ghost apps: {0}" } } },
+            { "error_removing_ghost_app", new Dictionary<Language, string> { { Language.French, "Erreur suppression {0}: {1}" }, { Language.English, "Error removing {0}: {1}" } } },
+            { "error_removing_registry_entry", new Dictionary<Language, string> { { Language.French, "Erreur suppression entrée registre {0}: {1}" }, { Language.English, "Error removing registry entry {0}: {1}" } } },
+            
+            // Empty folders messages
+            { "log_detecting_empty_folders", new Dictionary<Language, string> { { Language.French, "Détection des dossiers vides en cours..." }, { Language.English, "Detecting empty folders..." } } },
+            { "log_empty_folders_found", new Dictionary<Language, string> { { Language.French, "Dossiers vides trouvés: {0}" }, { Language.English, "Empty folders found: {0}" } } },
+            { "log_removing_empty_folder", new Dictionary<Language, string> { { Language.French, "Suppression du dossier vide: {0}" }, { Language.English, "Removing empty folder: {0}" } } },
+            { "error_detecting_empty_folders", new Dictionary<Language, string> { { Language.French, "Erreur lors de la détection des dossiers vides: {0}" }, { Language.English, "Error detecting empty folders: {0}" } } },
+            { "error_removing_empty_folder", new Dictionary<Language, string> { { Language.French, "Erreur suppression {0}: {1}" }, { Language.English, "Error removing {0}: {1}" } } },
             
             // MessageBox titles and messages
             { "msgbox_information", new Dictionary<Language, string> { { Language.French, "Information" }, { Language.English, "Information" } } },

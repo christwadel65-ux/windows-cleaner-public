@@ -92,6 +92,9 @@ namespace WindowsCleaner
         /// <summary>Supprime les raccourcis (.lnk) cassés dont la cible n'existe plus</summary>
         public bool CleanBrokenShortcuts { get; set; }
         
+        /// <summary>Nettoie les applications fantômes (dossiers orphelins, entrées registre invalides)</summary>
+        public bool CleanGhostApps { get; set; }
+        
         /// <summary>Ferme automatiquement les navigateurs avant le nettoyage (recommandé)</summary>
         public bool CloseBrowsersIfNeeded { get; set; } = true;
     }
@@ -131,6 +134,12 @@ namespace WindowsCleaner
         // Statistiques raccourcis
         /// <summary>Nombre de raccourcis cassés supprimés</summary>
         public int BrokenShortcutsDeleted { get; set; }
+        
+        // Statistiques applications fantômes
+        /// <summary>Nombre d'applications fantômes nettoyées</summary>
+        public int GhostAppsRemoved { get; set; }
+        /// <summary>Nombre d'entrées registre invalides supprimées</summary>
+        public int InvalidRegistryEntriesRemoved { get; set; }
     }
 
     /// <summary>
@@ -989,6 +998,29 @@ namespace WindowsCleaner
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, LanguageManager.Get("error_cleaning", "raccourcis cassés", ex.Message));
+                    }
+                }, cancellationToken));
+            }
+            
+            if (options.CleanGhostApps)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        var ghostApps = GhostAppsCleaner.DetectGhostApps(threadSafeLog, cancellationToken);
+                        var (deletedFiles, freedBytes, removedRegistry) = GhostAppsCleaner.CleanGhostApps(ghostApps, options.DryRun, threadSafeLog, cancellationToken);
+                        lock (lockObj)
+                        {
+                            result.FilesDeleted += deletedFiles;
+                            result.BytesFreed += freedBytes;
+                            result.GhostAppsRemoved = ghostApps.Count;
+                            result.InvalidRegistryEntriesRemoved = removedRegistry;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(LogLevel.Error, LanguageManager.Get("error_cleaning", "applications fantômes", ex.Message));
                     }
                 }, cancellationToken));
             }
