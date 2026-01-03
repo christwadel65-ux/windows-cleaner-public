@@ -1,7 +1,7 @@
 # Windows Cleaner v2.0.5
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
+[![License](https://img.shields.io/badge/license-Propriétaire-red.svg)](../LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
 [![Version](https://img.shields.io/badge/version-2.0.5-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
@@ -231,7 +231,7 @@ iscc build/windows-cleaner.iss
 
 ## 📜 Licence
 
-MIT License - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr)
+Licence Propriétaire - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr)
 
 ## 👤 Auteur
 
