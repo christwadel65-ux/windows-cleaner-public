@@ -5,7 +5,7 @@ $dotnetPath = "C:\Program Files\dotnet\dotnet.exe"
 $projectPath = "d:\GitHub\Windows Cleaner\src\WindowsCleaner\WindowsCleaner.csproj"
 
 Write-Host "================================" -ForegroundColor Cyan
-Write-Host " Windows Cleaner v2.0.3 - Build" -ForegroundColor Cyan
+Write-Host " Windows Cleaner v2.0.4 - Build" -ForegroundColor Cyan
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host ""
 

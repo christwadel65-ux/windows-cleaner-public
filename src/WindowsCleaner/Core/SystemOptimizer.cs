@@ -357,57 +357,70 @@ namespace WindowsCleaner
                 
                 var script = @"
                     $report = @()
+                    $report += '=== RAPPORT SANTÉ DISQUES ==='
+                    $report += ''
                     
                     try {
-                        # Méthode 1: Win32_DiskDrive (avec timeout)
-                        $disks = Get-CimInstance -ClassName Win32_DiskDrive -ErrorAction SilentlyContinue
+                        # Méthode 1: Win32_DiskDrive
+                        $disks = @(Get-CimInstance -ClassName Win32_DiskDrive -ErrorAction SilentlyContinue)
                         
-                        if ($disks) {
-                            $report += ""=== DISQUES PHYSIQUES ===""
+                        if ($disks.Count -gt 0) {
+                            $report += '=== DISQUES PHYSIQUES ==='
                             foreach ($disk in $disks) {
-                                $report += """"
-                                $report += ""Disque: $($disk.Model)""
-                                $report += ""Statut: $($disk.Status)""
-                                $report += ""Interface: $($disk.InterfaceType)""
-                                $sizeGB = [Math]::Round($disk.Size / 1GB, 2)
-                                $report += ""Taille: $sizeGB GB""
-                                
-                                # Informations SMART si disponibles
-                                $partitions = $disk | Get-CimAssociatedInstance -ResultClassName Win32_DiskPartition -ErrorAction SilentlyContinue
-                                if ($partitions) {
-                                    $report += ""Partitions: $($partitions.Count)""
+                                $report += ''
+                                $report += ('Disque: ' + $disk.Model)
+                                $report += ('Statut: ' + $disk.Status)
+                                $report += ('Interface: ' + $disk.InterfaceType)
+                                if ($disk.Size) {
+                                    $sizeGB = [Math]::Round($disk.Size / 1GB, 2)
+                                    $report += ('Taille: ' + $sizeGB + ' GB')
+                                }
+                                if ($disk.Partitions) {
+                                    $report += ('Partitions: ' + $disk.Partitions)
                                 }
                             }
+                        } else {
+                            $report += 'Aucun disque physique détecté'
                         }
                         
-                        # Méthode 2: Volumes logiques
-                        $volumes = Get-Volume -ErrorAction SilentlyContinue | Where-Object { $_.DriveLetter }
+                        # Méthode 2: Volumes logiques (tous)
+                        $volumes = @(Get-Volume -ErrorAction SilentlyContinue)
                         
-                        if ($volumes) {
-                            $report += """"
-                            $report += ""=== VOLUMES ===""
+                        if ($volumes.Count -gt 0) {
+                            $report += ''
+                            $report += '=== VOLUMES DISPONIBLES ==='
                             foreach ($vol in $volumes) {
-                                $report += """"
-                                $report += ""Lecteur: $($vol.DriveLetter):""
-                                $report += ""Type: $($vol.FileSystemType)""
-                                $report += ""Santé: $($vol.HealthStatus)""
-                                $sizeGB = [Math]::Round($vol.Size / 1GB, 2)
-                                $freeGB = [Math]::Round($vol.SizeRemaining / 1GB, 2)
-                                $report += ""Taille: $sizeGB GB (Libre: $freeGB GB)""
+                                $report += ''
+                                if ($vol.DriveLetter) {
+                                    $report += ('Lecteur: ' + $vol.DriveLetter + ':')
+                                } else {
+                                    $report += ('Nom: ' + $vol.FileSystemLabel)
+                                }
+                                $report += ('Type: ' + $vol.FileSystemType)
+                                $report += ('Santé: ' + $vol.HealthStatus)
+                                if ($vol.Size) {
+                                    $sizeGB = [Math]::Round($vol.Size / 1GB, 2)
+                                    $freeGB = [Math]::Round($vol.SizeRemaining / 1GB, 2)
+                                    $report += ('Taille: ' + $sizeGB + ' GB (Libre: ' + $freeGB + ' GB)')
+                                }
                             }
+                        } else {
+                            $report += ''
+                            $report += 'Aucun volume détecté'
                         }
                         
-                        # Si aucune méthode n'a fonctionné
-                        if (-not $disks -and -not $volumes) {
-                            $report += ""Aucune information disque disponible""
-                            $report += ""(Droits administrateur requis pour SMART complet)""
+                        if ($disks.Count -eq 0 -and $volumes.Count -eq 0) {
+                            $report += ''
+                            $report += 'Aucune information disque disponible'
+                            $report += '(Droits administrateur requis pour informations complètes)'
                         }
                         
                     } catch {
-                        $report += ""Erreur lors de la récupération: $($_.Exception.Message)""
+                        $report += ''
+                        $report += ('Erreur lors de la récupération: ' + $_.Exception.Message)
                     }
                     
-                    $report -join ""`r`n""
+                    $report | Out-String
                 ";
                 
                 var psi = new ProcessStartInfo
@@ -434,7 +447,12 @@ namespace WindowsCleaner
                 }
                 
                 log?.Invoke("Rapport SMART récupéré");
-                return string.IsNullOrEmpty(output.Trim()) ? "Aucun disque détecté (vérifiez les droits admin)" : output;
+                var result = output.Trim();
+                if (string.IsNullOrEmpty(result))
+                {
+                    result = "=== RAPPORT SANTÉ DISQUES ===\n\n(Impossible de récupérer les informations disque - vérifiez les droits administrateur)";
+                }
+                return result;
             }
             catch (Exception ex)
             {

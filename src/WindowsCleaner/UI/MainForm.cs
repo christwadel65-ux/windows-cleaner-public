@@ -430,6 +430,38 @@ namespace WindowsCleaner
             toolsMenu.DropDownItems.Add(backupMenuItem);
             toolsMenu.DropDownItems.Add(optimizerMenuItem);
             menu.Items.Add(toolsMenu);
+
+            // Uninstaller Menu
+            var uninstallerMenu = new ToolStripMenuItem(LanguageManager.Get("menu_uninstaller"));
+            var uninstallProgramsMenuItem = new ToolStripMenuItem("🗑️ " + LanguageManager.Get("uninstaller_title"));
+            var uninstallExportMenuItem = new ToolStripMenuItem("📋 " + LanguageManager.Get("btn_export_csv"));
+            
+            uninstallProgramsMenuItem.Click += UninstallerMenuItem_Click;
+            uninstallExportMenuItem.Click += (s, e) =>
+            {
+                var saveDialog = new SaveFileDialog
+                {
+                    FileName = $"programmes_{DateTime.Now:yyyyMMdd_HHmmss}.csv",
+                    Filter = "Fichiers CSV (*.csv)|*.csv"
+                };
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (ProgramUninstaller.ExportProgramsList(saveDialog.FileName))
+                    {
+                        MessageBox.Show(LanguageManager.Get("uninstaller_export_success", saveDialog.FileName), LanguageManager.Get("msgbox_success"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(LanguageManager.Get("uninstaller_export_error"), LanguageManager.Get("msgbox_result"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            };
+
+            uninstallerMenu.DropDownItems.Add(uninstallProgramsMenuItem);
+            uninstallerMenu.DropDownItems.Add(new ToolStripSeparator());
+            uninstallerMenu.DropDownItems.Add(uninstallExportMenuItem);
+            menu.Items.Add(uninstallerMenu);
             
             helpMenu.DropDownItems.Add(checkUpdateMenuItem);
             helpMenu.DropDownItems.Add(new ToolStripSeparator());
@@ -1011,9 +1043,10 @@ namespace WindowsCleaner
             // Version
             var lblVersion = new Label
             {
-                Text = "Version: 2.0.3",
+                Text = "Version: 2.0.4 - Program Uninstaller Edition",
                 Location = new Point(10, yPos),
-                AutoSize = true
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
             };
             panel.Controls.Add(lblVersion);
             yPos += 30;
@@ -1047,6 +1080,53 @@ namespace WindowsCleaner
                 catch { }
             };
             panel.Controls.Add(linkAuthor);
+            yPos += 40;
+
+            // New Features in v2.0.4
+            var lblFeatures = new Label
+            {
+                Text = "🆕 Nouveau dans v2.0.4 :",
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(10, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblFeatures);
+            yPos += 30;
+
+            var lblFeatures1 = new Label
+            {
+                Text = "• 🗑️ Désinstallateur de programmes complet",
+                Location = new Point(20, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblFeatures1);
+            yPos += 25;
+
+            var lblFeatures2 = new Label
+            {
+                Text = "• Interface professionnelle avec recherche temps réel",
+                Location = new Point(20, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblFeatures2);
+            yPos += 25;
+
+            var lblFeatures3 = new Label
+            {
+                Text = "• Export CSV de la liste des programmes",
+                Location = new Point(20, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblFeatures3);
+            yPos += 25;
+
+            var lblFeatures4 = new Label
+            {
+                Text = "• Nettoyage complet registre + AppData",
+                Location = new Point(20, yPos),
+                AutoSize = true
+            };
+            panel.Controls.Add(lblFeatures4);
             yPos += 40;
 
             // License title
@@ -2049,6 +2129,353 @@ THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
                 len = len / 1024;
             }
             return $"{len:0.##} {sizes[order]}";
+        }
+
+        private void UninstallerMenuItem_Click(object? sender, EventArgs e)
+        {
+            var uninstallerForm = new Form
+            {
+                Text = LanguageManager.Get("uninstaller_title"),
+                Size = new Size(1100, 700),
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.Sizable,
+                MinimumSize = new Size(900, 500),
+                BackColor = SystemColors.Control,
+                Icon = this.Icon
+            };
+
+            // Main layout - Top to Bottom
+            var mainPanel = new Panel { Dock = DockStyle.Fill };
+
+            // TOP PANEL - Title and Search
+            var topPanel = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 70,
+                BackColor = Color.FromArgb(240, 240, 240),
+                BorderStyle = BorderStyle.FixedSingle,
+                Padding = new Padding(12, 10, 12, 10)
+            };
+
+            var lblTitle = new Label
+            {
+                Text = LanguageManager.Get("uninstaller_title"),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Location = new Point(12, 8),
+                AutoSize = true
+            };
+            topPanel.Controls.Add(lblTitle);
+
+            var txtSearch = new TextBox
+            {
+                Location = new Point(12, 32),
+                Size = new Size(550, 28),
+                Font = new Font("Segoe UI", 10),
+                PlaceholderText = "🔍 " + LanguageManager.Get("uninstaller_select_program")
+            };
+            topPanel.Controls.Add(txtSearch);
+
+            mainPanel.Controls.Add(topPanel);
+
+            // MIDDLE PANEL - ListView
+            var middlePanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(12),
+                BackColor = SystemColors.Control
+            };
+
+            var lvPrograms = new ListView
+            {
+                Dock = DockStyle.Fill,
+                View = View.Details,
+                FullRowSelect = true,
+                MultiSelect = true,
+                GridLines = true,
+                Font = new Font("Segoe UI", 9),
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            lvPrograms.Columns.Add(LanguageManager.Get("uninstaller_program_header"), 380);
+            lvPrograms.Columns.Add(LanguageManager.Get("uninstaller_version_header"), 110);
+            lvPrograms.Columns.Add(LanguageManager.Get("uninstaller_publisher_header"), 320);
+            lvPrograms.Columns.Add(LanguageManager.Get("uninstaller_size_header"), 110);
+
+            middlePanel.Controls.Add(lvPrograms);
+            mainPanel.Controls.Add(middlePanel);
+
+            // LOGS PANEL - Bottom with logs
+            var logsPanel = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 120,
+                BackColor = Color.FromArgb(30, 30, 30),
+                BorderStyle = BorderStyle.FixedSingle,
+                Padding = new Padding(8)
+            };
+
+            var txtLogs = new RichTextBox
+            {
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                Font = new Font("Courier New", 8),
+                BackColor = Color.FromArgb(30, 30, 30),
+                ForeColor = Color.Lime,
+                BorderStyle = BorderStyle.None,
+                ScrollBars = RichTextBoxScrollBars.Vertical
+            };
+            logsPanel.Controls.Add(txtLogs);
+            mainPanel.Controls.Add(logsPanel);
+
+            // BOTTOM PANEL - Options and Buttons
+            var bottomPanel = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 80,
+                BackColor = Color.FromArgb(240, 240, 240),
+                BorderStyle = BorderStyle.FixedSingle,
+                Padding = new Padding(12)
+            };
+
+            var chkCleanRemnants = new CheckBox
+            {
+                Text = LanguageManager.Get("uninstaller_cleanup_remnants"),
+                Location = new Point(12, 12),
+                AutoSize = true,
+                Checked = true,
+                Font = new Font("Segoe UI", 10)
+            };
+            bottomPanel.Controls.Add(chkCleanRemnants);
+
+            // Buttons Row
+            var btnUninstall = new Button
+            {
+                Text = LanguageManager.Get("btn_uninstall"),
+                Location = new Point(12, 40),
+                Size = new Size(130, 36),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                BackColor = Color.FromArgb(220, 53, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+            btnUninstall.FlatAppearance.BorderSize = 0;
+            bottomPanel.Controls.Add(btnUninstall);
+
+            var btnExport = new Button
+            {
+                Text = LanguageManager.Get("btn_export_csv"),
+                Location = new Point(155, 40),
+                Size = new Size(130, 36),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                BackColor = Color.FromArgb(40, 167, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+            btnExport.FlatAppearance.BorderSize = 0;
+            bottomPanel.Controls.Add(btnExport);
+
+            var btnCancel = new Button
+            {
+                Text = "Fermer",
+                Location = new Point(1000, 40),
+                Size = new Size(90, 36),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                BackColor = Color.FromArgb(108, 117, 125),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand,
+                DialogResult = DialogResult.Cancel
+            };
+            btnCancel.FlatAppearance.BorderSize = 0;
+            bottomPanel.Controls.Add(btnCancel);
+
+            mainPanel.Controls.Add(bottomPanel);
+            uninstallerForm.Controls.Add(mainPanel);
+
+            // Charger les programmes
+            statusLabel.Text = LanguageManager.Get("uninstaller_loading");
+            Application.DoEvents();
+
+            var programs = ProgramUninstaller.GetInstalledPrograms();
+            foreach (var program in programs)
+            {
+                var size = program.EstimatedSize > 0 ? (program.EstimatedSize / 1024.0).ToString("F2") : "N/A";
+                var item = new ListViewItem(program.DisplayName);
+                item.SubItems.Add(program.DisplayVersion);
+                item.SubItems.Add(program.Publisher);
+                item.SubItems.Add(size);
+                item.Tag = program;
+                lvPrograms.Items.Add(item);
+            }
+
+            statusLabel.Text = LanguageManager.Get("uninstaller_programs_found", programs.Count);
+
+            // Search filter
+            txtSearch.TextChanged += (s, e) =>
+            {
+                lvPrograms.Items.Clear();
+                var filtered = programs.Where(p => p.DisplayName.Contains(txtSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                foreach (var program in filtered)
+                {
+                    var size = program.EstimatedSize > 0 ? (program.EstimatedSize / 1024.0).ToString("F2") : "N/A";
+                    var item = new ListViewItem(program.DisplayName);
+                    item.SubItems.Add(program.DisplayVersion);
+                    item.SubItems.Add(program.Publisher);
+                    item.SubItems.Add(size);
+                    item.Tag = program;
+                    lvPrograms.Items.Add(item);
+                }
+            };
+
+            btnUninstall.Click += (s, ev) =>
+            {
+                if (lvPrograms.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show(LanguageManager.Get("uninstaller_no_selection"), LanguageManager.Get("uninstaller_attention"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var confirm = MessageBox.Show(
+                    LanguageManager.Get("uninstaller_confirm", lvPrograms.SelectedItems.Count),
+                    LanguageManager.Get("msgbox_confirmation"),
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (confirm != DialogResult.Yes) return;
+
+                btnUninstall.Enabled = false;
+                btnExport.Enabled = false;
+                lvPrograms.Enabled = false;
+                chkCleanRemnants.Enabled = false;
+                txtSearch.Enabled = false;
+
+                var log = new Action<string>(msg =>
+                {
+                    // Affichage dans les logs
+                    txtLogs.AppendText(msg + Environment.NewLine);
+                    txtLogs.ScrollToCaret();
+                });
+
+                var successCount = 0;
+                var failureCount = 0;
+                var successList = new List<string>();
+                var failureList = new List<string>();
+
+                log("═══════════════════════════════════════════════════════");
+                log("🗑️  DÉBUT DE LA DÉSINSTALLATION");
+                log("═══════════════════════════════════════════════════════");
+                log("");
+
+                foreach (ListViewItem item in lvPrograms.SelectedItems)
+                {
+                    if (item.Tag is ProgramUninstaller.InstalledProgram program)
+                    {
+                        log($"→ Désinstallation de : {program.DisplayName} (v{program.DisplayVersion})");
+                        log($"  Éditeur: {program.Publisher}");
+                        
+                        if (ProgramUninstaller.UninstallProgram(program, true, log))
+                        {
+                            log($"  ✓ Désinstallation réussie");
+                            
+                            if (chkCleanRemnants.Checked)
+                            {
+                                log($"  • Nettoyage des fichiers résiduels...");
+                                ProgramUninstaller.CleanupProgramRemnants(program, log);
+                                log($"  ✓ Nettoyage terminé");
+                            }
+                            
+                            successCount++;
+                            successList.Add(program.DisplayName);
+                            item.ForeColor = Color.Green;
+                            log("");
+                        }
+                        else
+                        {
+                            log($"  ✗ ERREUR : Désinstallation échouée");
+                            failureCount++;
+                            failureList.Add(program.DisplayName);
+                            item.ForeColor = Color.Red;
+                            log("");
+                        }
+                    }
+                }
+
+                log("═══════════════════════════════════════════════════════");
+                log("📊 RÉSUMÉ DE LA DÉSINSTALLATION");
+                log("═══════════════════════════════════════════════════════");
+                log($"✓ Applications supprimées avec succès : {successCount}");
+                if (successCount > 0)
+                {
+                    foreach (var appName in successList)
+                    {
+                        log($"  • {appName}");
+                    }
+                }
+                log($"✗ Applications échouées : {failureCount}");
+                if (failureCount > 0)
+                {
+                    foreach (var appName in failureList)
+                    {
+                        log($"  • {appName}");
+                    }
+                }
+                log("═══════════════════════════════════════════════════════");
+                log("");
+                
+                // Rafraîchir la liste des programmes
+                log("🔄 Rafraîchissement de la liste des programmes...");
+                Application.DoEvents();
+                
+                lvPrograms.Items.Clear();
+                var updatedPrograms = ProgramUninstaller.GetInstalledPrograms();
+                foreach (var program in updatedPrograms)
+                {
+                    var size = program.EstimatedSize > 0 ? (program.EstimatedSize / 1024.0).ToString("F2") : "N/A";
+                    var item = new ListViewItem(program.DisplayName);
+                    item.SubItems.Add(program.DisplayVersion);
+                    item.SubItems.Add(program.Publisher);
+                    item.SubItems.Add(size);
+                    item.Tag = program;
+                    lvPrograms.Items.Add(item);
+                }
+                
+                log("✓ Liste rafraîchie");
+                log("");
+                
+                btnUninstall.Enabled = true;
+                btnExport.Enabled = true;
+                lvPrograms.Enabled = true;
+                chkCleanRemnants.Enabled = true;
+                txtSearch.Enabled = true;
+            };
+
+            btnExport.Click += (s, ev) =>
+            {
+                var saveDialog = new SaveFileDialog
+                {
+                    FileName = $"programmes_{DateTime.Now:yyyyMMdd_HHmmss}.csv",
+                    Filter = "Fichiers CSV (*.csv)|*.csv"
+                };
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (ProgramUninstaller.ExportProgramsList(saveDialog.FileName))
+                    {
+                        MessageBox.Show(LanguageManager.Get("uninstaller_export_success", saveDialog.FileName), LanguageManager.Get("msgbox_success"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show(LanguageManager.Get("uninstaller_export_error"), LanguageManager.Get("msgbox_result"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            };
+
+            uninstallerForm.CancelButton = btnCancel;
+            uninstallerForm.ShowDialog(this);
         }
     }
 }
