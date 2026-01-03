@@ -463,6 +463,13 @@ namespace WindowsCleaner
             uninstallerMenu.DropDownItems.Add(uninstallExportMenuItem);
             menu.Items.Add(uninstallerMenu);
             
+            // System Configuration Menu
+            var sysConfigMenu = new ToolStripMenuItem(LanguageManager.Get("menu_sysconfig"));
+            var sysConfigMenuItem = new ToolStripMenuItem("⚙️ " + LanguageManager.Get("sysconfig_title"));
+            sysConfigMenuItem.Click += SysConfigMenuItem_Click;
+            sysConfigMenu.DropDownItems.Add(sysConfigMenuItem);
+            menu.Items.Add(sysConfigMenu);
+            
             helpMenu.DropDownItems.Add(checkUpdateMenuItem);
             helpMenu.DropDownItems.Add(new ToolStripSeparator());
             helpMenu.DropDownItems.Add(languageMenuItem);
@@ -2129,6 +2136,27 @@ THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
                 len = len / 1024;
             }
             return $"{len:0.##} {sizes[order]}";
+        }
+
+        private void SysConfigMenuItem_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                var sysConfigForm = new SystemConfigForm
+                {
+                    Icon = this.Icon
+                };
+                sysConfigForm.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    LanguageManager.Get("msg_error_generic", ex.Message),
+                    LanguageManager.Get("msgbox_error"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void UninstallerMenuItem_Click(object? sender, EventArgs e)

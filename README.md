@@ -1,9 +1,9 @@
-# Windows Cleaner v2.0.4
+# Windows Cleaner v2.0.5
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Version](https://img.shields.io/badge/version-2.0.4-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
+[![Version](https://img.shields.io/badge/version-2.0.5-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
 Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser votre système Windows. Interface moderne avec support multilingue (FR/EN), mode sombre, système de profils, CLI complet, statistiques, et mise à jour automatique.
 
@@ -11,6 +11,18 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 
 ## ✨ Fonctionnalités Principales
+
+### ⚙️ Configuration Système Avancée (v2.0.5)
+- **Gestionnaire de démarrage complet** : Programmes au démarrage (HKCU/HKLM/Dossiers)
+- **Gestion des services Windows** : Démarrage/Arrêt/Modification du type de démarrage
+- **Tâches planifiées** : Activation/Désactivation des tâches Windows
+- **Désactivation non-destructive** : Sauvegarde des programmes désactivés pour réactivation
+- **Support RunOnce** : Détection des programmes à exécution unique
+- **Wow6432Node** : Support des applications 32-bit sur Windows 64-bit
+- **En-têtes colorés** : Interface moderne avec couleurs d'accent par onglet
+- **Recherche en temps réel** : Filtrage instantané dans tous les onglets
+- **Statuts normalisés** : Affichage cohérent (Ready, Disabled, Running, etc.)
+- **Menu Tools** : Accès via "⚙️ Configuration Système"
 
 ### �️ Désinstallateur Complet de Programmes (v2.0.4)
 - **Interface professionnelle** : Design moderne avec en-tête coloré

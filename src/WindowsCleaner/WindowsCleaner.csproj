@@ -8,9 +8,9 @@
     <RootNamespace>WindowsCleaner</RootNamespace>
     <ApplicationManifest>UI/app.manifest</ApplicationManifest>
     <ApplicationIcon>UI/app.ico</ApplicationIcon>
-    <Version>2.0.4</Version>
-    <FileVersion>2.0.4.0</FileVersion>
-    <InformationalVersion>2.0.4</InformationalVersion>
+    <Version>2.0.5</Version>
+    <FileVersion>2.0.5.0</FileVersion>
+    <InformationalVersion>2.0.5</InformationalVersion>
     <Product>Windows Cleaner</Product>
     <Company>Windows Cleaner</Company>
     <AssemblyName>windows-cleaner</AssemblyName>
@@ -26,4 +26,9 @@
     <PublishTrimmed>false</PublishTrimmed>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="9.0.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.0" />
+  </ItemGroup>
 </Project>

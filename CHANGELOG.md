@@ -9,6 +9,35 @@ et ce projet adhère au [Versionnage Sémantique](https://semver.org/lang/fr/).
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
+## 🆕 Nouveautés v2.1.0 (03 janvier 2026)
+
+### ⚙️ Nouveau Menu : Configuration Système (type msconfig)
+- **Nouveau menu "Configuration Système"** : accès complet à la gestion du système Windows
+- **Onglet Programmes de démarrage** :
+  - Liste tous les programmes qui se lancent au démarrage (HKCU, HKLM, dossier Démarrage)
+  - Désactivation/activation des programmes de démarrage
+  - Affichage de l'emplacement et de la commande d'exécution
+- **Onglet Services Windows** :
+  - Liste complète de tous les services Windows avec statut et type de démarrage
+  - Démarrage/Arrêt des services
+  - Modification du type de démarrage (auto, manuel, désactivé)
+  - Affichage des descriptions des services
+- **Onglet Tâches planifiées** :
+  - Liste de toutes les tâches planifiées du système
+  - Activation/Désactivation des tâches
+  - Affichage du statut, prochaine et dernière exécution
+- **Onglet Outils système** :
+  - Accès rapide à msconfig
+  - Accès rapide au Gestionnaire de tâches
+  - Accès rapide au Gestionnaire de services
+- **Classe SystemConfigManager** : gestion complète de la configuration système
+- **Interface SystemConfigForm** : formulaire avec onglets pour une navigation intuitive
+- **Traductions FR/EN complètes** : 60+ nouvelles clés de traduction
+- **Avertissement administrateur** : notification si l'application ne s'exécute pas en tant qu'admin
+- **Chargement asynchrone** : les services et tâches se chargent en arrière-plan pour ne pas bloquer l'interface
+- **Sécurité** : confirmation avant arrêt de services ou désactivation d'éléments
+- **Intégration totale** : nouveau menu entre "Désinstallateur" et "Aide"
+
 ## 🆕 Nouveautés v2.0.3 (01 janvier 2026)
 
 ### 👻 Détection et Nettoyage des Applications Fantômes

@@ -431,6 +431,85 @@ namespace WindowsCleaner
             // Uninstaller menu and messages
             { "menu_uninstaller", new Dictionary<Language, string> { { Language.French, "🗑️ Désinstallateur" }, { Language.English, "🗑️ Uninstaller" } } },
             { "uninstaller_title", new Dictionary<Language, string> { { Language.French, "Désinstallateur de programmes" }, { Language.English, "Program Uninstaller" } } },
+            
+            // System Configuration menu and messages
+            { "menu_sysconfig", new Dictionary<Language, string> { { Language.French, "⚙️ Configuration Système" }, { Language.English, "⚙️ System Configuration" } } },
+            { "sysconfig_title", new Dictionary<Language, string> { { Language.French, "Configuration Système (msconfig)" }, { Language.English, "System Configuration (msconfig)" } } },
+            { "sysconfig_tab_startup", new Dictionary<Language, string> { { Language.French, "Programmes de démarrage" }, { Language.English, "Startup Programs" } } },
+            { "sysconfig_tab_services", new Dictionary<Language, string> { { Language.French, "Services Windows" }, { Language.English, "Windows Services" } } },
+            { "sysconfig_tab_tasks", new Dictionary<Language, string> { { Language.French, "Tâches planifiées" }, { Language.English, "Scheduled Tasks" } } },
+            { "sysconfig_tab_tools", new Dictionary<Language, string> { { Language.French, "Outils système" }, { Language.English, "System Tools" } } },
+            
+            // System Config - Column headers
+            { "sysconfig_col_name", new Dictionary<Language, string> { { Language.French, "Nom" }, { Language.English, "Name" } } },
+            { "sysconfig_col_location", new Dictionary<Language, string> { { Language.French, "Emplacement" }, { Language.English, "Location" } } },
+            { "sysconfig_col_command", new Dictionary<Language, string> { { Language.French, "Commande" }, { Language.English, "Command" } } },
+            { "sysconfig_col_status", new Dictionary<Language, string> { { Language.French, "État" }, { Language.English, "Status" } } },
+            { "sysconfig_col_service_name", new Dictionary<Language, string> { { Language.French, "Nom du service" }, { Language.English, "Service Name" } } },
+            { "sysconfig_col_display_name", new Dictionary<Language, string> { { Language.French, "Nom d'affichage" }, { Language.English, "Display Name" } } },
+            { "sysconfig_col_start_type", new Dictionary<Language, string> { { Language.French, "Type de démarrage" }, { Language.English, "Start Type" } } },
+            { "sysconfig_col_description", new Dictionary<Language, string> { { Language.French, "Description" }, { Language.English, "Description" } } },
+            { "sysconfig_col_task_name", new Dictionary<Language, string> { { Language.French, "Nom de la tâche" }, { Language.English, "Task Name" } } },
+            { "sysconfig_col_next_run", new Dictionary<Language, string> { { Language.French, "Prochaine exécution" }, { Language.English, "Next Run" } } },
+            { "sysconfig_col_last_run", new Dictionary<Language, string> { { Language.French, "Dernière exécution" }, { Language.English, "Last Run" } } },
+            
+            // System Config - Buttons
+            { "sysconfig_btn_disable", new Dictionary<Language, string> { { Language.French, "Désactiver" }, { Language.English, "Disable" } } },
+            { "sysconfig_btn_add", new Dictionary<Language, string> { { Language.French, "Ajouter" }, { Language.English, "Add" } } },
+            { "sysconfig_btn_enable", new Dictionary<Language, string> { { Language.French, "Activer" }, { Language.English, "Enable" } } },
+            { "sysconfig_btn_refresh", new Dictionary<Language, string> { { Language.French, "Actualiser" }, { Language.English, "Refresh" } } },
+            { "sysconfig_btn_start", new Dictionary<Language, string> { { Language.French, "Démarrer" }, { Language.English, "Start" } } },
+            { "sysconfig_btn_stop", new Dictionary<Language, string> { { Language.French, "Arrêter" }, { Language.English, "Stop" } } },
+            { "sysconfig_btn_change_type", new Dictionary<Language, string> { { Language.French, "Modifier le type" }, { Language.English, "Change Type" } } },
+            { "sysconfig_btn_open_msconfig", new Dictionary<Language, string> { { Language.French, "Ouvrir msconfig" }, { Language.English, "Open msconfig" } } },
+            { "sysconfig_btn_open_taskmgr", new Dictionary<Language, string> { { Language.French, "Gestionnaire de tâches" }, { Language.English, "Task Manager" } } },
+            { "sysconfig_btn_open_services", new Dictionary<Language, string> { { Language.French, "Gestionnaire de services" }, { Language.English, "Services Manager" } } },
+            
+            // System Config - Labels
+            { "sysconfig_lbl_start_type", new Dictionary<Language, string> { { Language.French, "Type de démarrage:" }, { Language.English, "Start Type:" } } },
+            { "sysconfig_enabled", new Dictionary<Language, string> { { Language.French, "Activé" }, { Language.English, "Enabled" } } },
+            { "sysconfig_disabled", new Dictionary<Language, string> { { Language.French, "Désactivé" }, { Language.English, "Disabled" } } },
+            { "sysconfig_ready", new Dictionary<Language, string> { { Language.French, "Prêt" }, { Language.English, "Ready" } } },
+            { "sysconfig_loading", new Dictionary<Language, string> { { Language.French, "Chargement..." }, { Language.English, "Loading..." } } },
+            { "sysconfig_error", new Dictionary<Language, string> { { Language.French, "Erreur lors du chargement" }, { Language.English, "Loading error" } } },
+            
+            // System Config - Status messages
+            { "sysconfig_loaded_programs", new Dictionary<Language, string> { { Language.French, "{0} programmes de démarrage chargés" }, { Language.English, "{0} startup programs loaded" } } },
+            { "sysconfig_loaded_services", new Dictionary<Language, string> { { Language.French, "{0} services chargés" }, { Language.English, "{0} services loaded" } } },
+            { "sysconfig_loaded_tasks", new Dictionary<Language, string> { { Language.French, "{0} tâches planifiées chargées" }, { Language.English, "{0} scheduled tasks loaded" } } },
+            { "sysconfig_starting_service", new Dictionary<Language, string> { { Language.French, "Démarrage du service {0}..." }, { Language.English, "Starting service {0}..." } } },
+            { "sysconfig_stopping_service", new Dictionary<Language, string> { { Language.French, "Arrêt du service {0}..." }, { Language.English, "Stopping service {0}..." } } },
+            
+            // System Config - Confirmation messages
+            { "sysconfig_confirm_disable_startup", new Dictionary<Language, string> { { Language.French, "Voulez-vous vraiment désactiver le programme de démarrage '{0}' ?" }, { Language.English, "Do you really want to disable the startup program '{0}'?" } } },
+            { "sysconfig_confirm_stop_service", new Dictionary<Language, string> { { Language.French, "Voulez-vous vraiment arrêter le service '{0}' ?\n\nCela peut affecter le fonctionnement du système." }, { Language.English, "Do you really want to stop the service '{0}'?\n\nThis may affect system functionality." } } },
+            { "sysconfig_confirm_disable_task", new Dictionary<Language, string> { { Language.French, "Voulez-vous vraiment désactiver la tâche '{0}' ?" }, { Language.English, "Do you really want to disable the task '{0}'?" } } },
+            
+            // System Config - Success messages
+            { "sysconfig_success_disable", new Dictionary<Language, string> { { Language.French, "Programme désactivé avec succès" }, { Language.English, "Program disabled successfully" } } },
+            { "sysconfig_success_enable", new Dictionary<Language, string> { { Language.French, "Programme activé avec succès" }, { Language.English, "Program enabled successfully" } } },
+            { "sysconfig_service_started", new Dictionary<Language, string> { { Language.French, "Service démarré avec succès" }, { Language.English, "Service started successfully" } } },
+            { "sysconfig_service_stopped", new Dictionary<Language, string> { { Language.French, "Service arrêté avec succès" }, { Language.English, "Service stopped successfully" } } },
+            { "sysconfig_start_type_changed", new Dictionary<Language, string> { { Language.French, "Type de démarrage modifié avec succès" }, { Language.English, "Start type changed successfully" } } },
+            { "sysconfig_task_enabled", new Dictionary<Language, string> { { Language.French, "Tâche activée avec succès" }, { Language.English, "Task enabled successfully" } } },
+            { "sysconfig_task_disabled", new Dictionary<Language, string> { { Language.French, "Tâche désactivée avec succès" }, { Language.English, "Task disabled successfully" } } },
+            
+            // System Config - Error messages
+            { "sysconfig_error_loading", new Dictionary<Language, string> { { Language.French, "Erreur lors du chargement : {0}" }, { Language.English, "Error while loading: {0}" } } },
+            { "sysconfig_error_disable", new Dictionary<Language, string> { { Language.French, "Erreur lors de la désactivation" }, { Language.English, "Error while disabling" } } },
+            { "sysconfig_error_enable", new Dictionary<Language, string> { { Language.French, "Erreur lors de l'activation" }, { Language.English, "Error while enabling" } } },
+            { "sysconfig_error_start_service", new Dictionary<Language, string> { { Language.French, "Erreur lors du démarrage du service" }, { Language.English, "Error starting service" } } },
+            { "sysconfig_error_stop_service", new Dictionary<Language, string> { { Language.French, "Erreur lors de l'arrêt du service" }, { Language.English, "Error stopping service" } } },
+            { "sysconfig_error_change_type", new Dictionary<Language, string> { { Language.French, "Erreur lors du changement du type de démarrage" }, { Language.English, "Error changing start type" } } },
+            { "sysconfig_error_enable_task", new Dictionary<Language, string> { { Language.French, "Erreur lors de l'activation de la tâche" }, { Language.English, "Error enabling task" } } },
+            { "sysconfig_error_disable_task", new Dictionary<Language, string> { { Language.French, "Erreur lors de la désactivation de la tâche" }, { Language.English, "Error disabling task" } } },
+            
+            // System Config - Warning
+            { "sysconfig_warning_admin", new Dictionary<Language, string> { { Language.French, "Certaines opérations nécessitent des privilèges administrateur" }, { Language.English, "Some operations require administrator privileges" } } },
+            
+            // System Config - Tools tab
+            { "sysconfig_tools_title", new Dictionary<Language, string> { { Language.French, "Outils de configuration système" }, { Language.English, "System Configuration Tools" } } },
+            { "sysconfig_tools_description", new Dictionary<Language, string> { { Language.French, "Accès rapide aux outils de configuration système Windows" }, { Language.English, "Quick access to Windows system configuration tools" } } },
             { "uninstaller_select_program", new Dictionary<Language, string> { { Language.French, "Sélectionnez un programme à désinstaller complètement :" }, { Language.English, "Select a program to uninstall completely:" } } },
             { "uninstaller_program_header", new Dictionary<Language, string> { { Language.French, "Programme" }, { Language.English, "Program" } } },
             { "uninstaller_version_header", new Dictionary<Language, string> { { Language.French, "Version" }, { Language.English, "Version" } } },
