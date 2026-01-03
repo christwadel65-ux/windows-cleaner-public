@@ -1,53 +1,57 @@
-# Build directories
-bin/
-obj/
-Output/
-publish-output/
-release/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
-# IDE files
-*.user
-*.suo
-*.userprefs
+# Visual Studio cache/options directory
 .vs/
-.vscode/settings.json
-.vscode/launch.json
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local history for Visual Studio Code
+.history/
+.vscode-insiders/
+
+# Build folder
+publish/
+
+# NuGet Packet Manager files
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
 
 # Project files
-*.iss
-scripts/
-plans/
+*.csproj.user
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
 
-# Executables
-*.exe
-*.dll
-*.pdb
+# IDE
+.idea/
+*.swp
+*.swo
 
-# Sensitive files (NEVER COMMIT)
-*.key
-*.pem
-*.p12
-*.pfx
-.env
-.env.local
-appsettings.Development.json
-appsettings.*.json
-secrets.json
-private-key.xml
-credentials.json
-
-# Logs
-*.log
-logs/
-*.log.*
-
-# OS files
+# OS
 .DS_Store
 Thumbs.db
-*.tmp
-
-# Temp files
-*.bak
-*.swp
-*~
-.fake
