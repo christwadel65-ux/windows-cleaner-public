@@ -1,7 +1,7 @@
 # Windows Cleaner v2.0.5
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-Propriétaire-red.svg)](../LICENSE)
+[![License](https://img.shields.io/badge/license-Propriétaire-red.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
 [![Version](https://img.shields.io/badge/version-2.0.5-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
@@ -227,8 +227,8 @@ iscc build/windows-cleaner.iss
 
 - [CHANGELOG.md](CHANGELOG.md) - Historique des versions
 - [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md) - Guide de mise à jour
-- [docs/RELEASE_GUIDE.md](docs/RELEASE_GUIDE.md) - Guide de publication
-- [docs/VERSION_MANAGEMENT.md](docs/VERSION_MANAGEMENT.md) - Gestion de version
+- [docs/USAGE_GUIDE.md](docs/USAGE_GUIDE.md) - Guide d'utilisation
+- [docs/ADVANCED_FEATURES.md](docs/ADVANCED_FEATURES.md) - Fonctionnalités avancées
 
 ## 📜 Licence
 
@@ -240,9 +240,9 @@ Licence Propriétaire - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr
 
 ## 🔗 Liens
 
-- **Repository** : [christwadel65-ux/Nouveau-dossier](https://github.com/christwadel65-ux/Nouveau-dossier)
-- **Issues** : [Signaler un bug](https://github.com/christwadel65-ux/Nouveau-dossier/issues)
-- **Releases** : [Télécharger](https://github.com/christwadel65-ux/Nouveau-dossier/releases)
+- **Repository** : [christwadel65-ux/Windows-Cleaner](https://github.com/christwadel65-ux/Windows-Cleaner)
+- **Issues** : [Signaler un bug](https://github.com/christwadel65-ux/Windows-Cleaner/issues)
+- **Releases** : [Télécharger](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
 ## 🙏 Contribution
 
