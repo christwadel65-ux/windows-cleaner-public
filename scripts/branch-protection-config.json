@@ -1,0 +1,29 @@
+{
+  "branchProtection": {
+    "branch": "master",
+    "rules": {
+      "pullRequestReviews": {
+        "required": true,
+        "requiredApprovingReviewCount": 1,
+        "dismissStaleReviews": false,
+        "requireCodeOwnerReview": false
+      },
+      "statusChecks": {
+        "required": true,
+        "strict": true,
+        "contexts": [
+          "build",
+          "test",
+          "security"
+        ]
+      },
+      "enforceAdmins": true,
+      "allowForcePushes": false,
+      "allowDeletions": false,
+      "requireLinearHistory": false,
+      "requireConversationResolution": false,
+      "dismissalRestrictions": null
+    },
+    "description": "Protège la branche master avec les règles de sécurité essentielles"
+  }
+}

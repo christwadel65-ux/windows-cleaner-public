@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "XltHuab7ApE=",
+  "success": true,
+  "projectFilePath": "D:\\GitHub\\Windows-Cleaner_SOURCE\\src\\WindowsCleaner\\WindowsCleaner.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cleco\\.nuget\\packages\\system.management\\9.0.0\\system.management.9.0.0.nupkg.sha512",
+    "C:\\Users\\cleco\\.nuget\\packages\\system.serviceprocess.servicecontroller\\9.0.0\\system.serviceprocess.servicecontroller.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
