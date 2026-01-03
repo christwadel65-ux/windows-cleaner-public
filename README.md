@@ -1,245 +1,116 @@
-# Windows Cleaner v2.0.4
+# Windows Cleaner v2.0.5 - Distribution Binaire
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Version](https://img.shields.io/badge/version-2.0.4-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
+[![Version](https://img.shields.io/badge/version-2.0.5-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
-Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser votre système Windows. Interface moderne avec support multilingue (FR/EN), mode sombre, système de profils, CLI complet, statistiques, et mise à jour automatique.
+## 📦 Distribution Binaire Uniquement
 
-<img width="1191" height="635" alt="image" src="https://github.com/user-attachments/assets/e5d8f523-035c-46d7-a65b-f0538b6dfc8b" />
+Ce repository contient **uniquement les versions binaires compilées** de Windows Cleaner.
 
-✨ Uninstaller New V2.0.4
-<img width="1067" height="682" alt="image" src="https://github.com/user-attachments/assets/49943670-7b3c-4c84-acbd-62c726b9edac" />
+Le code source est disponible dans un repository privé.
 
+## 📥 Téléchargement
 
+### Version Stable (Recommandée)
 
-## ✨ Fonctionnalités Principales
+**Windows Cleaner v2.0.5**
+- 📦 [WindowsCleaner-Setup-2.0.5.exe](https://github.com/christwadel65-ux/Windows-Cleaner/releases/download/v2.0.5/WindowsCleaner-Setup-2.0.5.exe) *(Installeur complet)*
+- 📦 [windows-cleaner.exe](https://github.com/christwadel65-ux/Windows-Cleaner/releases/download/v2.0.5/windows-cleaner.exe) *(Version portable)*
 
-### �️ Désinstallateur Complet de Programmes (v2.0.4)
-- **Interface professionnelle** : Design moderne avec en-tête coloré
-- **Recherche en temps réel** : Filtrage instantané des programmes
-- **Désinstallation complète** : Programme + fichiers + registre + AppData
-- **Nettoyage profond du registre** : HKEY_LOCAL_MACHINE + HKEY_CURRENT_USER
-- **Export CSV** : Liste complète des programmes installés
-- **Sélection multiple** : Désinstalle plusieurs programmes à la fois
-- **Logs en direct** : Suivi complet des opérations en bas de fenêtre
-- **Traduction multilingue** : Interface complète FR/EN
-- **Menu Tools** : Accès facile via "🗑️ Désinstallateur"
-- **Alternating row colors** : Meilleure lisibilité des listes
+### Toutes les Versions
 
-### �👻 Nettoyage Applications Fantômes (v2.0.3)
-- **Détection des applications fantômes** : entrées registre invalides (HKLM/HKCU)
-- **Sécurité maximale** : liste blanche de 80+ dossiers système pour zéro faux positif
-- **Mode Dry-Run** : prévisualise avant suppression
-- **Case "👻 Applications fantômes"** dans groupe Advanced
-- **Rapport détaillé** : statistiques sur applications détectées/supprimées
+Consultez la page [Releases](https://github.com/christwadel65-ux/Windows-Cleaner/releases) pour voir toutes les versions disponibles.
 
-### 📁 Nettoyage des Dossiers Vides (v2.0.3)
-- **Détection récursive** : trouve tous les dossiers vides
-- **Suppression intelligente** : traite d'abord les dossiers imbriqués
-- **Vérification double** : vérifie que vide avant suppression
-- **Case "📁 Dossiers vides"** dans groupe Advanced
-- **Mode Dry-Run** : aperçu avant suppression
-- **100% sûr** : ne touche que les dossiers vides
+## 🚀 Installation
 
-### 🌍 Interface Multilingue (v2.0.2)
-- **Support complet** : Français 🇫🇷 et Anglais 🇺🇸
-- **Changement en direct** : Menu Aide → 🌍 Langue (redémarrage automatique)
-- **Traduction complète** : Interface, profils, logs, messages
-- **Persistance** : Préférence sauvegardée automatiquement
-- **Langue par défaut** : Anglais (modifiable)
+### Option 1 : Installeur (Recommandé)
 
-### 🔒 Amélioration Vie Privée (v2.0.2)
-- **Case dédiée "🕘 Historique navigateurs"** cochée par défaut
-- **Nettoyage complet** : Chrome/Edge/Firefox (History, places.sqlite, sessions, onglets récents)
-- **Fermeture automatique** des navigateurs avant nettoyage
-- **Option indépendante** : choix séparé du cache navigateurs
-- **Statistiques intégrées** : fichiers supprimés et espace libéré
+1. Téléchargez `WindowsCleaner-Setup-2.0.5.exe`
+2. Exécutez l'installeur
+3. Suivez les instructions à l'écran
 
-### 🔄 Système de Mise à Jour Automatique (v2.0.0)
-- Vérification automatique au démarrage via GitHub API
-- Menu "Aide > 🔄 Vérifier les mises à jour"
-- Notification discrète dans la barre de statut
-- Dialogue avec version, date et notes de version
-- Accès direct à la page de téléchargement
+### Option 2 : Version Portable
 
-### 💻 Nettoyage Développeur (v2.0.0)
-**10 options spécialisées** : VS Code, NuGet, Maven, npm, Docker, node_modules, Visual Studio, Python, Git, Jeux (Steam/Epic)
+1. Téléchargez `windows-cleaner.exe`
+2. Placez-le dans un dossier de votre choix
+3. Exécutez directement (aucune installation requise)
 
-### 📊 Optimisations SSD (v2.0.0)
-- **TRIM automatique** et **vérifications SMART** avec compteurs et rapports détaillés
-- Détection multi-niveaux (Win32_DiskDrive + Get-Volume)
-- Sauvegarde automatique de l'historique
+## ⚙️ Configuration Requise
 
-## 🚀 Démarrage Rapide
+- **OS** : Windows 10/11 (64-bit)
+- **.NET** : 10.0 Runtime (téléchargé automatiquement si nécessaire)
+- **RAM** : 100 MB minimum
+- **Espace disque** : 50 MB
 
-### Compilation et Exécution
-```powershell
-# À la racine du repo
-dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
-dotnet run --project src/WindowsCleaner/WindowsCleaner.csproj
-```
+## 🔑 Privilèges Administrateur
 
-### Exécution depuis le dossier compilé
-```powershell
-# Après compilation Release
-.\bin\Release\net10.0-windows\windows-cleaner.exe
-```
+Certaines fonctionnalités nécessitent les droits administrateur :
+- Nettoyage de fichiers système
+- Gestion des services Windows
+- Modification du registre système
+- Désinstallation de programmes
 
-### Ligne de Commande (CLI)
-```powershell
-# Afficher l'aide
-windows-cleaner.exe --help
+**Recommandation** : Lancez l'application en tant qu'administrateur (clic droit → "Exécuter en tant qu'administrateur")
 
-# Nettoyage avec profil
-windows-cleaner.exe --profile "Nettoyage Rapide"
+## ✨ Fonctionnalités v2.0.5
 
-# Mode simulation (test sans suppression)
-windows-cleaner.exe --profile "Nettoyage Complet" --dry-run
+### Nouveautés
 
-# Lister les profils disponibles
-windows-cleaner.exe --list-profiles
+- ⚙️ **Configuration Système Avancée** : Gestion complète du démarrage, services et tâches
+- 🔄 **Désactivation non-destructive** : Sauvegarde des programmes désactivés
+- 🎨 **En-têtes colorés** : Interface moderne avec couleurs d'accent
+- 🔍 **Recherche améliorée** : Filtrage temps réel dans tous les onglets
+- 🌐 **Support RunOnce et WOW6432Node**
 
-# Afficher les statistiques
-windows-cleaner.exe --stats
-```
+### Fonctionnalités Principales
 
-## ⚠️ Notes Importantes
-- **Droits Administrateur** : Requis pour nettoyer les fichiers système (Temp système, Prefetch, Windows Update)
-- **Mode Simuler** : Testez les opérations sans supprimer de fichiers
-- **Corbeille** : Vidage sans confirmation via l'API Windows (P/Invoke)
+- 🧹 **Nettoyage Système** : Temp, cache, corbeille, navigateurs
+- 🗑️ **Désinstallateur Complet** : Suppression totale des programmes
+- 👻 **Applications Fantômes** : Détection des entrées invalides
+- 📁 **Dossiers Vides** : Nettoyage intelligent
+- ⚡ **Optimisation SSD** : Trim, défragmentation
+- 💻 **Nettoyage Développeur** : npm, NuGet, Maven, Docker
+- 🌍 **Multilingue** : Français et Anglais
+- 📊 **Statistiques** : Suivi de l'espace libéré
+- 🔄 **Mise à jour automatique** : Check au démarrage
 
-## ✨ Fonctionnalités Complètes
+## 📖 Documentation
 
-### 🧹 Nettoyage Standard
-- Cache navigateurs (Chrome, Edge, Firefox, Brave, Opera, Vivaldi) + fermeture automatique
-- Historique navigateurs + onglets récents/sessions
-- Fichiers temporaires (utilisateur et système)
-- Windows Update, Vignettes, Prefetch
-- Flush DNS, Corbeille
+- [Guide d'Utilisation](docs/USAGE_GUIDE.md)
+- [Changelog](CHANGELOG.md)
+- [Statistiques](docs/STATISTICS_TRACKING.md)
 
-### 🔬 Nettoyage Avancé
-- Journaux système (.evtx), Cache installeurs
-- Journaux d'applications (Microsoft Store)
-- Fichiers orphelins (> 7 jours)
-- Cache mémoire, Raccourcis cassés
-- **👻 Applications fantômes** : détecte et supprime entrées registre invalides
-- **📁 Dossiers vides** : détecte et supprime récursivement dossiers vides
+## 🐛 Signaler un Bug
 
-### 💻 Nettoyage Développeur
-Docker, Node.js (node_modules), Visual Studio (obj/bin/.vs), Python (__pycache__), Git, VS Code, NuGet, Maven, npm, Jeux (Steam/Epic)
+Si vous rencontrez un problème :
 
-### 🔒 Protection Vie Privée
-Historique Exécuter (Win+R), Documents récents, Timeline Windows, Historique recherche, Presse-papiers
-
-### 🎯 Autres Fonctionnalités
-- **Profils** : 4 profils prédéfinis + personnalisables (JSON)
-- **Analyse disque** : Catégorisation par type + top fichiers volumineux
-- **Détecteur de doublons** : Hash MD5 + filtres + suppression intelligente
-- **Planificateur** : Intégration Windows Task Scheduler
-- **Statistiques & Rapports** : Rapports HTML + historique complet
-- **Backup/Restauration** : Points de restauration système
-- **CLI complet** : --profile, --dry-run, --silent, --stats, --help
-- **Alertes intelligentes** : Disque < 10%, cache > 2GB, rappels maintenance
-- **Optimisations** : TRIM SSD, compaction registre
-
-### 🎨 Interface
-- Thème sombre/clair
-- Barre de progression temps réel
-- Mode simulation (Dry Run)
-- Boutons ✅ Tout / ❌ Rien
-- Logs en temps réel
-- Infobulles contextuelles
-
-## 🛡️ Sécurité & Robustesse
-- Gestion d'erreurs complète + logs
-- Thread-safe + retry logic (8 tentatives)
-- Mode Dry-Run (test sans suppression)
-- Backup automatique < 24h
-- Points de restauration système
-- CancellationToken pour annulation
-
-## 📊 Spécifications Techniques
-
-- **Framework** : .NET 10.0 Windows
-- **Version** : 2.0.4
-- **UI** : Windows Forms + CLI
-- **Modules** : 21+ fichiers C# (~6500+ lignes)
-- **Prérequis** : Windows 10/11 (x64), .NET 10.0 Runtime
-- **Options** : 20+ options de nettoyage
-
-## 📁 Structure Projet
-
-```
-src/WindowsCleaner/
-├── WindowsCleaner.csproj
-├── Core/         # Cleaner, SystemOptimizer, BackupManager, Logger
-├── Features/     # DiskAnalyzer, DuplicateFinder, UpdateManager
-└── UI/           # MainForm, Program
-
-docs/             # Documentation et guides
-scripts/          # Scripts PowerShell (prepare_release.ps1)
-build/            # Inno Setup
-```
-
-## 📝 Configuration
-
-**Logs** : `%APPDATA%\WindowsCleaner\logs\windows-cleaner.log`  
-**Paramètres** : `%APPDATA%\WindowsCleaner\settings.json`
-
-Export des logs : **Fichier → Exporter les logs**
-
-## 🔨 Build & Distribution
-
-### Compilation
-```powershell
-dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
-```
-
-### Préparation Release
-```powershell
-# Simple mise à jour
-.\scripts\prepare_release.ps1 -Version 2.0.4
-
-# Avec build + ZIP
-.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip
-
-# Full auto (build + ZIP + Git tag)
-.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip -PushTag
-```
-
-### Installateur
-```powershell
-iscc build/windows-cleaner.iss
-```
-
-## 📚 Documentation
-
-- [CHANGELOG.md](CHANGELOG.md) - Historique des versions
-- [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md) - Guide de mise à jour
-- [docs/RELEASE_GUIDE.md](docs/RELEASE_GUIDE.md) - Guide de publication
-- [docs/VERSION_MANAGEMENT.md](docs/VERSION_MANAGEMENT.md) - Gestion de version
+1. Vérifiez que vous utilisez la **dernière version**
+2. Consultez les [Issues existantes](https://github.com/christwadel65-ux/Windows-Cleaner/issues)
+3. Créez une nouvelle Issue avec :
+   - Version de Windows Cleaner
+   - Version de Windows
+   - Description du problème
+   - Étapes pour reproduire
+   - Captures d'écran si possible
 
 ## 📜 Licence
 
-MIT License - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr)
+Ce logiciel est distribué sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-## 👤 Auteur
+## ⚠️ Avertissement
 
-**[easycoding.fr](https://easycoding.fr) (Skill_teams)**
+**Utilisez cet outil à vos propres risques.**
 
-## 🔗 Liens
+- Créez toujours un **point de restauration** avant d'utiliser les fonctions de nettoyage avancées
+- Vérifiez soigneusement les éléments sélectionnés avant de nettoyer
+- Certaines opérations sont **irréversibles**
 
-- **Repository** : [christwadel65-ux/Nouveau-dossier](https://github.com/christwadel65-ux/Nouveau-dossier)
-- **Issues** : [Signaler un bug](https://github.com/christwadel65-ux/Nouveau-dossier/issues)
-- **Releases** : [Télécharger](https://github.com/christwadel65-ux/Nouveau-dossier/releases)
+## 💡 Support
 
-## 🙏 Contribution
+Pour toute question ou demande de fonctionnalité, ouvrez une [Issue](https://github.com/christwadel65-ux/Windows-Cleaner/issues).
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/NewFeature`)
-3. Commit (`git commit -m 'Add NewFeature'`)
-4. Push (`git push origin feature/NewFeature`)
-5. Ouvrir une Pull Request
+---
 
+**Windows Cleaner** - Nettoyage et optimisation professionnels pour Windows
