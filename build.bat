@@ -2,7 +2,7 @@
 setlocal
 cd /d "d:\GitHub\Windows Cleaner"
 echo ====================================
-echo  Windows Cleaner v2.0.3 - Build
+echo  Windows Cleaner v2.0.4 - Build
 echo ====================================
 echo.
 echo Compilation en cours...

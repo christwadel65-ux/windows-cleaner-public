@@ -1,9 +1,9 @@
-# Windows Cleaner v2.0.3
+# Windows Cleaner v2.0.4
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](../LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Version](https://img.shields.io/badge/version-2.0.3-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
+[![Version](https://img.shields.io/badge/version-2.0.4-brightgreen.svg)](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
 
 Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser votre système Windows. Interface moderne avec support multilingue (FR/EN), mode sombre, système de profils, CLI complet, statistiques, et mise à jour automatique.
 
@@ -12,7 +12,19 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 ## ✨ Fonctionnalités Principales
 
-### 👻 Nettoyage Applications Fantômes (v2.0.3)
+### �️ Désinstallateur Complet de Programmes (v2.0.4)
+- **Interface professionnelle** : Design moderne avec en-tête coloré
+- **Recherche en temps réel** : Filtrage instantané des programmes
+- **Désinstallation complète** : Programme + fichiers + registre + AppData
+- **Nettoyage profond du registre** : HKEY_LOCAL_MACHINE + HKEY_CURRENT_USER
+- **Export CSV** : Liste complète des programmes installés
+- **Sélection multiple** : Désinstalle plusieurs programmes à la fois
+- **Logs en direct** : Suivi complet des opérations en bas de fenêtre
+- **Traduction multilingue** : Interface complète FR/EN
+- **Menu Tools** : Accès facile via "🗑️ Désinstallateur"
+- **Alternating row colors** : Meilleure lisibilité des listes
+
+### �👻 Nettoyage Applications Fantômes (v2.0.3)
 - **Détection des applications fantômes** : entrées registre invalides (HKLM/HKCU)
 - **Sécurité maximale** : liste blanche de 80+ dossiers système pour zéro faux positif
 - **Mode Dry-Run** : prévisualise avant suppression
@@ -147,7 +159,7 @@ Historique Exécuter (Win+R), Documents récents, Timeline Windows, Historique r
 ## 📊 Spécifications Techniques
 
 - **Framework** : .NET 10.0 Windows
-- **Version** : 2.0.3
+- **Version** : 2.0.4
 - **UI** : Windows Forms + CLI
 - **Modules** : 21+ fichiers C# (~6500+ lignes)
 - **Prérequis** : Windows 10/11 (x64), .NET 10.0 Runtime
@@ -184,13 +196,13 @@ dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
 ### Préparation Release
 ```powershell
 # Simple mise à jour
-.\scripts\prepare_release.ps1 -Version 2.0.3
+.\scripts\prepare_release.ps1 -Version 2.0.4
 
 # Avec build + ZIP
-.\scripts\prepare_release.ps1 -Version 2.0.3 -Build -CreateZip
+.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip
 
 # Full auto (build + ZIP + Git tag)
-.\scripts\prepare_release.ps1 -Version 2.0.3 -Build -CreateZip -PushTag
+.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip -PushTag
 ```
 
 ### Installateur

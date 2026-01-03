@@ -95,6 +95,12 @@ namespace WindowsCleaner
         /// <summary>Nettoie les applications fantômes (dossiers orphelins, entrées registre invalides)</summary>
         public bool CleanGhostApps { get; set; }
         
+        /// <summary>Permet de désinstaller complètement un programme spécifique</summary>
+        public string? UninstallProgramName { get; set; }
+        
+        /// <summary>Nettoie les restes d'un programme après désinstallation</summary>
+        public bool CleanupProgramRemnants { get; set; }
+        
         /// <summary>Ferme automatiquement les navigateurs avant le nettoyage (recommandé)</summary>
         public bool CloseBrowsersIfNeeded { get; set; } = true;
     }
