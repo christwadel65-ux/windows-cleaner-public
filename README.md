@@ -169,61 +169,7 @@ Historique Exécuter (Win+R), Documents récents, Timeline Windows, Historique r
 - Points de restauration système
 - CancellationToken pour annulation
 
-## 📊 Spécifications Techniques
-
-- **Framework** : .NET 10.0 Windows
-- **Version** : 2.0.4
-- **UI** : Windows Forms + CLI
-- **Modules** : 21+ fichiers C# (~6500+ lignes)
-- **Prérequis** : Windows 10/11 (x64), .NET 10.0 Runtime
-- **Options** : 20+ options de nettoyage
-
-## 📁 Structure Projet
-
-```
-src/WindowsCleaner/
-├── WindowsCleaner.csproj
-├── Core/         # Cleaner, SystemOptimizer, BackupManager, Logger
-├── Features/     # DiskAnalyzer, DuplicateFinder, UpdateManager
-└── UI/           # MainForm, Program
-
-docs/             # Documentation et guides
-scripts/          # Scripts PowerShell (prepare_release.ps1)
-build/            # Inno Setup
-```
-
-## 📝 Configuration
-
-**Logs** : `%APPDATA%\WindowsCleaner\logs\windows-cleaner.log`  
-**Paramètres** : `%APPDATA%\WindowsCleaner\settings.json`
-
-Export des logs : **Fichier → Exporter les logs**
-
-## 🔨 Build & Distribution
-
-### Compilation
-```powershell
-dotnet build src/WindowsCleaner/WindowsCleaner.csproj --configuration Release
-```
-
-### Préparation Release
-```powershell
-# Simple mise à jour
-.\scripts\prepare_release.ps1 -Version 2.0.4
-
-# Avec build + ZIP
-.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip
-
-# Full auto (build + ZIP + Git tag)
-.\scripts\prepare_release.ps1 -Version 2.0.4 -Build -CreateZip -PushTag
-```
-
-### Installateur
-```powershell
-iscc build/windows-cleaner.iss
-```
-
-## 📚 Documentation
+## � Documentation
 
 - [CHANGELOG.md](CHANGELOG.md) - Historique des versions
 - [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md) - Guide de mise à jour
@@ -236,7 +182,7 @@ Licence Propriétaire - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr
 
 ## 👤 Auteur
 
-**[easycoding.fr](https://easycoding.fr) (Skill_teams)**
+**[easycoding.fr](https://easycoding.fr)**
 
 ## 🔗 Liens
 
