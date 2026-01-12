@@ -1,4 +1,4 @@
-# Windows Cleaner v2.0.5
+# Windows Cleaner v2.0.6
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-Propriétaire-red.svg)](LICENSE)
@@ -9,6 +9,17 @@ Outil professionnel en C# (WinForms + CLI) pour nettoyer, analyser et optimiser 
 
 <center><img width="1192" height="618" alt="image" src="https://github.com/user-attachments/assets/66e0b7c9-9bf4-4621-86b3-b7be33391b8c" />
 </center>
+
+🔒 Windows Cleaner dispose maintenant d'un système de licence complet avec:
+
+✅ Essai gratuit 7 jours automatique
+✅ Verrouillage par Hardware ID (unique par ordinateur)
+✅ Activation de licence permanente
+✅ Interfaces conviviales pour la gestion de licence
+
+Pour toute demande merci de passer par notre site : 
+easycoding.fr 
+contact : admin@easycoding.fr
 
 
 ## ✨ Fonctionnalités Principales
