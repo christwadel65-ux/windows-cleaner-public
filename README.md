@@ -24,6 +24,29 @@ contact : admin@easycoding.fr
 
 ## ✨ Fonctionnalités Principales
 
+## 🔄 Historique des Versions
+
+### 🆕 Dernières Modifications (17/01/2026) V2.0.7
+
+#### 🛠️ Corrections et Améliorations
+- **Affichage statut licence au démarrage** : État de la licence visible dans le Operations Log à chaque lancement
+- **Logs de démarrage détaillés** : Version, heure et statut licence (Essai/Activée/Permanente) enregistrés
+- **Réaffichage après Clear Logs** : Le statut licence réapparaît après effacement des logs
+- **Fix Settings saved au startup** : Suppression des logs "Settings saved successfully" au démarrage
+
+### V2.0.6 (15/01/2026)
+
+#### 🛠️ Corrections et Améliorations
+- **Nettoyage Edge amélioré** : Ajout support fichiers SQLite WAL (History-wal, History-shm, WebData)
+- **Multi-profils Edge** : Nettoyage de tous les profils Edge (Default + profils utilisateurs)
+- **Stabilisation Hardware ID** : Tri par nom d'adaptateur réseau (stable avec/sans internet)
+- **Protection anti-fraude licence** : Date première installation en registre Windows (empêche régénération essai)
+- **Préservation licence** : Setup Inno ne supprime plus les données de licence lors réinstallation
+- **Fermeture navigateurs optimisée** : Support msedgewebview2, délais ajustés (1500ms), 2 tentatives de suppression
+- **Messages d'erreur améliorés** : Message réseau plus clair sans connexion internet
+- **Build optimisé** : Script build.bat avec publish + nettoyage langues inutiles (garde FR/EN uniquement)
+- **Logs améliorés** : Affichage date d'expiration licence au lieu de debug Hardware ID
+
 ### ⚙️ Configuration Système Avancée (v2.0.5)
 - **Gestionnaire de démarrage complet** : Programmes au démarrage (HKCU/HKLM/Dossiers)
 - **Gestion des services Windows** : Démarrage/Arrêt/Modification du type de démarrage
