@@ -1,4 +1,4 @@
-# Windows Cleaner v2.0.6
+# Windows Cleaner v2.0.7
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-Propriétaire-red.svg)](LICENSE)
