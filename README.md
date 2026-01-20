@@ -187,15 +187,7 @@ Licence Propriétaire - Copyright (c) 2025 [easycoding.fr](https://easycoding.fr
 
 ## 🔗 Liens
 
-- **Repository** : [christwadel65-ux/Windows-Cleaner](https://github.com/christwadel65-ux/Windows-Cleaner)
-- **Issues** : [Signaler un bug](https://github.com/christwadel65-ux/Windows-Cleaner/issues)
-- **Releases** : [Télécharger](https://github.com/christwadel65-ux/Windows-Cleaner/releases)
+- **Issues** : [Signaler un bug](https://easycoding.fr/support/categories/windows-cleaner.8/create)
+- **Releases** : [Télécharger](https://easycoding.fr/windows-cleaner.r277/)
 
-## 🙏 Contribution
-
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/NewFeature`)
-3. Commit (`git commit -m 'Add NewFeature'`)
-4. Push (`git push origin feature/NewFeature`)
-5. Ouvrir une Pull Request
 
